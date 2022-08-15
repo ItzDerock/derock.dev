@@ -1,7 +1,7 @@
 export function OutsideLink({
   to,
   children,
-  color = "text-violet-500",
+  color = "text-violet-400",
 }: {
   to: string;
   children: React.ReactNode;

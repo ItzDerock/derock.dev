@@ -22,6 +22,29 @@ body {
 }
 
 /*
+ * Scrollbar
+ */
+
+::-webkit-scrollbar {
+    width: 0.5rem;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: theme('colors.gray.700');
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: theme('colors.gray.500');
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: theme('colors.gray.600');
+}
+
+/*
  * Commands
  */
 
