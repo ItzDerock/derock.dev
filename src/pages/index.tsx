@@ -25,7 +25,7 @@ const Index: NextPage = () => {
       <Header />
 
       <main className="font-terminal m-5 text-sm overflow-scroll md:overflow-auto">
-        <Command input="neofetch" title="Contact">
+        <Command input="neofetch" title="Contact" animationIndex={1}>
           <pre className="text-arch whitespace-pre ">
             {"      /\\\\           "} derock<span className="text-white">@</span>derockdev <br />
             {"     /  \\\\          "} <span className="text-white">----------------</span> <br />
@@ -37,7 +37,7 @@ const Index: NextPage = () => {
           </pre>
         </Command>
 
-        <Command input="cat ~/README.md" title="About Me">
+        <Command input="cat ~/README.md" title="About Me" animationIndex={2}>
           <span className="font-bold"># Introduction</span>
           <br /><br />
           <p>
@@ -52,7 +52,7 @@ const Index: NextPage = () => {
           </p>
         </Command>
 
-        <Command input="ls /bin/languages" title="Languages">
+        <Command input="ls /bin/languages" title="Languages" animationIndex={3}>
           <TerminalBars 
             data={[
               { title: "TypeScript", percent: 10 },
@@ -64,7 +64,7 @@ const Index: NextPage = () => {
           />
         </Command>
 
-        <Command input="ls /bin/technology" title="Technology">
+        <Command input="ls /bin/technology" title="Technology" animationIndex={4}>
           <TerminalBars
             data={[
               { title: "Discord.js", percent: 10 },
@@ -80,7 +80,7 @@ const Index: NextPage = () => {
           <span className="text-secondary">... and a lot more</span>
         </Command>
 
-        <Command input="ls /lib/databases" title="Databases">
+        <Command input="ls /lib/databases" title="Databases" animationIndex={5}>
             <span className="text-primary whitespace-pre">
               Postgres    MySQL    MongoDB    Redis
             </span> <br />
@@ -89,7 +89,7 @@ const Index: NextPage = () => {
             </span>
         </Command>
 
-        <Command input="tree ~/experience" title="Job Experience">
+        <Command input="tree ~/experience" title="Job Experience" animationIndex={6}>
             <TreeEntity 
               title="PoroScout - poroscout.gg"
               position="Founder"
