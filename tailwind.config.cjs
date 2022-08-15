@@ -8,7 +8,9 @@ module.exports = {
         primary: '#FF4C29',
         arch: "#1793D1",
         prompt: "#55FF56",
-        secondary: "#334756"
+        header: "#2C394B",
+        dots: "#334756",
+        secondary: "rgb(156 163 175)"
       },
 
       fontFamily: {

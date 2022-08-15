@@ -38,12 +38,12 @@ const Index: NextPage = () => {
         </Command>
 
         <Command input="cat ~/README.md" title="About Me" animationIndex={2}>
-          <span className="font-bold"># Introduction</span>
+          <span className="font-bold"># 👋 Introduction</span>
           <br /><br />
           <p>
-            Hello there! 👋 <br />
-            My name is Derock and I am a <span className="text-arch">fullstack</span> developer and a <span className="text-arch">Discord Bot</span> developer. <br />
-            I&apos;m currently working as a freelance developer. <br /><br />
+            Hello there! <br />
+            My name is Derock and I am a <span className="text-violet-400">fullstack</span> developer and a <span className="text-violet-400">Discord Bot</span> developer. <br />
+            I&apos;m currently a highschool student and I am working as a freelance developer. <br /><br />
           </p>
 
           <p>
@@ -64,7 +64,7 @@ const Index: NextPage = () => {
           />
         </Command>
 
-        <Command input="ls /bin/technology" title="Technology" animationIndex={4}>
+        <Command input="ls /bin/technologies" title="Technology" animationIndex={4}>
           <TerminalBars
             data={[
               { title: "Discord.js", percent: 10 },
@@ -77,7 +77,7 @@ const Index: NextPage = () => {
               { title: "Kubernetes", percent: 8 },
             ]}
           />
-          <span className="text-secondary">... and a lot more</span>
+          <span className="text-gray-400 italic">... and a lot more</span>
         </Command>
 
         <Command input="ls /lib/databases" title="Databases" animationIndex={5}>
@@ -99,7 +99,7 @@ const Index: NextPage = () => {
               PoroScout is a League of Legends Discord Bot. <br />
               PoroScout is currently in <PoroScoutGuilds /> guilds. <br />
               Partnered with <OutsideLink to="https://mobalytics.gg">Mobalytics</OutsideLink> for advertising and analytics. <br />
-              <span className="text-secondary">(Discord.js, Typescript, React, Tailwind, Docker, Fastify, & more)</span> <br />
+              <span className="text-gray-400">(Discord.js, Typescript, React, Tailwind, Docker, Fastify, & more)</span> <br />
             </TreeEntity>
 
             <br />

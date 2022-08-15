@@ -56,7 +56,7 @@ export function TerminalPrompt(props: { command: string, title: string }) {
       </div>
         
       <div className="grow overflow-hidden">
-        <span className="text-secondary">
+        <span className="text-dots">
           #{dots}
         </span>
       </div>

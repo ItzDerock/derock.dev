@@ -8,7 +8,7 @@ export function Header() {
 
   return (
     <header>
-      <div className="grid grid-cols-3 gap-3 px-3 bg-secondary font-header">
+      <div className="grid grid-cols-3 gap-3 px-3 bg-header font-header">
         <div className="col-start-1 col-span-1 text-left text-white">
           <div className="flex items-center h-full gap-3">
             <FontAwesomeLink
