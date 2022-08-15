@@ -5,6 +5,7 @@ specifiers:
   '@fortawesome/free-brands-svg-icons': ^6.1.2
   '@fortawesome/free-solid-svg-icons': ^6.1.2
   '@fortawesome/react-fontawesome': ^0.2.0
+  '@saber2pr/types-github-api': ^0.0.9
   '@types/node': 18.0.0
   '@types/react': 18.0.14
   '@types/react-dom': 18.0.5
@@ -36,6 +37,7 @@ dependencies:
   zod: 3.18.0
 
 devDependencies:
+  '@saber2pr/types-github-api': 0.0.9
   '@types/node': 18.0.0
   '@types/react': 18.0.14
   '@types/react-dom': 18.0.5
@@ -285,6 +287,10 @@ packages:
 
   /@rushstack/eslint-patch/1.1.4:
     resolution: {integrity: sha512-LwzQKA4vzIct1zNZzBmRKI9QuNpLgTQMEjsQLf3BXuGYb3QPTP4Yjf6mkdX+X1mYttZ808QpOwAzZjv28kq7DA==}
+    dev: true
+
+  /@saber2pr/types-github-api/0.0.9:
+    resolution: {integrity: sha512-sB5gbTTaxNgm55HwxjGFo9oHZUVzFcPkxkh4eoSMK4blI1XZmdT7MDVroeweAfQesNJ5TlwVteBLzOKkdfeTdw==}
     dev: true
 
   /@swc/helpers/0.4.3:

@@ -1,3 +1,5 @@
+import { IconDefinition } from "@fortawesome/free-brands-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { OutsideLink } from "../Links/OutsideLink";
 
 export const Positions = {
@@ -10,10 +12,12 @@ export const Positions = {
 type TreeEntityProps = {
   title: string;
   link?: string;
-  position: keyof typeof Positions;
-  startDate: string;
+  position?: keyof typeof Positions;
+  startDate?: string;
   endDate?: string;
   children: React.ReactNode
+  icon?: IconDefinition;
+  stats?: React.ReactNode
 }
 
 function getFormattedDate(date: Date) {
@@ -22,30 +26,47 @@ function getFormattedDate(date: Date) {
 }
 
 export default function TreeEntity(props: TreeEntityProps) {
-  const positionData = Positions[props.position];
-  const startDate = new Date(props.startDate);
+  const positionData = props.position ? Positions[props.position] : undefined;
 
   return (
     <div className="h-fit">
       <p className="whitespace-pre">
+        {
+          props.icon ? (
+            <FontAwesomeIcon icon={props.icon} className="mr-2" size="sm" />
+          ) : null
+        }
         {
           props.link ? <OutsideLink to={props.link}>{props.title}</OutsideLink>
           : <span className="text-arch underline underline-offset-2">{props.title}</span>
         }
       </p>
 
-      <ul className="tree-list ml-10">
-        <li>
-          {/* Position */}
-          <span className={positionData[0]}>{positionData[1]}</span>
-        </li>
-        <li>
-          {/* Date */}
-          <span className="text-arch">{getFormattedDate(startDate)} -</span>{" "}
-          <span className={props.endDate ? "text-arch" : "text-prompt"}>{
-            props.endDate ? getFormattedDate(new Date(props.endDate)) : "Present"
-          }</span>
-        </li>
+      <ul className="tree-list ml-8">
+        {
+          props.position ? (
+            <li>
+              {/* Position */}
+              <span className={positionData![0]}>{positionData![1]}</span>
+            </li>
+          ) : null
+        }
+        {
+          props.stats ? (
+            <li>{props.stats}</li>
+          ) : null
+        }
+        {
+          props.startDate ? (
+            <li>
+              {/* Date */}
+              <span className="text-arch">{getFormattedDate(new Date(props.startDate))} -</span>{" "}
+              <span className={props.endDate ? "text-arch" : "text-prompt"}>{
+                props.endDate ? getFormattedDate(new Date(props.endDate)) : "Present"
+              }</span>
+            </li>
+          ) : null
+        }
         <li>
           {/* Description */}
           {props.children}

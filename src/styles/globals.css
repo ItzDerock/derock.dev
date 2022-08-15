@@ -64,11 +64,15 @@ body {
 }
 
 .tree-list {
-    list-style-type: "|-";
+    list-style-type: "├";
 }
 
 .tree-list > li {
     padding-inline-start: 1ch;
+}
+
+.tree-list > li:last-of-type {
+    list-style-type: '└';
 }
 
 .float-in {

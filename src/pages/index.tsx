@@ -1,7 +1,10 @@
+import { faBook, faGlobe } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import type { NextPage } from "next";
 import Head from "next/head";
 import { Header } from "../components/Header";
 import { OutsideLink } from "../components/Links/OutsideLink";
+import GithubStars from "../components/Stats/Github";
 import PoroScoutGuilds from "../components/Stats/PoroScout";
 import { TerminalBars } from "../components/Terminal/Bar";
 import Command from "../components/Terminal/Command";
@@ -130,6 +133,15 @@ const Index: NextPage = () => {
               and a custom Minecraft plugin to automate backups <span className="text-secondary">(Java, SFTP)</span> <br/>
               Clients also got SSH access, FTP, and SFTP access <span className="text-secondary">(Ubuntu, ZFS, chroot, SSHD, ProFTPD)</span>
             </TreeEntity>
+        </Command>
+
+        <Command input="tree ~/open-source-projects" title="Open Source Projects" animationIndex={7}>
+            <TreeEntity
+              title="ItzDerock/discord-html-transcripts"
+              icon={faBook}
+              stats={<GithubStars repo="ItzDerock/discord-html-transcripts" />}
+              link="https://github.com/ItzDerock/discord-html-transcripts"
+            >test</TreeEntity>
         </Command>
 
         

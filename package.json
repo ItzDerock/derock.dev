@@ -22,6 +22,7 @@
     "zod": "^3.17.3"
   },
   "devDependencies": {
+    "@saber2pr/types-github-api": "^0.0.9",
     "@types/node": "18.0.0",
     "@types/react": "18.0.14",
     "@types/react-dom": "18.0.5",
