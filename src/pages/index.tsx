@@ -24,7 +24,7 @@ const Index: NextPage = () => {
 
       <Header />
 
-      <main className="font-terminal m-5 text-sm">
+      <main className="font-terminal m-5 text-sm overflow-scroll md:overflow-auto">
         <Command input="neofetch" title="Contact">
           <pre className="text-arch whitespace-pre ">
             {"      /\\\\           "} derock<span className="text-white">@</span>derockdev <br />
@@ -112,8 +112,8 @@ const Index: NextPage = () => {
               link="https://infobeyondtech.com/"
             >
               Summer internship where I and a team built and racked a multi-GPU 2U server. <br />
-              We worked on training GANs and YOLO models for threat detection. <br />
-              <span className="text-secondary">(Python, Hardware, Tensorflow, System Administration)</span> <br/>
+              I worked on training and adapting GANs and YOLO models for threat evaluation through image processing. <br />
+              <span className="text-secondary">(Python, Hardware, Tensorflow, PyTorch, CUDA, System Administration)</span> <br/>
             </TreeEntity>
 
             <br />

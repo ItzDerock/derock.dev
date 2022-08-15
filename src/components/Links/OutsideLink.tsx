@@ -10,7 +10,7 @@ export function OutsideLink({
   return (
     <a
       href={to}
-      className={"underline decoration-dotted underline-offset-2 " + color}
+      className={"underline decoration-dotted underline-offset-2 transition-colors " + color}
       target="_blank"
       rel="noreferrer"
     >

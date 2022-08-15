@@ -47,3 +47,22 @@ body {
 .tree-list > li {
     padding-inline-start: 1ch;
 }
+
+.float-in {
+    animation-name: float-in;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: 1;
+    animation-timing-function: ease-out;
+}
+
+@keyframes float-in {
+    from {
+        transform: translateY(-0.5ch);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0ch);
+        opacity: 1;
+    }
+}

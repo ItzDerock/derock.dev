@@ -1,7 +1,9 @@
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
+import useMobile from "../../hooks/Mobile";
 
 export function TerminalPrompt({ command, title }: { command: string, title: string }) {
   const [dots, setDots] = useState(".");
+  const mobile = useMobile();
 
   useEffect(() => {
     const update = () => {
@@ -20,10 +22,23 @@ export function TerminalPrompt({ command, title }: { command: string, title: str
   return (
     <div className="flex whitespace-nowrap gap-3">
       <div className="float-left w-fit">
-        <span className="text-prompt">[derock@derock.dev</span>{" "}
-        <span className="text-white">~</span>
-        <span className="text-prompt">]$</span>{" "}
-        <span className="text-white">{command}</span> {"  "}
+
+        {
+          mobile ? (
+            <Fragment>
+              <span className="text-prompt">$</span>{" "}
+              <span className="text-white">{command}</span> {"  "}
+            </Fragment>
+          ) : (
+            <Fragment>
+              <span className="text-prompt">[derock@derock.dev</span>{" "}
+              <span className="text-white">~</span>
+              <span className="text-prompt">]$</span>{" "}
+              <span className="text-white">{command}</span> {"  "}
+            </Fragment>
+          )
+        }
+
       </div>
         
       <div className="grow overflow-hidden">

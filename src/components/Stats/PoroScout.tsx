@@ -4,6 +4,9 @@ import { OutsideLink } from "../Links/OutsideLink";
 
 function useTopGGAPI() {
   return useQuery(["poroscout-guilds"], async () => {
+    // delay for demo purposes
+    // await new Promise(resolve => setTimeout(resolve, 1000));
+
     const { data } = await axios.get<StatcordResponse>(
       "https://api.statcord.com/v3/913190001007804426"
     );
@@ -20,7 +23,7 @@ export default function PoroScoutGuilds() {
   // https://top.gg/api/bots/913190001007804426
   const { data, error, isLoading } = useTopGGAPI();
 
-  if(isLoading) return <span className="text-secondary transition-colors">...</span>;
+  if(isLoading) return <span className="text-secondary transition-colors animate-pulse">...</span>;
   if(error || !data) return <span className="text-primary transition-colors">Err!</span>;
 
   return (

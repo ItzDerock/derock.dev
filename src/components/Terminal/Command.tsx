@@ -8,7 +8,7 @@ type CommandProps = {
 
 export default function Command(props: CommandProps) {
   return (
-    <section>
+    <section className="float-in">
       <TerminalPrompt command={props.input} title={props.title} />
       <div className="text-white ml-6 my-2">
         {props.children}

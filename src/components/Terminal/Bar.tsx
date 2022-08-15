@@ -1,5 +1,3 @@
-import { Fragment } from "react";
-
 type TerminalBarProps = {
   data: {
     title: string,
@@ -22,7 +20,7 @@ export function TerminalBars(props: TerminalBarProps) {
   const textPadding = Math.max(...props.data.map(d => d.title.length)) + 1;
   
   return (
-    <Fragment>
+    <div className="whitespace-nowrap">
       {
         props.data.map((d, i) => (
           <p key={i}>
@@ -46,6 +44,6 @@ export function TerminalBars(props: TerminalBarProps) {
           </p>
         ))
       }
-    </Fragment>
+    </div>
   )
 }
