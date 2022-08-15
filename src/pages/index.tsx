@@ -24,7 +24,7 @@ const Index: NextPage = () => {
 
       <Header />
 
-      <main className="font-terminal m-5 text-sm overflow-scroll md:overflow-auto">
+      <main className="font-terminal m-5 text-sm overflow-x-auto sm:overflow-auto lg:max-w-screen-2xl mx-auto">
         <Command input="neofetch" title="Contact" animationIndex={1}>
           <pre className="text-arch whitespace-pre ">
             {"      /\\\\           "} derock<span className="text-white">@</span>derockdev <br />

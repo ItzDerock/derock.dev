@@ -1,8 +1,14 @@
 import { Fragment, useEffect, useState } from "react";
+import { useHover } from "../../hooks/Hover";
 import useMobile from "../../hooks/Mobile";
 
-export function TerminalPrompt({ command, title }: { command: string, title: string }) {
+export function TerminalPrompt(props: { command: string, title: string }) {
   const [dots, setDots] = useState(".");
+  const [isHovering, hoverProps] = useHover();
+  const [command, setCommand] = useState(props.command);
+
+  console.log(hoverProps)
+  
   const mobile = useMobile();
 
   useEffect(() => {
@@ -17,7 +23,15 @@ export function TerminalPrompt({ command, title }: { command: string, title: str
     window.addEventListener("resize", update);
     return () => window.removeEventListener("resize", update);
 
-  }, [command.length, title.length]);
+  }, [command.length]);
+
+  useEffect(() => {
+    if(isHovering) {
+      setCommand(props.title);
+    } else {
+      setCommand(props.command);
+    }
+  }, [isHovering]);
 
   return (
     <div className="flex whitespace-nowrap gap-3">
@@ -27,7 +41,7 @@ export function TerminalPrompt({ command, title }: { command: string, title: str
           mobile ? (
             <Fragment>
               <span className="text-prompt">$</span>{" "}
-              <span className="text-white">{command}</span> {"  "}
+              <span className="text-white" {...hoverProps}>{command}</span> {"  "}
             </Fragment>
           ) : (
             <Fragment>
@@ -48,7 +62,7 @@ export function TerminalPrompt({ command, title }: { command: string, title: str
       </div>
       
       <div className="float-right w-fit">
-        <span className="text-secondary">{title}</span>
+        <span className="text-gray-400">{props.title}</span>
       </div>
     </div>
   )
