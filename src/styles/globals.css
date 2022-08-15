@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * Fonts
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap');
+
+@font-face {
+    font-family: 'CaskaydiaCove NF';
+    src: url(/CaskaydiaCoveNF.ttf);
+}
+
+/*
+ * Body
+ */
+
+body {
+    background-color: #0C111B;
+}
+
+/*
+ * Commands
+ */
+
+.paddingDotsLeft {
+    width: fit-content;
+    float: left;
+}
+
+.paddingDots {
+    overflow: hidden;
+    flex-grow: 1;
+}
+
+.paddingDotsRight {
+    width: fit-content;
+    float: right;
+}
+
+.tree-list {
+    list-style-type: "|-";
+}
+
+.tree-list > li {
+    padding-inline-start: 1ch;
+}
