@@ -8,7 +8,7 @@ export function NavbarElement({ name, link }: { name: string, link: string }) {
   return (
     <div className={
       (isActive ? "text-primary bg-slate-600 border-primary border-b-2" : "")
-      + " inline-block px-2 md:px-5"
+      + " inline-block px-2 md:px-4"
     }>
       <Link href={link}>{name}</Link>
     </div>
