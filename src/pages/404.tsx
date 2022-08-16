@@ -19,7 +19,7 @@ export default function Custom404() {
         <title>404 - Not Found</title>
       </Head>
 
-      <div className="flex h-screen font-terminal">
+      <div className="flex font-terminal h-[100vh] mx-4 overflow-hidden">
         <div className="m-auto text-left">
           <Command input={"cat " + path}>
             <p>
