@@ -13,6 +13,10 @@ const App: AppType = ({ Component, pageProps }) => {
         <style>
           {dom.css()}
         </style>
+
+        <title>Derock&apos;s Development</title>
+        <meta name="theme-color" content="#FF4C29" />
+        <link rel="icon" href="/favicon.ico" />
       </Head>
       <Component {...pageProps} />
     </QueryClientProvider>

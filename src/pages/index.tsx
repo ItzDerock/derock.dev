@@ -11,6 +11,7 @@ import PoroScoutGuilds from "../components/Stats/PoroScout";
 import { TerminalBars } from "../components/Terminal/Bar";
 import Command from "../components/Terminal/Command";
 import TreeEntity from "../components/Terminal/TreeEntity";
+import { TerminalWrapper } from "../components/Terminal/Wrapper";
 
 type TechnologyCardProps = {
   name: string;
@@ -24,13 +25,11 @@ const Index: NextPage = () => {
       <Head>
         <title>Derock&apos;s Development</title>
         <meta name="description" content="Derock's resume and portfolio." />
-        <meta name="theme-color" content="#FF4C29" />
-        <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <Header />
 
-      <main className="font-terminal m-5 text-sm overflow-x-auto sm:overflow-auto lg:max-w-screen-2xl mx-auto pb-4">
+      <TerminalWrapper>
         <Command input="neofetch" title="Contact" animationIndex={1}>
           <pre className="text-arch whitespace-pre font-terminal">
             {"      /\\\\           "} derock<span className="text-white">@</span>derockdev <br />
@@ -168,7 +167,7 @@ const Index: NextPage = () => {
               Take a look at reviews from my clients!
             </TreeEntity>
         </Command>
-      </main>
+      </TerminalWrapper>
     </>
   );
 };
