@@ -27,7 +27,7 @@ export default function Custom404() {
               cat: {path}: No such file or directory <br /> <br />
               <Link to="/" color="text-gray-500">Go Home</Link>
             </p>
-          </Command>Error
+          </Command>
         </div>
       </div>
     </Fragment>
