@@ -9,11 +9,11 @@ type CommandProps = {
 
 export default function Command(props: CommandProps) {
   return (
-    <section className="float-in" style={{ animationDelay: ((props.animationIndex ?? 1) * 150) + 'ms' }}>
+    <article className="float-in" style={{ animationDelay: ((props.animationIndex ?? 1) * 150) + 'ms' }}>
       <TerminalPrompt command={props.input} title={props.title} />
       <div className="text-white ml-6 my-2">
         {props.children}
       </div>
-    </section>
+    </article>
   )
 }
