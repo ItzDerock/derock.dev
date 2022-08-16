@@ -18,6 +18,8 @@ type TreeEntityProps = {
   children: React.ReactNode
   icon?: IconDefinition;
   stats?: React.ReactNode
+
+  animationIndex?: number;
 }
 
 function getFormattedDate(date: Date) {
@@ -29,7 +31,9 @@ export default function TreeEntity(props: TreeEntityProps) {
   const positionData = props.position ? Positions[props.position] : undefined;
 
   return (
-    <div className="h-fit">
+    <div className={(props.animationIndex ? "float-in " : "")  + "h-fit"} style={{
+      animationDelay: props.animationIndex ? `${props.animationIndex * 0.1}s` : undefined,
+    }}>
       <p className="whitespace-pre">
         {
           props.icon ? (
