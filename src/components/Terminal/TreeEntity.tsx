@@ -1,6 +1,6 @@
 import { IconDefinition } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { OutsideLink } from "../Links/OutsideLink";
+import { Link } from "../Links/Link";
 
 export const Positions = {
   Founder: ["text-primary", 'Founder'],
@@ -37,8 +37,9 @@ export default function TreeEntity(props: TreeEntityProps) {
           ) : null
         }
         {
-          props.link ? <OutsideLink to={props.link}>{props.title}</OutsideLink>
-          : <span className="text-arch underline underline-offset-2">{props.title}</span>
+          props.link ?
+            <Link to={props.link}>{props.title}</Link>
+            : <span className="text-arch underline underline-offset-2">{props.title}</span>
         }
       </p>
 

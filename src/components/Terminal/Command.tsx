@@ -2,7 +2,7 @@ import { TerminalPrompt } from "./Prompt";
 
 type CommandProps = {
   input: string;
-  title: string;
+  title?: string;
   children: React.ReactNode;
   animationIndex?: number;
 }

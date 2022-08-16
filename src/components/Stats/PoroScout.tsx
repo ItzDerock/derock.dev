@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useQuery } from "react-query"
-import { OutsideLink } from "../Links/OutsideLink";
+import { Link } from "../Links/Link";
 
 function useTopGGAPI() {
   return useQuery(["poroscout-guilds"], async () => {
@@ -27,9 +27,9 @@ export default function PoroScoutGuilds() {
   if(error || !data) return <span className="text-primary transition-colors">Err!</span>;
 
   return (
-    <OutsideLink to="https://top.gg/bot/913190001007804426">
+    <Link to="https://top.gg/bot/913190001007804426">
       {data.data[0]?.servers}
-    </OutsideLink>
+    </Link>
   )
 }
 

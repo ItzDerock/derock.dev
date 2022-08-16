@@ -2,7 +2,7 @@ import { Fragment, useEffect, useRef, useState } from "react";
 import { useHover } from "../../hooks/Hover";
 import useMobile from "../../hooks/Mobile";
 
-export function TerminalPrompt(props: { command: string, title: string }) {
+export function TerminalPrompt(props: { command: string, title?: string }) {
   const [dots, setDots] = useState(".");
   const [isHovering, hoverProps] = useHover();
   const [command, setCommand] = useState(props.command);
@@ -47,7 +47,7 @@ export function TerminalPrompt(props: { command: string, title: string }) {
   }, [command.length]);
 
   useEffect(() => {
-    if(isHovering) {
+    if(isHovering && props.title) {
       setCommand(props.title);
     } else {
       setCommand(props.command);
@@ -75,25 +75,31 @@ export function TerminalPrompt(props: { command: string, title: string }) {
         }
 
       </div>
-        
-      <div className="grow overflow-hidden">
-        <span className="text-dots">
-          #{dots}
-        </span>
-      </div>
-      
-      <div className="float-right w-fit">
-        <span className="text-gray-400 hover:cursor-pointer" onClick={() => {
-          window.location.hash = ("#" + props.title);
 
-          // copy new url to clipboard
-          navigator.clipboard.writeText(window.location.href);
+      {
+        props.title ? (
+          <Fragment>
+            <div className="grow overflow-hidden">
+              <span className="text-dots">
+                #{dots}
+              </span>
+            </div>
+            
+            <div className="float-right w-fit">
+              <span className="text-gray-400 hover:cursor-pointer" onClick={() => {
+                window.location.hash = ("#" + props.title);
 
-          setTitle("Link Copied!");
-        }}>
-          {title}
-        </span>
-      </div>
+                // copy new url to clipboard
+                navigator.clipboard.writeText(window.location.href);
+
+                setTitle("Link Copied!");
+              }}>
+                {title}
+              </span>
+            </div>
+          </Fragment>
+        ) : null
+      }
     </div>
   )
 }

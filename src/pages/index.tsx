@@ -1,10 +1,10 @@
-import { faBook } from "@fortawesome/free-solid-svg-icons";
+import { faBook, faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import type { NextPage } from "next";
 import Head from "next/head";
 import { Fragment } from "react";
 import { Header } from "../components/Header";
-import { OutsideLink } from "../components/Links/OutsideLink";
+import { Link } from "../components/Links/Link";
 import GithubStats from "../components/Stats/Github";
 import NPMDownloads from "../components/Stats/NPM";
 import PoroScoutGuilds from "../components/Stats/PoroScout";
@@ -35,10 +35,10 @@ const Index: NextPage = () => {
           <pre className="text-arch whitespace-pre font-terminal">
             {"      /\\\\           "} derock<span className="text-white">@</span>derockdev <br />
             {"     /  \\\\          "} <span className="text-white">----------------</span> <br />
-            {"    /\\\\  \\\\         "} Email: <OutsideLink color="text-white" to="mailto:derock@derock.dev">derock@derock.dev</OutsideLink><br />
-            {"   /      \\\\        "} Github: <OutsideLink color="text-white" to="https://github.com/ItzDerock">ItzDerock</OutsideLink><br />
-            {"  /   ,,   \\\\       "} Discord: <OutsideLink color="text-white" to="/discord">Derock#0001</OutsideLink><br />
-            {" /   |  |  -\\\\      "} Website: <OutsideLink color="text-white" to="https://derock.dev/">derock.dev</OutsideLink><br />
+            {"    /\\\\  \\\\         "} Email: <Link color="text-white" to="mailto:derock@derock.dev">derock@derock.dev</Link><br />
+            {"   /      \\\\        "} Github: <Link color="text-white" to="https://github.com/ItzDerock">ItzDerock</Link><br />
+            {"  /   ,,   \\\\       "} Discord: <Link color="text-white" to="/discord">Derock#0001</Link><br />
+            {" /   |  |  -\\\\      "} Website: <Link color="text-white" to="https://derock.dev/">derock.dev</Link><br />
             {"/_-''    ''-_\\\\     "} <br />
           </pre>
         </Command>
@@ -54,7 +54,7 @@ const Index: NextPage = () => {
 
           <p>
             <span className="text-primary">Interested in hiring me?</span> <br />
-            Shoot me an <OutsideLink to="mailto:derock@derock.dev">email</OutsideLink> or contact me on <OutsideLink to="/discord">Discord</OutsideLink>. <br />
+            Shoot me an <Link to="mailto:derock@derock.dev">email</Link> or contact me on <Link to="/discord">Discord</Link>. <br />
           </p>
         </Command>
 
@@ -104,7 +104,7 @@ const Index: NextPage = () => {
             >
               PoroScout is a League of Legends Discord Bot. <br />
               PoroScout is currently in <PoroScoutGuilds /> guilds. <br />
-              Partnered with <OutsideLink to="https://mobalytics.gg">Mobalytics</OutsideLink> for advertising and analytics. <br />
+              Partnered with <Link to="https://mobalytics.gg">Mobalytics</Link> for advertising and analytics. <br />
               <span className="text-gray-400">(Discord.js, Typescript, React, Tailwind, Docker, Fastify, & more)</span> <br />
             </TreeEntity>
 
@@ -156,9 +156,18 @@ const Index: NextPage = () => {
               <span className="text-secondary">(Typescript, jsdom, discord.js, HTML, CSS)</span> <br />
             </TreeEntity>
             <br />
-            <span className="text-secondary italic">see more on my <OutsideLink to="https://github.com/ItzDerock" color="text-secondary">github</OutsideLink>.</span>
+            <span className="text-secondary italic">see more on my <Link to="https://github.com/ItzDerock" color="text-secondary">github</Link>.</span>
         </Command>
-        
+
+        <Command input="find ~/links -type l -ls" title="Links" animationIndex={8}>
+            <TreeEntity
+              title="Reviews -> ~/reviews"
+              icon={faStar}
+              link="/reviews"
+            >
+              Take a look at reviews from my clients!
+            </TreeEntity>
+        </Command>
       </main>
     </>
   );
