@@ -16,6 +16,10 @@ module.exports = {
       fontFamily: {
         terminal: ['CaskaydiaCove NF', 'monospace'],
         header: ['Ubuntu Mono', 'monospace'],
+      },
+
+      fontSize: {
+        '2xs': ['0.65rem', '1rem'],
       }
     },
   },

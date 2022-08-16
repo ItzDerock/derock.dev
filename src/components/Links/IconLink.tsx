@@ -15,7 +15,7 @@ export function FontAwesomeLink(props: FontAwesomeLinkProps) {
             <FontAwesomeIcon 
                 icon={props.icon} 
                 size={props.size} 
-                className={props.className ?? "h-5 duration-100 hover:scale-105"}
+                className={props.className ?? "scale-110 duration-100 hover:scale-125"}
             />
         </a>
     )

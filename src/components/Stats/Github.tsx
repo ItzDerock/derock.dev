@@ -2,7 +2,8 @@ import { useQuery } from "react-query"
 import type { Repository } from "@saber2pr/types-github-api"
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { faCodeFork, faStar } from "@fortawesome/free-solid-svg-icons";
+import { Error, Loading } from "./common/States";
 
 function useGithubAPI(repo: string) {
   return useQuery(["github", repo], async () => {
@@ -13,16 +14,27 @@ function useGithubAPI(repo: string) {
   });
 }
 
-export default function GithubStars({ repo }: { repo: string }) {
+export default function GithubStats({ repo }: { repo: string }) {
   const { data, error, isLoading } = useGithubAPI(repo);
 
-  if(isLoading) return <span className="text-secondary transition-colors animate-pulse">...</span>;
-  if(error || !data) return <span className="text-primary transition-colors">Err!</span>;
+  if(isLoading) return <Loading />;
+  if(error || !data) return <Error />;
 
   return (
     <span className="text-white transition-colors"> 
-      <FontAwesomeIcon icon={faStar} size="xs" />
-      {data.stargazers_count} 
+      <FontAwesomeIcon icon={faStar} size="xs" className="mr-2" />
+      {data.stargazers_count.toLocaleString()} 
+      <span className="text-secondary text-2xs">
+        {" "}stars
+      </span>
+
+      <span className="text-dots"> | </span>
+
+      <FontAwesomeIcon icon={faCodeFork} size="xs" className="mr-2" />
+      {data.forks_count.toLocaleString()}
+      <span className="text-secondary text-2xs">
+        {" "}forks
+      </span>
     </span>
   )
 }
