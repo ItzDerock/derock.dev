@@ -19,17 +19,17 @@ export default function Custom404() {
         <title>404 - Not Found</title>
       </Head>
 
-      <div className="flex font-terminal h-[100vh] mx-4 overflow-hidden">
+      <main className="flex font-terminal h-full mx-4 overflow-hidden">
         <div className="m-auto text-left">
           <Command input={"cat " + path}>
             <p>
               <span className="text-primary font-bold">Error 404:</span>{" "}
               cat: {path}: No such file or directory <br /> <br />
-              <Link to="/" color="text-gray-500">Go Home</Link>
+              <Link to="/" color="text-gray-500">cd ~/ (Go Home)</Link>
             </p>
           </Command>
         </div>
-      </div>
+      </main>
     </Fragment>
   )
 }
