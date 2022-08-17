@@ -16,13 +16,17 @@ function useNPMAPI(packageName: string) {
 export default function NPMDownloads({ packageName }: { packageName: string }) {
   const { data, error, isLoading } = useNPMAPI(packageName);
 
-  if(isLoading) return <Loading />;
-  if(error || !data) return <Error />;
+  // if(isLoading) return <Loading />;
+  // if(error || !data) return <Error />;
 
   return (
     <span className="text-white transition-colors">
       <FontAwesomeIcon icon={faDownload} className="mr-2" />
-      {data.downloads.toLocaleString()} {" "}
+      {
+        isLoading ? <Loading />
+          : (error || !data) ? <Error />
+          : data.downloads.toLocaleString()
+      } {" "}
       <span className="text-secondary text-2xs">
         downloads / week
       </span>
