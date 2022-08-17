@@ -1,4 +1,4 @@
-import { faBook, faStar } from "@fortawesome/free-solid-svg-icons";
+import { faBook, faGlobe, faStar } from "@fortawesome/free-solid-svg-icons";
 import type { NextPage } from "next";
 import Head from "next/head";
 import { Fragment } from "react";
@@ -150,7 +150,21 @@ const Index: NextPage = () => {
               It will generate an HTML file containing a discord-styled transcript of a channel. <br />
               <span className="text-secondary">(Typescript, jsdom, discord.js, HTML, CSS)</span> <br />
             </TreeEntity>
+            
             <br />
+
+            <TreeEntity
+              title="ItzDerock/derock.dev"
+              icon={faGlobe}
+              stats={<GithubStats repo="ItzDerock/derock.dev" />}
+              link="https://github.com/ItzDerock/derock.dev"
+            >
+              This website! <br />
+              <span className="text-secondary">(Typescript, React, NextJS, Tailwind, HTML, CSS)</span> <br />
+            </TreeEntity>
+
+            <br />
+
             <span className="text-secondary italic">see more on my <Link to="https://github.com/ItzDerock" color="text-secondary">github</Link>.</span>
         </Command>
 

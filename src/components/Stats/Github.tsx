@@ -18,7 +18,7 @@ export default function GithubStats({ repo }: { repo: string }) {
   const { data, error, isLoading } = useGithubAPI(repo);
 
   if(isLoading) return <Loading />;
-  if(error || !data) return <Error />;
+  if(error || !data) return <Error customText="Failed to load stats!" />;
 
   return (
     <span className="text-white transition-colors"> 
