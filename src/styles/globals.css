@@ -118,3 +118,19 @@ body {
 html, body, #__next {
     height: 100%;
 }
+
+/*
+ * Loading bars
+ */
+
+#nprogress .bar {
+    background: theme('colors.primary') !important;
+}
+
+#nprogress .peg {
+    box-shadow: 0 0 10px theme('colors.primary'), 0 0 5px theme('colors.primary') !important;
+}
+
+#nprogress .spinner-icon {
+    display: none;
+}

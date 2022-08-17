@@ -7,13 +7,16 @@ specifiers:
   '@fortawesome/react-fontawesome': ^0.2.0
   '@saber2pr/types-github-api': ^0.0.9
   '@types/node': 18.0.0
+  '@types/nprogress': ^0.2.0
   '@types/react': 18.0.14
   '@types/react-dom': 18.0.5
   autoprefixer: ^10.4.8
   axios: ^0.27.2
+  axios-progress-bar: ^1.2.0
   eslint: 8.18.0
   eslint-config-next: 12.2.3
   next: 12.2.3
+  nprogress: ^0.2.0
   postcss: ^8.4.16
   react: 18.2.0
   react-dom: 18.2.0
@@ -29,7 +32,9 @@ dependencies:
   '@fortawesome/free-solid-svg-icons': 6.1.2
   '@fortawesome/react-fontawesome': 0.2.0_tebjjym7ugcdduvdrfbg7ugwxq
   axios: 0.27.2
+  axios-progress-bar: 1.2.0_axios@0.27.2
   next: 12.2.3_biqbaboplfbrettd7655fr4n2y
+  nprogress: 0.2.0
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   react-query: 3.39.2_biqbaboplfbrettd7655fr4n2y
@@ -39,6 +44,7 @@ dependencies:
 devDependencies:
   '@saber2pr/types-github-api': 0.0.9
   '@types/node': 18.0.0
+  '@types/nprogress': 0.2.0
   '@types/react': 18.0.14
   '@types/react-dom': 18.0.5
   autoprefixer: 10.4.8_postcss@8.4.16
@@ -307,6 +313,10 @@ packages:
     resolution: {integrity: sha512-cHlGmko4gWLVI27cGJntjs/Sj8th9aYwplmZFwmmgYQQvL5NUsgVJG7OddLvNfLqYS31KFN0s3qlaD9qCaxACA==}
     dev: true
 
+  /@types/nprogress/0.2.0:
+    resolution: {integrity: sha512-1cYJrqq9GezNFPsWTZpFut/d4CjpZqA0vhqDUPFWYKF1oIyBz5qnoYMzR+0C/T96t3ebLAC1SSnwrVOm5/j74A==}
+    dev: true
+
   /@types/prop-types/15.7.5:
     resolution: {integrity: sha512-JCB8C6SnDoQf0cNycqd/35A7MjcnK+ZTqE7judS6o7utxUCg6imJg3QK2qzHKszlTjcj2cn+NwMB2i96ubpj7w==}
     dev: true
@@ -533,6 +543,14 @@ packages:
     resolution: {integrity: sha512-32+ub6kkdhhWick/UjvEwRchgoetXqTK14INLqbGm5U2TzBkBNF3nQtLYm8ovxSkQWArjEQvftCKryjZaATu3w==}
     engines: {node: '>=4'}
     dev: true
+
+  /axios-progress-bar/1.2.0_axios@0.27.2:
+    resolution: {integrity: sha512-PEgWb/b2SMyHnKJ/cxA46OdCuNeVlo8eqL0HxXPtz+6G/Jtpyo49icPbW+jpO1wUeDEjbqpseMoCyWxESxf5pA==}
+    peerDependencies:
+      axios: 0.x
+    dependencies:
+      axios: 0.27.2
+    dev: false
 
   /axios/0.27.2:
     resolution: {integrity: sha512-t+yRIyySRTp/wua5xEr+z1q60QmLq8ABsS5O9Me1AsE5dfKqgnCFzwiCZZ/cGNd1lq4/7akDWMxdhVlucjmnOQ==}
@@ -1685,6 +1703,10 @@ packages:
     resolution: {integrity: sha512-bdok/XvKII3nUpklnV6P2hxtMNrCboOjAcyBuQnWEhO665FwrSNRxU+AqpsyvO6LgGYPspN+lu5CLtw4jPRKNA==}
     engines: {node: '>=0.10.0'}
     dev: true
+
+  /nprogress/0.2.0:
+    resolution: {integrity: sha512-I19aIingLgR1fmhftnbWWO3dXc0hSxqHQHQb3H8m+K3TnEn/iSeTZZOyvKXWqQESMwuUVnatlCnZdLBZZt2VSA==}
+    dev: false
 
   /object-assign/4.1.1:
     resolution: {integrity: sha512-rJgTQnkUnH1sFw8yT6VSU3zD3sWmu6sZhIseY8VX+GRu3P6F7Fu+JNDoXfklElbLJSnc3FUQHVe4cU5hj+BcUg==}

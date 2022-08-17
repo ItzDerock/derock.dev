@@ -1,12 +1,40 @@
-import "../styles/globals.css";
 import type { AppType } from "next/dist/shared/lib/utils";
 import { QueryClient, QueryClientProvider } from "react-query";
 import Head from "next/head";
 import { dom } from "@fortawesome/fontawesome-svg-core";
+import { loadProgressBar } from 'axios-progress-bar';
+import NProgress from 'nprogress';
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 
+// css
+import 'nprogress/nprogress.css';
+import "../styles/globals.css";
+
+// loading bar for axios
 const queryClient = new QueryClient();
+loadProgressBar();
 
+// the actual app
 const App: AppType = ({ Component, pageProps }) => {
+  const router = useRouter();
+
+  // nprogress page loading
+  useEffect(() => {
+    const start = () => NProgress.start();
+    const end   = () => NProgress.done();
+
+    router.events.on('routeChangeStart', start);
+    router.events.on('routeChangeComplete', end);
+    router.events.on('routeChangeError', end);
+
+    return () => {
+      router.events.off('routeChangeStart', start);
+      router.events.off('routeChangeComplete', end);
+      router.events.off('routeChangeError', end);
+    }
+  }, [router]);
+
   return (
     <QueryClientProvider client={queryClient}>
       <Head>
