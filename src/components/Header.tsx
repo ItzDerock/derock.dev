@@ -1,12 +1,19 @@
 import { faDiscord, faGithub } from "@fortawesome/free-brands-svg-icons";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { useTime } from "../hooks/Time";
 import { FontAwesomeLink } from "./Links/IconLink";
 import Navbar from "./Navbar/Navbar";
 
 export function Header() {
   const time = useTime(5000);
+  const [renderTime, setRenderTime] = useState(false);
+
+  // hyrdation error because render time is different
+  useEffect(() => {
+    setRenderTime(true);
+  }, [])
 
   return (
     <header>
@@ -42,7 +49,9 @@ export function Header() {
             <h1 className="hidden md:inline-block">
               {
                 // time in 24-hour format HH:MM
-                time.getHours().toString().padStart(2, "0") + ":" + time.getMinutes().toString().padStart(2, "0")
+                renderTime 
+                  ? time.getHours().toString().padStart(2, "0") + ":" + time.getMinutes().toString().padStart(2, "0")
+                  : "00:00"
               }
             </h1>
           </div>
