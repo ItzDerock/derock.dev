@@ -14,7 +14,7 @@ module.exports = {
       },
 
       fontFamily: {
-        terminal: ['CaskaydiaCove NF', 'monospace'],
+        terminal: ['CascadiaCode', 'monospace'],
         header: ['Ubuntu Mono', 'monospace'],
       },
 
