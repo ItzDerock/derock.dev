@@ -1,5 +1,4 @@
 import { faBook, faStar } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import type { NextPage } from "next";
 import Head from "next/head";
 import { Fragment } from "react";
@@ -12,12 +11,6 @@ import { TerminalBars } from "../components/Terminal/Bar";
 import Command from "../components/Terminal/Command";
 import TreeEntity from "../components/Terminal/TreeEntity";
 import { TerminalWrapper } from "../components/Terminal/Wrapper";
-
-type TechnologyCardProps = {
-  name: string;
-  description: string; 
-  documentation: string;
-};
 
 const Index: NextPage = () => {
   return (
