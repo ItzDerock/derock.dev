@@ -100,6 +100,7 @@ const Index: NextPage = () => {
               position="Founder"
               startDate="4/26/2022"
               link="https://poroscout.gg"
+              animationIndex={10}
             >
               PoroScout is a League of Legends Discord Bot. <br />
               PoroScout is currently in <PoroScoutGuilds /> guilds. <br />
@@ -115,6 +116,7 @@ const Index: NextPage = () => {
               startDate="01/07/2022"
               endDate="04/25/2022"
               link="https://infobeyondtech.com/"
+              animationIndex={11}
             >
               Summer internship where I and a team built and racked a multi-GPU 2U server. <br />
               I worked on training and adapting GANs and YOLO models for threat evaluation through image processing. <br />
@@ -129,6 +131,7 @@ const Index: NextPage = () => {
               startDate="01/07/2022"
               endDate="04/25/2022"
               link="https://mcstorage.cloud"
+              animationIndex={12}
             >
               MCStorage was a cloud storage hosting provider. <br/>
               It featured a fully function web dashboard <span className="text-secondary">(React, NGINX, Node.JS, Docker)</span> <br/>
@@ -158,7 +161,7 @@ const Index: NextPage = () => {
             <span className="text-secondary italic">see more on my <Link to="https://github.com/ItzDerock" color="text-secondary">github</Link>.</span>
         </Command>
 
-        <Command input="find ~/links -type l -ls" title="Links" animationIndex={8}>
+        <Command input="find ~/links -type l -ls" title="Additional Pages" animationIndex={8}>
             <TreeEntity
               title="Reviews -> ~/reviews"
               icon={faStar}
