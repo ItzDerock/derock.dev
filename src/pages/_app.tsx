@@ -45,7 +45,7 @@ const App: AppType = ({ Component, pageProps }) => {
         <title>Derock&apos;s Development</title>
         <meta name="theme-color" content="#FF4C29" />
         <link rel="icon" href="/favicon.ico" />
-        <script defer={true} data-domain="derock.dev" data-api="https://stats.derock.dev/api/log" src="https://stats.derock.dev/js/stats.outbound.js"></script>
+        <script defer={true} data-domain="derock.dev" src="https://stats.derock.dev/js/script.outbound-links.js"></script>
       </Head>
       <Component {...pageProps} />
     </QueryClientProvider>
