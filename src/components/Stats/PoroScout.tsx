@@ -16,6 +16,9 @@ function useTopGGAPI() {
     }
 
     return data;
+  }, {
+    staleTime: 1000 * 60 * 60 * 24, // 1 day
+    cacheTime: 1000 * 60 * 60 * 12, // 12 hours
   });
 }
 

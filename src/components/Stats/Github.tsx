@@ -17,7 +17,9 @@ function useGithubAPI(repo: string) {
       // rate limited or bad request, dont retry
       if(String(error.response?.status).startsWith("4")) return false;
       return true;
-    }
+    },
+    staleTime: 1000 * 60 * 60 * 24, // 1 day
+    cacheTime: 1000 * 60 * 60 * 12, // 12 hours
   });
 }
 
