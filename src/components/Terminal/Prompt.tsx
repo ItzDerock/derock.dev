@@ -47,8 +47,10 @@ export function TerminalPrompt(props: { command: string, title?: string }) {
   }, [command.length]);
 
   useEffect(() => {
+    const spaceNeeded = props.command.length - (props.title?.length ?? 0);
+
     if(isHovering && props.title) {
-      setCommand(props.title);
+      setCommand(props.title + " ".repeat(spaceNeeded > 0 ? spaceNeeded : 0));
     } else {
       setCommand(props.command);
     }
@@ -58,21 +60,8 @@ export function TerminalPrompt(props: { command: string, title?: string }) {
     <div className="flex whitespace-nowrap gap-3" ref={ref}>
       <div className="float-left w-fit">
 
-        {
-          mobile ? (
-            <Fragment>
-              <span className="text-prompt">$</span>{" "}
-              <span className="text-white" {...hoverProps}>{command}</span> {"  "}
-            </Fragment>
-          ) : (
-            <Fragment>
-              <span className="text-prompt">[derock@derock.dev</span>{" "}
-              <span className="text-white">~</span>
-              <span className="text-prompt">]$</span>{" "}
-              <span className="text-white">{command}</span> {"  "}
-            </Fragment>
-          )
-        }
+        <span className="text-prompt">$</span>{" "}
+        <span className="text-white whitespace-pre" {...hoverProps}>{command}</span> {"  "}
 
       </div>
 
