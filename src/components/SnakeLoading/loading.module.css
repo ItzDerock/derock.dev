@@ -1,0 +1,127 @@
+.snake-loading pattern path {
+  stroke: #8d946a;
+}
+
+.snake-group {
+  stroke: theme("colors.accent.200");
+}
+
+.snake-group .snake {
+  -webkit-animation: stroke-anim 4s linear infinite;
+  animation: stroke-anim 4s linear infinite;
+}
+
+@-webkit-keyframes stroke-anim {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes stroke-anim {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.snake-group .snake {
+  stroke-dasharray: 32 224;
+  stroke-dashoffset: 256;
+  -webkit-animation-timing-function: steps(32);
+  animation-timing-function: steps(32);
+}
+
+.dot {
+  -webkit-animation: dot1 4s steps(1) infinite;
+  animation: dot1 4s steps(1) infinite;
+}
+
+@-webkit-keyframes dot1 {
+  0%,
+  26%,
+  91.1% {
+    opacity: 1;
+  }
+  26.1%,
+  91% {
+    opacity: 0;
+  }
+}
+
+@keyframes dot1 {
+  0%,
+  26%,
+  91.1% {
+    opacity: 1;
+  }
+  26.1%,
+  91% {
+    opacity: 0;
+  }
+}
+
+.dot-2 {
+  -webkit-animation-name: dot2;
+  animation-name: dot2;
+}
+
+@-webkit-keyframes dot2 {
+  0%,
+  26%,
+  51%,
+  100% {
+    opacity: 0;
+  }
+  26.1%,
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes dot2 {
+  0%,
+  26%,
+  51%,
+  100% {
+    opacity: 0;
+  }
+  26.1%,
+  50% {
+    opacity: 1;
+  }
+}
+
+.dot-3 {
+  -webkit-animation-name: dot3;
+  animation-name: dot3;
+}
+
+@-webkit-keyframes dot3 {
+  0%,
+  50%,
+  92%,
+  100% {
+    opacity: 0;
+  }
+  50.1%,
+  92% {
+    opacity: 1;
+  }
+}
+
+@keyframes dot3 {
+  0%,
+  50%,
+  92%,
+  100% {
+    opacity: 0;
+  }
+  50.1%,
+  92% {
+    opacity: 1;
+  }
+}
+
+svg {
+  margin: auto;
+  max-width: 144px;
+}
