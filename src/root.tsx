@@ -37,7 +37,6 @@ export default function Root() {
 
         {/* title */}
         <Meta property="og:title" content="derock.dev - Fullstack Developer" />
-        
 
         <Link rel="preconnect" href="https://fonts.googleapis.com" />
         <Link
