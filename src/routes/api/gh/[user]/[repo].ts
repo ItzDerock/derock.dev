@@ -31,7 +31,7 @@ export async function GET({ params }: APIEvent) {
     headers: {
       "Accept": "application/vnd.github.v3+json",
       "User-Agent": "ItzDerock/derock.dev",
-      "Authorization": `token ${env.GITHUB_API_TOKEN}` 
+      "Authorization": `token ${env.GITHUB_PAT}` 
     }
   });
 

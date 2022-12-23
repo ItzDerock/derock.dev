@@ -23,4 +23,5 @@ gitignore
 .DS_Store
 Thumbs.db
 
-src/env/server.ts
+# env
+.env
