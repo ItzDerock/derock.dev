@@ -53,6 +53,7 @@ export default function ProjectCard(props: CardProps) {
               style={{ "background-color": props.badge!.color }}
               target="_blank"
               rel="noreferrer"
+              aria-label={`Top tool used in ${props.title}`}
             >
               <props.badge.icon class="w-6 h-6" style={{
                 "fill": props.badge!.fill ?? "white"

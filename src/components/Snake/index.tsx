@@ -254,23 +254,23 @@ export default function SnakeGame() {
             
             <div class="grid-cols-3 grid-rows-2 grid gap-1 mt-2">
               <div></div>
-              <button class="snake-button bg-background border-line py-3 rounded-lg" onClick={moveUp} name="up">
+              <button class="snake-button bg-background border-line py-3 rounded-lg" onClick={moveUp} name="up" aria-label="Move Snake Up">
                 <svg class="m-auto" width="9" height="7" viewBox="0 0 9 7" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M4.50002 0.309143L8.75003 6.30914H0.25L4.50002 0.309143Z" fill="white" />
                 </svg>
               </button>
               <div></div>
-              <button class="snake-button bg-background border-line py-3 rounded-lg" onClick={moveLeft} name="left">
+              <button class="snake-button bg-background border-line py-3 rounded-lg" onClick={moveLeft} name="left" aria-label="Move Snake Left">
                 <svg class="m-auto" width="7" height="9" viewBox="0 0 7 9" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0.309143 4.5L6.30914 8.75V0.25L0.309143 4.5Z" fill="white" />
                 </svg>
               </button>
-              <button class="snake-button bg-background border-line py-3 rounded-lg" onClick={moveDown} name="down">
+              <button class="snake-button bg-background border-line py-3 rounded-lg" onClick={moveDown} name="down" aria-label="Move Snake Down">
                 <svg class="m-auto" width="9" height="7" viewBox="0 0 9 7" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M4.50002 6.69086L0.25 0.690857H8.75003L4.50002 6.69086Z" fill="white" />
                 </svg>
               </button>
-              <button class="snake-button bg-background border-line py-3 rounded-lg" onClick={moveRight} name="right">
+              <button class="snake-button bg-background border-line py-3 rounded-lg" onClick={moveRight} name="right" aria-label="Move Snake Right">
                 <svg class="m-auto" width="7" height="9" viewBox="0 0 7 9" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M6.69086 4.5L0.690857 0.25V8.75L6.69086 4.5Z" fill="white" />
                 </svg>
