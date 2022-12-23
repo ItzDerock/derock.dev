@@ -23,6 +23,7 @@
     "solid-icons": "^1.0.4",
     "solid-js": "^1.6.6",
     "solid-start": "^0.2.8",
+    "solid-start-vercel": "^0.2.8",
     "swiper": "^8.4.5",
     "undici": "^5.14.0",
     "zod": "^3.20.2"
