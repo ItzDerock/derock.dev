@@ -39,7 +39,7 @@ export default function Root() {
         <Meta property="og:title" content="derock.dev - Fullstack Developer" />
 
         {/* description */}
-        <Meta property="description" content="Hi I'm Derock, a highschool student and fullstack developer." />
+        <Meta name="description" content="Hi I'm Derock, a highschool student and fullstack developer." />
 
         <Link rel="preconnect" href="https://fonts.googleapis.com" />
         <Link
