@@ -17,7 +17,7 @@ export default function SnakeDisplay({
   startGame: () => void;
 }) {
   return (
-    <div class="w-[240px] h-[400px] bg-background bg-opacity-[84%] shadow-snakeGameWindow rounded-lg">
+    <div class="w-[240px] h-[400px] bg-background bg-opacity-[84%] shadow-snakeGameWindow rounded-lg relative">
       <Show
         when={gameStarted()}
         fallback={
@@ -32,7 +32,7 @@ export default function SnakeDisplay({
           </div>
         }
       >
-        <div class="absolute">
+        {/* <div class="absolute"> */}
           {snake().map(([x, y], i, arr) => (
             <div
               class={
@@ -80,7 +80,7 @@ export default function SnakeDisplay({
               }}
             />
           }
-        </div>
+        {/* </div> */}
       </Show>
     </div>
   );
