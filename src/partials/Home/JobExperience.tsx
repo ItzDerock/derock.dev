@@ -36,7 +36,7 @@ export default function JobExperience() {
           <JobExpEntry
             company="InfoBeyond Technology LLC"
             position="Intern"
-            date="01/07/2022 - 04/25/2022"
+            date="05/15/2022 - 08/15/2022"
             href="https://infobeyondtech.com/"
             description="A summer internship I took where, with a team, we built, racked, and setup a multi-GPU 2U server for image processing. I then worked on adapting and traning different GAN (Generative Adversarial Network) and YOLO (You only look once) models for threat evaluation."
             techUsed={[
