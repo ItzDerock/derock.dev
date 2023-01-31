@@ -35,7 +35,7 @@ export default function Home() {
 
           <code class="text-secondary-200 whitespace-pre-wrap">
             // Hi there! <br />
-            // I'm a highschool student that does a lot of coding in my free time. <br />
+            // I'm a high school student that does a lot of coding in my free time. <br />
             // I am a big fan of open source and I love to contribute to projects. <br />
             // Interested in working with me? <br />
             // Reach out to me using the links above!
