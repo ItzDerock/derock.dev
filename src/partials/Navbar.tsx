@@ -4,7 +4,10 @@ import { A, useLocation } from "solid-start"
 export default function Navbar() {
   return (
     <nav class="flex flex-row text-secondary-100 [&>*:hover]:text-white [&>*]:border-r-line [&>*]:cursor-pointer [&>*]:p-3 [&>*]:box-border [&>*]:border-r border-b border-line">
-      <p>derock.dev</p>
+      <p class="hidden sm:block">
+        derock.dev
+      </p>
+      
       <NavbarElement
         href="/"
         title="Home"
@@ -13,6 +16,11 @@ export default function Navbar() {
         href="/projects"
         title="Projects"
       />
+      <a
+        href="https://derock.blog"
+      >
+        Blog
+      </a>
 
       <span class="flex-grow"></span>
       <A class="border-none" href="/contact">contact-me</A>
