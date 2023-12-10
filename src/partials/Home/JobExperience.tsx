@@ -1,17 +1,14 @@
 import { IoServer } from "solid-icons/io";
-import { SiFiles, SiNodedotjs, SiOpenzfs, SiPython, SiPytorch, SiReact, SiTensorflow, SiUbuntu } from "solid-icons/si";
-
-// import { importIoSolidIcons, importSiSolidIcons } from "~/utils/icons";
-// const SiFiles = importSiSolidIcons("SiFiles");
-// const SiNodedotjs = importSiSolidIcons("SiNodedotjs");
-// const SiOpenzfs = importSiSolidIcons("SiOpenzfs");
-// const SiPython = importSiSolidIcons("SiPython");
-// const SiPytorch = importSiSolidIcons("SiPytorch");
-// const SiReact = importSiSolidIcons("SiReact");
-// const SiTensorflow = importSiSolidIcons("SiTensorflow");
-// const SiUbuntu = importSiSolidIcons("SiUbuntu");
-
-// const IoServer = importIoSolidIcons("IoServer");
+import {
+  SiFiles,
+  SiNodedotjs,
+  SiOpenzfs,
+  SiPython,
+  SiPytorch,
+  SiReact,
+  SiTensorflow,
+  SiUbuntu,
+} from "solid-icons/si";
 
 import JobExpEntry from "~/components/JobExpEntry";
 
@@ -25,7 +22,6 @@ export default function JobExperience() {
       {/* vertical timeline style */}
       <div class="flex flex-row">
         <div class="grid grid-cols-4">
-
           <JobExpEntry
             company="Freelance Developer"
             href="mailto:derock@derock.dev"
@@ -38,7 +34,7 @@ export default function JobExperience() {
             position="Intern"
             date="05/15/2022 - 08/15/2022"
             href="https://infobeyondtech.com/"
-            description="A summer internship I took where, with a team, we built, racked, and setup a multi-GPU 2U server for image processing. I then worked on adapting and traning different GAN (Generative Adversarial Network) and YOLO (You only look once) models for threat evaluation."
+            description="A summer internship I took where, with a team, we built, racked, and setup a multi-GPU 2U server for image processing. I then worked on adapting and traning different GAN (Generative Adversarial Network) and YOLO (You only look once) models for enhanced object detection."
             techUsed={[
               {
                 name: "Python",
@@ -63,7 +59,7 @@ export default function JobExperience() {
                 name: "Linux",
                 icon: SiUbuntu,
                 href: "https://ubuntu.com/",
-              }
+              },
             ]}
           />
 
@@ -74,7 +70,6 @@ export default function JobExperience() {
             href="https://mcstorage.cloud/"
             description="Co-founded a Game server backup BaaS (Backup as a Service) with a friend. I built out and created most of the backend infrastructure and worked on the dashboard frontend too."
             type="last"
-
             techUsed={[
               {
                 name: "NodeJS",
@@ -100,13 +95,11 @@ export default function JobExperience() {
                 name: "ProFTPD",
                 icon: SiFiles,
                 href: "https://www.proftpd.org/",
-              }
+              },
             ]}
-          />         
-          
+          />
         </div>
       </div>
-
     </section>
-  )
+  );
 }
