@@ -65,7 +65,7 @@ export default function Publications() {
                   Encblock: Enclave and Blockchain-enabled Secure Data Sharing
                   and Computing for Power Grids,
                 </a>
-                ” Submitted to the 17th IEEE International Systems Conference
+                ” Accepted by the 17th IEEE International Systems Conference
                 (SysCon), Montreal, QC, Canada, 2023.
               </>
             }
