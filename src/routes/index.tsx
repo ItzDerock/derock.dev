@@ -1,6 +1,5 @@
 import { lazy, Suspense } from "solid-js";
 import { ErrorBoundary } from "solid-start";
-import ScrollReminder from "~/components/ScrollReminder";
 import SnakeLoading from "~/components/SnakeLoading";
 import Contact from "~/partials/Home/Contact";
 import JobExperience from "~/partials/Home/JobExperience";
@@ -15,8 +14,6 @@ import RecentProjects from "~/partials/Projects/RecentProjects";
 export default function Home() {
   return (
     <main class="max-h-full w-full overflow-y-auto flex flex-col space-y-4">
-      <ScrollReminder />
-
       <section class="h-fit w-fit mx-auto flex-grow p-8 xl:p-4 grid grid-cols-1 xl:grid-cols-2 2xl:gap-16 min-h-fit xl:min-h-full">
         <div class="text-left my-auto mt-8 xl:mt-auto xl:mx-auto xl:mr-0 xl:ml-16 2xl:ml-auto space-y-2">
           <small class="text-lg text-white">
@@ -32,7 +29,8 @@ export default function Home() {
           <p class="text-accent-200 [&>a]:underline">
             <a href="/discord">Discord</a>{" "}
             <a href="mailto:derock@derock.dev">Email</a>{" "}
-            <a href="https://github.com/ItzDerock">Github</a>
+            <a href="https://github.com/ItzDerock">Github</a>{" "}
+            <a href="https://derock.blog/?ref=portfolio">Blog</a>
           </p>
 
           <br />
