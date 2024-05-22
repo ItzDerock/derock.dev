@@ -1,21 +1,17 @@
-import { lazy, Suspense } from "solid-js";
-import { ErrorBoundary } from "solid-start";
+import { ErrorBoundary, lazy, Suspense } from "solid-js";
 import SnakeLoading from "~/components/SnakeLoading";
 import Contact from "~/partials/Home/Contact";
 import JobExperience from "~/partials/Home/JobExperience";
-import Publications from "~/partials/Home/Papers";
-const SnakeGame = lazy(async () => import("~/components/Snake"));
-const HomeLanguageSlider = lazy(
-  async () => import("~/partials/Home/LanguageSlider")
-);
+const SnakeGame = lazy(() => import("~/components/Snake"));
+const HomeLanguageSlider = lazy(() => import("~/partials/Home/LanguageSlider"));
 
 import RecentProjects from "~/partials/Projects/RecentProjects";
 
 export default function Home() {
   return (
     <main class="max-h-full w-full overflow-y-auto flex flex-col space-y-4">
-      <section class="h-fit w-fit mx-auto flex-grow p-8 xl:p-4 grid grid-cols-1 xl:grid-cols-2 2xl:gap-16 min-h-fit xl:min-h-full">
-        <div class="text-left my-auto mt-8 xl:mt-auto xl:mx-auto xl:mr-0 xl:ml-16 2xl:ml-auto space-y-2">
+      <section class="h-fit w-fit mx-auto flex-grow p-8 lg:px-16 grid grid-cols-1 xl:grid-cols-2 2xl:gap-16 min-h-fit xl:min-h-full">
+        <div class="text-left my-auto mt-8 xl:mt-auto xl:mx-auto xl:mr-0 md:ml-16 xl:ml-auto space-y-2">
           <small class="text-lg text-white">
             Hey there!{" "}
             <span class="animate-hand-wave inline-block origin-hand-wave">
@@ -48,7 +44,14 @@ export default function Home() {
 
         <div class="text-left w-full my-auto space-y-2 mt-14 xl:mt-auto h-fit">
           <Suspense fallback={<SnakeLoading />}>
-            <ErrorBoundary>
+            <ErrorBoundary
+              fallback={(err) => (
+                <div class="text-center text-white">
+                  <h1>Error loading Snake Game</h1>
+                  <p>{err.message}</p>
+                </div>
+              )}
+            >
               <SnakeGame />
             </ErrorBoundary>
           </Suspense>
@@ -56,13 +59,11 @@ export default function Home() {
       </section>
 
       <HomeLanguageSlider />
-      <div class="max-w-[1500px] mx-auto">
+      <div class="max-w-[1800px] mx-auto px-8 space-y-12">
         <RecentProjects />
+        <JobExperience />
+        <Contact />
       </div>
-
-      <JobExperience />
-      <Publications />
-      <Contact />
 
       <section>
         {/* filler */}

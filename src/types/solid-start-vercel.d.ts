@@ -1,4 +1,4 @@
-declare module 'solid-start-vercel' {
-  import { Adapter } from 'solid-start/vite/plugin';
+declare module "@solidjs/start-vercel" {
+  import { Adapter } from "@solidjs/start/vite/plugin";
   export default function vercel(): Adapter;
 }

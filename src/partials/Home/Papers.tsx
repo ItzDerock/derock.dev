@@ -2,9 +2,9 @@ import JobExpEntry from "~/components/JobExpEntry";
 
 export default function Publications() {
   return (
-    <section class="m-4 xl:m-24">
+    <section>
       <h2 class="text-white text-2xl my-4 text-center">
-        {">"} Publications <span class="animate-pulse inline-block">📄</span>
+        Publications <span class="animate-pulse inline-block">📄</span>
       </h2>
 
       {/* vertical timeline style */}

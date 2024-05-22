@@ -20,7 +20,7 @@ export default function JobExpEntry(props: JobExpEntry) {
   return (
     <>
       {/*  1/3 = the dot and line for timeline */}
-      <div class="flex flex-col items-center space-y-2">
+      <div class="flex flex-col items-center space-y-2 ml-auto mr-8">
         <div
           class={
             "w-1 flex-grow" + (props.type !== "first" ? " bg-accent-200" : "")
