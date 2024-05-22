@@ -1,21 +1,17 @@
-import { clientOnly } from "@solidjs/start";
 import { ErrorBoundary, lazy, Suspense } from "solid-js";
 import SnakeLoading from "~/components/SnakeLoading";
 import Contact from "~/partials/Home/Contact";
 import JobExperience from "~/partials/Home/JobExperience";
-import Publications from "~/partials/Home/Papers";
 const SnakeGame = lazy(() => import("~/components/Snake"));
-const HomeLanguageSlider = clientOnly(
-  () => import("~/partials/Home/LanguageSlider"),
-);
+const HomeLanguageSlider = lazy(() => import("~/partials/Home/LanguageSlider"));
 
 import RecentProjects from "~/partials/Projects/RecentProjects";
 
 export default function Home() {
   return (
     <main class="max-h-full w-full overflow-y-auto flex flex-col space-y-4">
-      <section class="h-fit w-fit mx-auto flex-grow p-8 xl:p-4 grid grid-cols-1 xl:grid-cols-2 2xl:gap-16 min-h-fit xl:min-h-full">
-        <div class="text-left my-auto mt-8 xl:mt-auto xl:mx-auto xl:mr-0 xl:ml-16 2xl:ml-auto space-y-2">
+      <section class="h-fit w-fit mx-auto flex-grow p-8 lg:px-16 grid grid-cols-1 xl:grid-cols-2 2xl:gap-16 min-h-fit xl:min-h-full">
+        <div class="text-left my-auto mt-8 xl:mt-auto xl:mx-auto xl:mr-0 md:ml-16 xl:ml-auto space-y-2">
           <small class="text-lg text-white">
             Hey there!{" "}
             <span class="animate-hand-wave inline-block origin-hand-wave">

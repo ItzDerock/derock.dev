@@ -49,7 +49,10 @@ export default createHandler(() => (
           {assets}
         </head>
         <body class="bg-background lg:p-14 font-fira max-h-screen max-w-full overflow-x-hidden flex">
-          <div class="bg-primary-200 lg:rounded-xl lg:border border-line flex-grow flex flex-col mx-auto max-h-full overflow-y-auto">
+          <div
+            class="bg-primary-200 lg:rounded-xl lg:border border-line flex-grow flex flex-col mx-auto max-h-full overflow-y-auto"
+            id="app"
+          >
             {children}
           </div>
 
