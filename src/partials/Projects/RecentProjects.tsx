@@ -1,9 +1,9 @@
+import { A } from "@solidjs/router";
 import { FaBrandsGithub, FaSolidArrowRight } from "solid-icons/fa";
 import { IoLogoStencil } from "solid-icons/io";
 import { SiJavascript, SiReact, SiSolid, SiTypescript } from "solid-icons/si";
 
 import { Show } from "solid-js";
-import { A } from "solid-start";
 import ProjectCard from "~/components/ProjectCard";
 
 type RecentProjectsProps = {
@@ -14,9 +14,9 @@ export default function RecentProjects(props: RecentProjectsProps) {
   if (!props.type) props.type = "featured";
 
   return (
-    <section class="m-4 xl:m-24">
-      <h2 class="text-white text-2xl mt-4 text-center">
-        {">"} {props.type === "featured" ? "Featured" : "All"} projects{" "}
+    <section>
+      <h2 class="text-white text-2xl font-bold mt-4 text-center mb-4">
+        {props.type === "featured" ? "Featured" : "All"} projects{" "}
         <span class="animate-shake inline-block">🚀</span>
       </h2>
 
@@ -53,25 +53,23 @@ export default function RecentProjects(props: RecentProjectsProps) {
           image="https://derock.media/r/g36kwr.png"
           links={[
             {
-              content: "Github",
-              link: "https://github.com/Poroscout",
-            },
-            {
               content: "Website",
               link: "https://poroscout.gg",
             },
           ]}
           badge={{
-            color: "#00ccff",
-            icon: SiReact,
-            href: "https://reactjs.org",
+            color: "#2e79c7",
+            icon: SiTypescript,
+            href: "https://typescriptlang.org",
           }}
-          github="Poroscout/website"
         >
-          Poroscout is a Discord Bot currently serving over 150k users across
-          2,000+ servers. The website is built using <em>NextJS</em>,{" "}
-          <em>TailwindCSS</em>, and the bot is running in <em>Node.js (TS)</em>{" "}
-          with a <em>PostgreSQL</em> database.
+          PoroScout is a League of Legends Discord Bot that serves over 670,000
+          users across over 3,000+ servers. The bot is featured in the official{" "}
+          <a href="https://discord.gg/leagueoflegends">League of Legends</a>{" "}
+          Discord server, and is partnered with the largest Danish League of
+          Legends platform, <a href="https://leagues.gg">Leagues.gg</a>. This
+          bot is fairly complex, with multiple microservices written in{" "}
+          <em>TypeScript</em> in a <em>TuroRepo</em> monorepo.
         </ProjectCard>
 
         <ProjectCard
@@ -114,10 +112,10 @@ export default function RecentProjects(props: RecentProjectsProps) {
           github="ItzDerock/derock.dev"
         >
           This repository holds the site you are seeing right now! It was built
-          with <em>SolidJS</em>, <em>Solid-Start</em>, and <em>TailwindCSS</em>.
-          You can also view older versions of the site on the different
-          branches. An older version of this site made in <em>Next.JS</em> and{" "}
-          <em>React</em> can be found on the v1 branch.
+          with <em>SolidJS</em>, <em>@solidjs/start</em>, and{" "}
+          <em>TailwindCSS</em>. You can also view older versions of the site on
+          the different branches. An older version of this site made in{" "}
+          <em>Next.JS</em> and <em>React</em> can be found on the v1 branch.
         </ProjectCard>
 
         {/* other projects */}

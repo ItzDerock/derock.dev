@@ -14,9 +14,9 @@ import JobExpEntry from "~/components/JobExpEntry";
 
 export default function JobExperience() {
   return (
-    <section class="m-4 xl:m-24">
-      <h2 class="text-white text-2xl my-4 text-center">
-        {">"} Job Experience <span class="animate-pulse inline-block">✨</span>
+    <section>
+      <h2 class="text-white text-2xl my-4 text-center font-bold">
+        Job Experience <span class="animate-pulse inline-block">✨</span>
       </h2>
 
       {/* vertical timeline style */}

@@ -34,14 +34,14 @@ type CardProps = {
 export default function ProjectCard(props: CardProps) {
   return (
     <div class="h-full flex flex-col">
-      <h2 class="text-primary-400 font-bold text-center whitespace-pre-wrap max-w-sm">
+      <h2 class="text-primary-400 font-bold text-center whitespace-pre-wrap">
         {props.type === "paper" ? "Paper" : "Project"}
         <Show when={typeof props.index !== "undefined"}>{props.index}</Show>
 
         <span class="text-secondary-100"> // {props.title}</span>
       </h2>
 
-      <div class="relative flex-grow flex flex-col rounded-lg bg-primary-300 border-line border max-w-sm h-full">
+      <div class="relative flex-grow flex flex-col rounded-lg bg-primary-300 border-line border h-full">
         {props.badge && (
           <a
             class="absolute rounded-md m-2 p-2 top-0 right-0 shadow-md hover:-translate-y-1 transition-all duration-300 cursor-pointer"

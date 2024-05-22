@@ -14,9 +14,9 @@ export default function Contact() {
   const [body, setBody] = createSignal("");
 
   return (
-    <section class="m-4 xl:m-24">
-      <h2 class="text-white text-2xl mt-4 text-center">
-        {">"} Contact Me <span class="animate-phone-ring inline-block">📞</span>
+    <section>
+      <h2 class="text-white text-2xl mt-4 text-center font-bold">
+        Contact Me <span class="animate-phone-ring inline-block">📞</span>
       </h2>
 
       <div class="flex flex-row flex-wrap gap-6 mx-auto">
@@ -72,21 +72,32 @@ export default function Contact() {
 
         {/* social buttons */}
         <div class="flex flex-col space-y-2 mt-4 w-64 align-middle justify-center [&>*]:w-full text-center flex-grow">
-          <a class="bg-background border-line border text-white p-2 rounded-md hover:-translate-y-1 duration-500 transition-all mx-auto" href="/discord">
+          <a
+            class="bg-background border-line border text-white p-2 rounded-md hover:-translate-y-1 duration-500 transition-all mx-auto"
+            href="/discord"
+          >
             <SiDiscord class="inline-block" /> Discord
           </a>
-          <a class="bg-background border-line border text-white p-2 rounded-md hover:-translate-y-1 duration-500 transition-all mx-auto" href="https://github.com/ItzDerock">
+          <a
+            class="bg-background border-line border text-white p-2 rounded-md hover:-translate-y-1 duration-500 transition-all mx-auto"
+            href="https://github.com/ItzDerock"
+          >
             <SiGithub class="inline-block" /> GitHub
           </a>
-          <a class="bg-background border-line border text-white p-2 rounded-md hover:-translate-y-1 duration-500 transition-all mx-auto" href="https://twitter.com/DerockGamer">
+          <a
+            class="bg-background border-line border text-white p-2 rounded-md hover:-translate-y-1 duration-500 transition-all mx-auto"
+            href="https://twitter.com/DerockGamer"
+          >
             <SiTwitter class="inline-block" /> Twitter
           </a>
-          <a class="bg-background border-line border text-white p-2 rounded-md hover:-translate-y-1 duration-500 transition-all mx-auto" href="https://dev.to/derock">
+          <a
+            class="bg-background border-line border text-white p-2 rounded-md hover:-translate-y-1 duration-500 transition-all mx-auto"
+            href="https://dev.to/derock"
+          >
             <SiDevdotto class="inline-block" /> Dev.to
           </a>
         </div>
       </div>
-
     </section>
-  )
+  );
 }

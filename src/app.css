@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @layer components {
   .snake-gradient {
     background-image: url("/snake/background.svg");
@@ -11,7 +10,11 @@
   }
 
   .snake-box-gradient {
-    background: linear-gradient(150.26deg, rgba(23, 85, 83, 0.7) 1.7%, rgba(67, 217, 173, 0.091) 81.82%);
+    background: linear-gradient(
+      150.26deg,
+      rgba(23, 85, 83, 0.7) 1.7%,
+      rgba(67, 217, 173, 0.091) 81.82%
+    );
     box-shadow: inset 0px 2px 0px rgba(255, 255, 255, 0.3);
   }
 }
@@ -28,12 +31,12 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: theme("colors.line"); 
+  background: theme("colors.line");
   border-radius: 0.5rem;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: theme("colors.primary.200"); 
+  background: theme("colors.primary.200");
 }
 
 /* background cube thingies */

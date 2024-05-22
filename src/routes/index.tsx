@@ -1,12 +1,12 @@
-import { lazy, Suspense } from "solid-js";
-import { ErrorBoundary } from "solid-start";
+import { clientOnly } from "@solidjs/start";
+import { ErrorBoundary, lazy, Suspense } from "solid-js";
 import SnakeLoading from "~/components/SnakeLoading";
 import Contact from "~/partials/Home/Contact";
 import JobExperience from "~/partials/Home/JobExperience";
 import Publications from "~/partials/Home/Papers";
-const SnakeGame = lazy(async () => import("~/components/Snake"));
-const HomeLanguageSlider = lazy(
-  async () => import("~/partials/Home/LanguageSlider")
+const SnakeGame = lazy(() => import("~/components/Snake"));
+const HomeLanguageSlider = clientOnly(
+  () => import("~/partials/Home/LanguageSlider"),
 );
 
 import RecentProjects from "~/partials/Projects/RecentProjects";
@@ -48,7 +48,14 @@ export default function Home() {
 
         <div class="text-left w-full my-auto space-y-2 mt-14 xl:mt-auto h-fit">
           <Suspense fallback={<SnakeLoading />}>
-            <ErrorBoundary>
+            <ErrorBoundary
+              fallback={(err) => (
+                <div class="text-center text-white">
+                  <h1>Error loading Snake Game</h1>
+                  <p>{err.message}</p>
+                </div>
+              )}
+            >
               <SnakeGame />
             </ErrorBoundary>
           </Suspense>
@@ -56,13 +63,11 @@ export default function Home() {
       </section>
 
       <HomeLanguageSlider />
-      <div class="max-w-[1500px] mx-auto">
+      <div class="max-w-[1800px] mx-auto px-8 space-y-12">
         <RecentProjects />
+        <JobExperience />
+        <Contact />
       </div>
-
-      <JobExperience />
-      <Publications />
-      <Contact />
 
       <section>
         {/* filler */}

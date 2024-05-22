@@ -1,4 +1,4 @@
-// import { unstable_clientOnly } from "solid-start";
+"use client";
 
 import { FaBrandsJava } from "solid-icons/fa";
 import {
@@ -25,18 +25,12 @@ import {
 import { For, Suspense, onCleanup, onMount } from "solid-js";
 import styles from "./language-slider.module.css";
 
-// import using unstable_clientOnly to prevent the Swiper from being rendered on the server
-// for some reason, swiper doesn't like solid-start's SSR
-// const Swiper = unstable_clientOnly(() => import("swiper/solid").then((m) => ({ default: m.Swiper })));
-// const SwiperSlide = unstable_clientOnly(() => import("swiper/solid").then((m) => ({ default: m.SwiperSlide })));
-// import { Swiper, SwiperSlide } from "swiper/solid";
-
-import type { IconTypes } from "solid-icons";
+// swiper got rid of their native solidjs component (rip)
 import { Swiper } from "swiper";
 import { Autoplay } from "swiper/modules";
+import type { IconTypes } from "solid-icons";
 
-import "swiper/css";
-// import "swiper/css/";
+// import "swiper/css"; -- this doesn't work, solid-start bug?
 
 export default function HomeLanguageSlider() {
   const SLIDER_ELEMENTS: [IconTypes, string][] = [
@@ -62,6 +56,7 @@ export default function HomeLanguageSlider() {
   ];
 
   onMount(() => {
+    console.log("Mounting swiperjs");
     const swiper = new Swiper(".lang-swiper", {
       modules: [Autoplay],
       // class: "swiper",
