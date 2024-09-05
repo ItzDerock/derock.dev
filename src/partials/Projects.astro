@@ -1,4 +1,5 @@
 ---
+import robotics from "../assets/projects/robotics.png";
 import ProjectCard from "../components/card/ProjectCard.astro";
 import PoroScout from "../components/external/PoroScout.astro";
 import LinkArrow from "../components/ui/LinkArrow.astro";
@@ -88,6 +89,18 @@ export interface Props {
         discord-flavored markdown into an Abstract Syntax Tree (AST), supporting
         various markdown features such as links, quotes, code blocks, mentions, and
         emojis
+      </ProjectCard>
+
+      <ProjectCard
+	      image={robotics}
+        title="vex-over-under"
+        href="https://github.com/itzderock/vex-over-under"
+        github="itzderock/vex-over-under"
+        index={index++}
+      >
+        Robotics code for the 2023-2024 VEX Robotics season. PID, Pure Pursuit, and
+	      Boomerang algorithms. Custom MPEG video decoding pipeline with LVGL, runs
+	      at 40 fps. 3rd best programming score in the state.
       </ProjectCard>
 
       <ProjectCard
