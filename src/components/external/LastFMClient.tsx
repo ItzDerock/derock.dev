@@ -1,0 +1,65 @@
+import { createResource, onMount, Show } from "solid-js";
+import type { LocalLastFMData } from "../../pages/api/lastfm";
+
+export function LastFMClient({
+  initialValue,
+}: {
+  initialValue?: LocalLastFMData;
+}) {
+  const [data, { refetch }] = createResource(
+    () => true,
+    () =>
+      // can't fetch on the server, so defer to client-side
+      // Astro global not available in solid, so cant use Astro.url
+      globalThis.window
+        ? fetch("/api/lastfm").then((r) => r.json() as Promise<LocalLastFMData>)
+        : Promise.resolve(null),
+    {
+      initialValue,
+    }
+  );
+
+  // refetch every 30 seconds
+  onMount(() => {
+    const interval = setInterval(() => {
+      refetch();
+    }, 30000);
+
+    if (globalThis.window) refetch();
+
+    return () => clearInterval(interval);
+  });
+
+  return (
+    <Show when={data()?.latestTrack}>
+      <div class="space-y-2">
+        <h2 class="font-semibold">Currently Listening</h2>
+        <a
+          class="flex flex-row items-center gap-2"
+          href={data()?.url}
+          target="_blank"
+        >
+          <span class="relative animate-spin-slow">
+            <img
+              src={
+                data()?.image ??
+                "https://pngimg.com/uploads/compact_disc/small/compact_disc_PNG102166.png"
+              }
+              alt="Last.fm album cover"
+              class="rounded-full"
+              width={48}
+              height={48}
+            />
+          </span>
+
+          <span class="flex flex-col flex-grow">
+            <span class="font-bold">{data()?.artist}</span>
+            <span>
+              {data()?.track} &middot; {data()?.album}
+            </span>
+          </span>
+        </a>
+      </div>
+    </Show>
+  );
+}

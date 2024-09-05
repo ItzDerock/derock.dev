@@ -1,0 +1,31 @@
+---
+export interface Props {
+  package: string;
+}
+
+type NPMJSResponse = {
+  downloads: number;
+  start: string;
+  end: string;
+  package: string;
+};
+
+import request from "@11ty/eleventy-fetch";
+import { Icon } from "astro-icon/components";
+
+const data = await request<NPMJSResponse>(
+  `https://api.npmjs.org/downloads/point/last-week/${Astro.props.package}`,
+  {
+    type: "json",
+    duration: "1h",
+  },
+);
+
+const formatter = new Intl.NumberFormat("en-US");
+---
+
+<span class="inline-block">
+  <Icon name="tabler:download" class="inline-block mb-1" />
+  {formatter.format(data.downloads)}
+  downloads/week
+</span>

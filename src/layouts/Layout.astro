@@ -1,0 +1,84 @@
+---
+import AOS from "../components/animations/AOS.astro";
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en" class="min-h-full overflow-x-hidden">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="keywords" content="fullstack developer, derock xie" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="theme-color" content="#5f8785" />
+
+    <!-- font -->
+    <link rel="preconnect" href="https://fonts.cdnfonts.com" />
+    <link href="https://fonts.cdnfonts.com/css/satoshi" rel="stylesheet" />
+
+    <title>{title}</title>
+
+    {/* thumbnail (large) */}
+    <meta property="og:image" content="/thumb.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    {/* title */}
+    <meta property="og:title" content={title} />
+
+    {/* description */}
+    <meta
+      name="description"
+      content="Hi, I'm Derock Xie, a fullstack developer and highschool student. Check out my projects and blogs on my website!"
+    />
+
+    <script>
+      if (
+        localStorage.theme === "dark" ||
+        (!("theme" in localStorage) &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches)
+      ) {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
+    </script>
+  </head>
+  <body
+    class="bg-background-light text-foreground-light dark:text-foreground-dark dark:bg-background-dark min-h-full px-4 md:px-12 min-w-full"
+  >
+    <div class="streak left-12 w-36 h-[900px] -rotate-45 -translate-y-[50%]">
+    </div>
+
+    <div
+      class="streak left-[400px] w-36 h-[900px] -rotate-45 -translate-y-[70%]"
+    >
+    </div>
+
+    <div
+      class="streak right-0 bottom-0 size-44 blur-[120px] translate-x-[50%] translate-y-[50%]"
+    >
+    </div>
+
+    <slot />
+    <style is:global>
+      html {
+        font-family: Satoshi, system-ui, sans-serif;
+      }
+
+      .streak {
+        position: fixed;
+        background: hsl(199, 56%, 18%);
+        border-radius: 50%;
+        filter: blur(90px);
+        mix-blend-mode: lighten;
+      }
+    </style>
+    <AOS />
+  </body>
+</html>

@@ -1,0 +1,84 @@
+---
+import { Icon } from "astro-icon/components";
+import { Image } from "astro:assets";
+import profilePicture from "../assets/profile.jpeg";
+import LastFM from "../components/external/LastFM.astro";
+import LinkArrow from "../components/ui/LinkArrow.astro";
+import Weather from "../components/weather/Weather.astro";
+import Layout from "./Layout.astro";
+import TwoColumn from "./TwoColumn.astro";
+---
+
+<Layout title="derock.dev - Fullstack Developer">
+  <TwoColumn>
+    <div>
+      <section class="flex flex-col gap-2 sticky top-12 lg:top-36">
+        <Image
+          src={profilePicture}
+          alt="Profile picture (picture of a cat)"
+          class="size-36 rounded-full"
+        />
+        <h1 class="font-bold text-5xl">Derock Xie</h1>
+        <h2 class="text-2xl text-text-light dark:text-text-dark">
+          Fullstack developer based in
+          <Weather />
+          Kentucky, USA.
+        </h2>
+
+        <!-- socials -->
+        <div class="flex gap-4">
+          <a
+            href="https://github.com/itzderock"
+            class="text-text-light dark:text-text-dark"
+            target="_blank"
+          >
+            <Icon name="fa6-brands:github" class="size-6 transition-all" />
+            <span class="sr-only">GitHub</span>
+          </a>
+
+          <a
+            href="https://discord.com/invite/NqqtkS7ekj"
+            class="text-text-light dark:text-text-dark"
+            target="_blank"
+          >
+            <Icon name="fa6-brands:discord" class="size-6 transition-all" />
+            <span class="sr-only">Discord</span>
+          </a>
+
+          <a
+            href="https://x.com/itzderock"
+            class="text-text-light dark:text-text-dark"
+            target="_blank"
+          >
+            <Icon name="fa6-brands:x-twitter" class="size-6 transition-all" />
+            <span class="sr-only">X (formally Twitter)</span>
+          </a>
+
+          <a
+            href="mailto:derock@derock.dev"
+            class="text-text-light dark:text-text-dark"
+            target="_blank"
+          >
+            <Icon name="tabler:mail-filled" class="size-6 transition-all" />
+            <span class="sr-only">Email</span>
+          </a>
+        </div>
+
+        <!-- links -->
+        <div class="flex flex-col mt-2 xl:mt-[35vh]">
+          <LinkArrow href="https://derock.blog" target="_blank">Blog</LinkArrow>
+          <LinkArrow href="/projects">All Projects</LinkArrow>
+        </div>
+
+        <!-- last.fm  -->
+        <div class="lg:flex flex-col mt-2 gap-2 opacity-60 hidden">
+          <LastFM />
+        </div>
+      </section>
+    </div>
+
+    <div class="space-y-8 p-8 -m-8 mb-24">
+      <slot />
+    </div>
+  </TwoColumn>
+</Layout>

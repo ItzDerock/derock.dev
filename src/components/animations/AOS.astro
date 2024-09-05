@@ -1,0 +1,60 @@
+<script>
+  import sal from "sal.js";
+  sal({
+    threshold: 0.1,
+    root: document.querySelector("body"),
+  });
+</script>
+
+<style is:global>
+  /**
+   * Settings
+   */
+  :root {
+    --sal-animation-duration: 0.6s;
+    --sal-animation-delay: 0s;
+    --sal-slide-offset: 20%;
+    --sal-zoom-in-scale: 0.5;
+    --sal-zoom-out-scale: 1.1;
+    --sal-flip-rotate: 91deg;
+  }
+
+  /**
+   * Easings
+   */
+  [data-sal] {
+    transition-duration: var(--sal-duration, var(--sal-animation-duration));
+    /* transition-delay: attr(data-sal-delay, 0s); */
+    transition-timing-function: var(
+      --sal-easing,
+      cubic-bezier(0.39, 0.575, 0.565, 1)
+    );
+  }
+
+  /**
+   * Animations
+   */
+
+  /* Fade-up animation */
+  [data-sal="fade-up"] {
+    opacity: 0;
+    transform: translateY(10px);
+    transition-property: opacity, transform;
+  }
+
+  [data-sal="fade-up"].sal-animate,
+  body.sal-disabled [data-sal="fade-up"] {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+
+<!-- fallback for js disabled -->
+<noscript>
+  <style type="text/css">
+    [data-sal|="fade-up"] {
+      opacity: 1;
+      transform: none;
+    }
+  </style>
+</noscript>

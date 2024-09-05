@@ -1,0 +1,59 @@
+---
+import EleventyFetch from "@11ty/eleventy-fetch";
+import * as env from "astro:env/server";
+import type { WeatherApiResponse } from "./openweathermap";
+import { weatherCodeToAdjective } from "./utils";
+import WeatherIcon from "./WeatherIcon.astro";
+
+// Build the URL
+const queryParams = new URLSearchParams();
+queryParams.append("appid", env.OPENWEATHERMAP_KEY);
+queryParams.append("units", "metric");
+
+// lat/long should be integers
+queryParams.append("lat", env.OPENWEATHERMAP_LAT.toFixed(0));
+queryParams.append("lon", env.OPENWEATHERMAP_LON.toFixed(0));
+
+// we only need current weather; options: current, minutely, hourly, daily, alerts
+queryParams.append("exclude", "minutely,hourly,daily,alerts");
+
+// Fetch the data (@11ty/eleventy-fetch caches response on the fs)
+const weather = await EleventyFetch<WeatherApiResponse>(
+  "https://api.openweathermap.org/data/3.0/onecall?" + queryParams.toString(),
+  {
+    type: "json",
+    duration: "1h",
+  }
+).catch((err) => {
+  queryParams.delete("appid");
+  console.error("Failed to fetch weather data! ", err, queryParams.entries);
+  return null;
+});
+
+const adj = weather
+  ? weatherCodeToAdjective(weather?.current.weather[0].id)
+  : null;
+
+const feels = weather ? Math.round(weather.current.feels_like) : null;
+---
+
+{
+  weather && adj && feels && (
+    <span class="whitespace-pre">
+      <span class="font-bold inline-block bg-gradient-to-b from-text-light dark:from-text-dark to-text-light/60 dark:to-text-dark/60 via-text-light dark:via-text-dark text-transparent bg-clip-text">
+        {adj}
+      </span>{" "}
+      <WeatherIcon
+        code={weather.current.weather[0].id}
+        isNight={
+          !!(
+            weather.current.sunrise &&
+            weather.current.sunset &&
+            (weather.current.dt > weather.current.sunset ||
+              weather.current.dt < weather.current.sunrise)
+          )
+        }
+      />
+    </span>
+  )
+}

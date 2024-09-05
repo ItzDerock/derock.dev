@@ -1,0 +1,134 @@
+---
+import ProjectCard from "../components/card/ProjectCard.astro";
+import PoroScout from "../components/external/PoroScout.astro";
+import LinkArrow from "../components/ui/LinkArrow.astro";
+
+let index = 0;
+
+export interface Props {
+  showAll?: boolean;
+}
+---
+
+<div class="flex flex-col gap-y-2 -mt-2">
+  <ProjectCard
+    image="https://poroscout.gg/poroxmoba.webp"
+    title="PoroScout"
+    href="https://poroscout.gg"
+    index={index++}
+  >
+    PoroScout is a League of Legends companion bot that provides real-time game
+    data, including live match stats, player profiles, champion statistics, and
+    more. It is comprised of multiple microservices bundled into one monorepo,
+    deployed using the Docker Swarm orchestrator.
+
+    <PoroScout slot="badges" />
+  </ProjectCard>
+  <ProjectCard
+    image="https://derock.media/r/7K4z7w.png"
+    title="discord-html-transcripts"
+    href="https://github.com/itzderock/discord-html-transcripts"
+    npm="discord-html-transcripts"
+    github="itzderock/discord-html-transcripts"
+    index={index++}
+  >
+    An open-source package for developers looking to create Discord-style chat
+    transcripts, allowing for a quick and easy way to archive and review 
+    conversations with a visually appealing format. It is built using StencilJS
+    and React SSR. 
+  </ProjectCard>
+  <ProjectCard
+    image="https://derock.media/r/KQEvQe.png"
+    title="HostForge"
+    href="https://hostforge.sh"
+    github="itzderock/hostforge"
+    index={index++}
+  >
+    A work-in-progress dashboard for managing fleets of servers, designed to
+    provide a simple and intuitive interface for deploying and managing Docker
+    swarm clusters. It can automatically build and bundle your code, automate
+    SSL certificates, manage reverse proxies, instant rollbacks, and more.
+  </ProjectCard>
+  <ProjectCard
+    image="https://media.derock.dev/r/1QBaTl.png"
+    title="MCStorage"
+    href="https://web.archive.org/web/20220306183052/https://mcstorage.cloud/"
+    index={index++}
+  >
+    MCStorage was a BaaS (Backup as a Service) designed for seamless integration
+    with Minecraft and other game servers to facilitate easy data backups.
+    Developed with a React.js frontend and a backend comprising a Fastify server
+    and ZFS storage nodes, it was sold in 2022 and is now under new management.
+  </ProjectCard>
+
+  {
+    Astro.props.showAll ? (
+      <ProjectCard
+        image="https://derock.media/r/8z57yv.png"
+        title="Advanced Stats"
+        href="https://github.com/itzderock/AdvancedStats"
+        github="itzderock/AdvancedStats"
+        index={index++}
+      >
+        Advanced Stats was a Discord bot that tracked server statistics and stored
+        them in InfluxDB for later analysis. Users could view graphs and other
+        charts related to their server, including voice channel usage, message 
+        counts, and more. The bot was built using Node.js and Discord.js.
+      </ProjectCard>
+
+      <ProjectCard
+        image="https://derock.media/r/7K4z7w.png"
+        title="discord-markdown-parser"
+        href="https://github.com/itzderock/discord-markdown-parser"
+        npm="discord-markdown-parser"
+        github="itzderock/discord-markdown-parser"
+        index={index++}
+      >
+        TypeScript implementation of a markdown parser, designed to turn
+        discord-flavored markdown into an Abstract Syntax Tree (AST), supporting
+        various markdown features such as links, quotes, code blocks, mentions, and
+        emojis
+      </ProjectCard>
+
+      <ProjectCard
+        image="https://nvd.nist.gov/site-media/images/cvss_logo.png"
+        title="CVSS-based Vulnerability and Risk Assessment for High Performance Computing Networks"
+        href="https://ieeexplore.ieee.org/document/9773931"
+        index={index++}
+      >
+        J. K. Debnath and D. Xie, "CVSS-based Vulnerability and Risk Assessment for High Performance Computing Networks," The 16th IEEE International Systems Conference (SysCon), Montreal, QC, Canada, 2022, pp. 1-8, doi: 10.1109/SysCon53536.2022.9773931.
+      </ProjectCard>
+
+      <ProjectCard
+        image="https://derock.media/GcgG7S.png"
+        title="A Network-based Distributed Data Storage System for Data Security in a Hostile Network"
+        href="https://ieeexplore.ieee.org/document/9994017"
+        index={index++}
+      >
+        J. Chu and D. Xie, "A Network-based Distributed Data Storage System for Data Security in a Hostile Network," 2022 International Conference on Smart Applications, Communications and Networking (SmartNets), Palapye, Botswana, 2022, pp. 1-8, doi: 10.1109/SmartNets55823.2022.9994017.
+      </ProjectCard>
+
+      <ProjectCard
+        image="https://derock.media/r/Xs8SkU.jpg"
+        title="Encblock: Enclave and Blockchain-enabled Secure Data Sharing and Computing for Power Grids"
+        href="https://cdn.derock.dev/SysCon2024Paper.pdf"
+        index={index++}
+      >D. Xie, A. Kumar, “Encblock: Enclave and Blockchain-enabled Secure Data Sharing and Computing for Power Grids,” Submitted to the 17th IEEE International Systems Conference (SysCon), Montreal, QC, Canada, 2023.</ProjectCard>
+
+      <div class="w-full flex flex-col justify-end">
+        <LinkArrow href="https://github.com/itzderock" class="ml-auto mr-0">
+          View even more on GitHub   
+        </LinkArrow>
+        <LinkArrow href="/" class="ml-auto mr-0">
+          Back Home
+        </LinkArrow>
+      </div>
+    ) : (
+      <div class="w-full flex justify-end">
+        <LinkArrow href="/projects" class="ml-auto mr-0">
+          View More Projects and Publications
+        </LinkArrow>
+      </div>
+    )
+  }
+</div>

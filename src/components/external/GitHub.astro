@@ -1,0 +1,24 @@
+---
+export interface Props {
+  repo: string;
+}
+
+import type { Repository } from "@saber2pr/types-github-api";
+import request from "@11ty/eleventy-fetch";
+import { Icon } from "astro-icon/components";
+
+const data = await request<Repository>(
+  `https://api.github.com/repos/${Astro.props.repo}`,
+  {
+    type: "json",
+    duration: "1h",
+  },
+);
+
+const formatter = new Intl.NumberFormat("en-US");
+---
+
+<span class="inline-block">
+  <Icon name="tabler:star-filled" class="inline-block mb-1" />
+  {formatter.format(data.stargazers_count)} stars
+</span>

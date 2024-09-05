@@ -1,0 +1,88 @@
+---
+// props should extend HTMLAnchorElement
+import type { HTMLTag, Polymorphic } from "astro/types";
+
+type Props<Tag extends HTMLTag> = Polymorphic<{
+  as: Tag;
+  href?: string;
+  target?: string;
+}>;
+
+const { as: Tag = "a", ...props } = Astro.props;
+
+props.class ??= "";
+props.class += ` link-arrow`;
+---
+
+<Tag {...props}>
+  <span class="text"><slot /></span>
+  <span class="arrow"><span class="opacity-0">→</span></span>
+</Tag>
+
+<style>
+  .link-arrow {
+    display: inline-block;
+    overflow: hidden;
+    text-decoration: none;
+    padding: 5px 5px;
+  }
+
+  .link-arrow > .text {
+    display: inline-block;
+    transition: transform 0.3s ease;
+    vertical-align: middle;
+  }
+
+  .link-arrow > .arrow {
+    display: inline-block;
+    transition: transform 0.3s ease;
+    margin-left: 4px;
+  }
+
+  .link-arrow:hover > .text {
+    transform: translateX(-4px);
+  }
+
+  .arrow {
+    padding-right: 2px;
+    position: relative;
+    overflow-x: hidden;
+    vertical-align: middle;
+  }
+
+  .arrow::after {
+    content: "→";
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .link-arrow:hover > .arrow::after {
+    animation: arrowOut 0.6s ease-in-out forwards;
+  }
+
+  .link-arrow:hover > .arrow::before {
+    content: "→";
+    animation: arrowIn 0.6s ease-in-out forwards;
+    position: absolute;
+  }
+
+  @keyframes arrowOut {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(150%);
+    }
+  }
+
+  @keyframes arrowIn {
+    0% {
+      transform: translateX(-150%);
+    }
+
+    100% {
+      transform: translateX(0);
+    }
+  }
+</style>

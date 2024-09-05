@@ -1,0 +1,12 @@
+---
+import { fetchCurrentSong } from "../../pages/api/lastfm";
+import { LastFMClient } from "./LastFMClient";
+
+const initialData = await fetchCurrentSong();
+---
+
+<LastFMClient
+  initialValue={initialData}
+  client:media="(min-width: 1024px)"
+  client:idle
+/>

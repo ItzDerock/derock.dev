@@ -1,0 +1,125 @@
+---
+import { Image } from "astro:assets";
+import CloudyDay1 from "../../assets/weather/cloudy-day-1.svg";
+import CloudyDay2 from "../../assets/weather/cloudy-day-2.svg";
+import CloudyDay3 from "../../assets/weather/cloudy-day-3.svg";
+import CloudyNight1 from "../../assets/weather/cloudy-night-1.svg";
+import CloudyNight2 from "../../assets/weather/cloudy-night-2.svg";
+import CloudyNight3 from "../../assets/weather/cloudy-night-3.svg";
+import Day from "../../assets/weather/day.svg";
+import Night from "../../assets/weather/night.svg";
+import Rainy1 from "../../assets/weather/rainy-1.svg";
+import Rainy2 from "../../assets/weather/rainy-2.svg";
+import Rainy3 from "../../assets/weather/rainy-3.svg";
+import Rainy4 from "../../assets/weather/rainy-4.svg";
+import Rainy5 from "../../assets/weather/rainy-5.svg";
+import Rainy6 from "../../assets/weather/rainy-6.svg";
+import Rainy7 from "../../assets/weather/rainy-7.svg";
+import Snowy1 from "../../assets/weather/snowy-1.svg";
+import Snowy2 from "../../assets/weather/snowy-2.svg";
+import Snowy3 from "../../assets/weather/snowy-3.svg";
+import Snowy4 from "../../assets/weather/snowy-4.svg";
+import Snowy5 from "../../assets/weather/snowy-5.svg";
+import Snowy6 from "../../assets/weather/snowy-6.svg";
+import Thunder from "../../assets/weather/thunder.svg";
+
+const WEATHER_ICON_MAP = {
+  // Thunderstorm
+  200: { day: Thunder, night: Thunder },
+  201: { day: Thunder, night: Thunder },
+  202: { day: Thunder, night: Thunder },
+  210: { day: Thunder, night: Thunder },
+  211: { day: Thunder, night: Thunder },
+  212: { day: Thunder, night: Thunder },
+  221: { day: Thunder, night: Thunder },
+  230: { day: Thunder, night: Thunder },
+  231: { day: Thunder, night: Thunder },
+  232: { day: Thunder, night: Thunder },
+
+  // Drizzle
+  300: { day: Rainy1, night: Rainy5 },
+  301: { day: Rainy2, night: Rainy6 },
+  302: { day: Rainy3, night: Rainy7 },
+  310: { day: Rainy1, night: Rainy5 },
+  311: { day: Rainy2, night: Rainy6 },
+  312: { day: Rainy3, night: Rainy7 },
+  313: { day: Rainy3, night: Rainy7 },
+  314: { day: Rainy4, night: Rainy7 },
+  321: { day: Rainy2, night: Rainy6 },
+
+  // Rain
+  500: { day: Rainy1, night: Rainy5 },
+  501: { day: Rainy2, night: Rainy6 },
+  502: { day: Rainy3, night: Rainy7 },
+  503: { day: Rainy4, night: Rainy7 },
+  504: { day: Rainy4, night: Rainy7 },
+  511: { day: Snowy3, night: Snowy6 },
+  520: { day: Rainy2, night: Rainy6 },
+  521: { day: Rainy3, night: Rainy7 },
+  522: { day: Rainy4, night: Rainy7 },
+  531: { day: Rainy4, night: Rainy7 },
+
+  // Snow
+  600: { day: Snowy1, night: Snowy4 },
+  601: { day: Snowy2, night: Snowy5 },
+  602: { day: Snowy3, night: Snowy6 },
+  611: { day: Snowy2, night: Snowy5 },
+  612: { day: Snowy2, night: Snowy5 },
+  613: { day: Snowy3, night: Snowy6 },
+  615: { day: Snowy2, night: Snowy5 },
+  616: { day: Snowy3, night: Snowy6 },
+  620: { day: Snowy1, night: Snowy4 },
+  621: { day: Snowy2, night: Snowy5 },
+  622: { day: Snowy3, night: Snowy6 },
+
+  // Atmosphere
+  701: { day: CloudyDay1, night: CloudyNight1 },
+  711: { day: CloudyDay2, night: CloudyNight2 },
+  721: { day: CloudyDay1, night: CloudyNight1 },
+  731: { day: CloudyDay2, night: CloudyNight2 },
+  741: { day: CloudyDay3, night: CloudyNight3 },
+  751: { day: CloudyDay2, night: CloudyNight2 },
+  761: { day: CloudyDay2, night: CloudyNight2 },
+  762: { day: CloudyDay3, night: CloudyNight3 },
+  771: { day: CloudyDay3, night: CloudyNight3 },
+  781: { day: CloudyDay3, night: CloudyNight3 },
+
+  // Clear
+  800: { day: Day, night: Night },
+
+  // Clouds
+  801: { day: CloudyDay1, night: CloudyNight1 },
+  802: { day: CloudyDay2, night: CloudyNight2 },
+  803: { day: CloudyDay3, night: CloudyNight3 },
+  804: { day: CloudyDay3, night: CloudyNight3 },
+};
+
+export interface Props {
+  code: number;
+  isNight: boolean;
+}
+
+function getWeatherIcon({ code, isNight }: Props) {
+  const iconSet =
+    code in WEATHER_ICON_MAP
+      ? WEATHER_ICON_MAP[code as keyof typeof WEATHER_ICON_MAP]
+      : WEATHER_ICON_MAP[800]; // Default to clear sky if code not found
+
+  return isNight ? iconSet.night : iconSet.day;
+}
+
+const { code, isNight } = Astro.props;
+const IconToUse = getWeatherIcon({ code, isNight });
+
+// build the icon class
+let iconClass = isNight ? "-ml-2 -mr-1" : "-ml-1 -mr-2";
+
+// if clear sky, uniform margin
+if (code === 800) iconClass = "-mx-3";
+---
+
+<Image
+  src={IconToUse}
+  alt="Weather icon"
+  class={"inline-block size-12 object-contain " + iconClass}
+/>

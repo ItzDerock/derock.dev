@@ -1,0 +1,67 @@
+<style is:global>
+  .card:hover::after {
+    opacity: 1 !important;
+  }
+
+  .card:hover::before {
+    opacity: 1 !important;
+  }
+
+  .card::before,
+  .card::after {
+    @apply rounded-md h-full left-0 opacity-0 absolute top-0 transition-all duration-500 w-full;
+    content: "";
+  }
+
+  .card::before {
+    background: radial-gradient(
+      800px circle at var(--mouse-x) var(--mouse-y),
+      rgba(255, 255, 255, 0.1),
+      transparent 40%
+    );
+
+    z-index: 3;
+  }
+
+  .card::after {
+    background: radial-gradient(
+      600px circle at var(--mouse-x) var(--mouse-y),
+      rgba(255, 255, 255, 0.15),
+      transparent 40%
+    );
+
+    z-index: 1;
+  }
+
+  .card:hover > div {
+    @apply dark:bg-card-dark bg-card-light;
+  }
+</style>
+
+<article
+  class="card cursor-pointer flex flex-col relative h-full p-[1px] rounded-md hover:bg-gray-800 duration-500"
+>
+  <div
+    class="rounded-md flex flex-col grow p-6 z-[2] h-full inset-[1px] transition-all duration-500"
+  >
+    <slot />
+  </div>
+</article>
+
+<script>
+  // mouse enter hover effect
+  function onMouseHover(e: MouseEvent) {
+    for (const card of document.getElementsByClassName(
+      "card",
+    ) as HTMLCollectionOf<HTMLDivElement>) {
+      const rect = card.getBoundingClientRect(),
+        x = e.clientX - rect.left,
+        y = e.clientY - rect.top;
+
+      card.style.setProperty("--mouse-x", `${x}px`);
+      card.style.setProperty("--mouse-y", `${y}px`);
+    }
+  }
+
+  window.addEventListener("mousemove", onMouseHover);
+</script>

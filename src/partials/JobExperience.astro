@@ -1,0 +1,35 @@
+---
+import JobSection from "../components/ui/JobSection.astro";
+
+export interface Props {
+  showAll?: boolean;
+}
+---
+
+<div class="flex flex-col pl-16">
+  <JobSection type="start" title="Freelance Developer" date="Present">
+    I'm currently working as a freelance developer doing random projects for
+    people. If you are interested in commissioning me, scroll down to the
+    contact section.
+  </JobSection>
+  <JobSection
+    type="middle"
+    title="InfoBeyond Technology LLC"
+    date="05/15/2022 - 08/15/2022"
+    position="Intern"
+  >
+    Built, racked, and setup a multi-GPU 2U server for image processing. I then
+    worked on adapting and traning different GAN (Generative Adversarial
+    Network) and YOLO (You only look once) models for enhanced object detection.
+  </JobSection>
+  <JobSection
+    type="end"
+    title="MCStorage.cloud"
+    position="Co-Founder"
+    date="01/07/2022 - 04/25/2022"
+  >
+    Created a Game server backup BaaS (Backup as a Service) with a friend. I
+    built out and created most of the backend infrastructure and worked on the
+    dashboard frontend too.
+  </JobSection>
+</div>

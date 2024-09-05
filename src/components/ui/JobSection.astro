@@ -1,0 +1,48 @@
+---
+export interface Props {
+  type: "start" | "middle" | "end";
+  title: string;
+  date?: string;
+  position?: string;
+}
+
+const { type, title, date, position } = Astro.props;
+---
+
+<div class="flex flex-row gap-4">
+  <div class="flex flex-col gap-2 items-center">
+    <div
+      class={"w-1 h-5 rounded-b-full " +
+        (type !== "start" ? "bg-card-light/40" : "")}
+    >
+    </div>
+
+    <div class="size-2 bg-gray-300 rounded-full"></div>
+
+    {
+      type !== "end" && (
+        <div class="w-1 bg-card-light/40 flex-grow rounded-t-full" />
+      )
+    }
+  </div>
+
+  <div class="py-4">
+    <!-- company -->
+    <h2 class="text-lg font-bold">{title}</h2>
+    <!-- position and dates -->
+    <p class="text-text-light dark:text-text-dark italic">
+      <span class="text-text-light dark:text-text-dark">
+        <span>
+          {position}
+        </span>
+        <span class="text-sm">
+          {date && position && " - "}
+          {date}
+        </span>
+      </span>
+    </p>
+
+    <!-- description -->
+    <p class="mt-2"><slot /></p>
+  </div>
+</div>

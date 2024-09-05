@@ -1,0 +1,31 @@
+{
+  "name": "derock.dev-v3",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@11ty/eleventy-fetch": "^4.0.1",
+    "@astrojs/check": "^0.8.2",
+    "@astrojs/solid-js": "^4.4.0",
+    "@astrojs/tailwind": "^5.1.0",
+    "@astrojs/vercel": "^7.8.0",
+    "astro": "^4.12.2",
+    "astro-icon": "^1.1.0",
+    "sal.js": "^0.8.5",
+    "solid-js": "^1.8.18",
+    "tailwindcss": "^3.4.6",
+    "typescript": "^5.5.3"
+  },
+  "devDependencies": {
+    "@iconify-json/fa6-brands": "^1.1.21",
+    "@iconify-json/tabler": "^1.1.118",
+    "@saber2pr/types-github-api": "^0.0.9",
+    "sharp": "^0.33.4"
+  }
+}

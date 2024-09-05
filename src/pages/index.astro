@@ -1,0 +1,69 @@
+---
+import Section from "../components/Section.astro";
+import MainLayout from "../layouts/MainLayout.astro";
+import JobExperience from "../partials/JobExperience.astro";
+import Projects from "../partials/Projects.astro";
+
+let i = 0;
+---
+
+<MainLayout title="derock.dev - Fullstack Developer">
+  <Section index={i++}>
+    <p>
+      Hi, I'm Derock, a rising <strong>senior in highschool</strong> that does
+      <strong>fullstack web development</strong>, <strong
+        >software development</strong
+      >, and <strong>embedded programming</strong>. I am an avid open-source
+      contributor and have a passion for learning new technologies. I focus a
+      lot on both the design and performance of the applications I build. Try
+      loading this site without JavaScript enabled, it should still work!
+    </p>
+  </Section>
+  <Section title="Skills 🛠️" index={i++}>
+    <div class="grid grid-cols-3">
+      <div>
+        <h3 class="font-semibold">tech</h3>
+        <ul>
+          <li>React</li>
+          <li>Solid</li>
+          <li>Next.js</li>
+          <li>Astro</li>
+          <li>Tailwind CSS</li>
+          <li>Node JS</li>
+          <li>Docker Swarm</li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="font-semibold">languages</h3>
+        <ul>
+          <li>TypeScript</li>
+          <li>C++</li>
+          <li>Python</li>
+          <li>Java</li>
+          <li>Rust</li>
+          <li>Bash</li>
+          <li>SQL</li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="font-semibold">tools</h3>
+        <ul>
+          <li>Git & GitHub</li>
+          <li>Docker</li>
+          <li>Turborepo</li>
+          <li>Neovim & VS Code</li>
+          <li>JetBrains IDEs</li>
+          <li>Linux</li>
+        </ul>
+      </div>
+    </div>
+  </Section>
+  <Section title="Projects" index={i++}>
+    <Projects />
+  </Section>
+  <Section title="Job Experience" index={i++}>
+    <JobExperience />
+  </Section>
+</MainLayout>

@@ -1,0 +1,21 @@
+---
+export interface Props {
+  title?: string;
+  index?: number;
+}
+
+const { title, index } = Astro.props;
+---
+
+<section
+  class="space-y-2"
+  data-sal="fade-up"
+  style={{
+    "transition-delay": `${(index ?? 0) * 100}ms`,
+  }}
+>
+  {title && <h2 class="text-lg font-bold">{title}</h2>}
+  <div class="text-text-light dark:text-text-dark mt-2">
+    <slot />
+  </div>
+</section>
