@@ -1,4 +1,13 @@
 ---
+import advancedStats from "../assets/projects/advanced-stats.png";
+import cvss from "../assets/projects/cvss.png";
+import discordHtmlTranscripts from "../assets/projects/discord-html-transcripts.png";
+import discordMarkdownParser from "../assets/projects/discord-markdown-parser.png";
+import hostforge from "../assets/projects/hostforge.png";
+import mcstorage from "../assets/projects/mcstorage.png";
+import poroscout from "../assets/projects/poroscout.webp";
+import powergrid from "../assets/projects/powergrid.png";
+import genericRobot from "../assets/projects/robotics-generic.png";
 import robotics from "../assets/projects/robotics.png";
 import ProjectCard from "../components/card/ProjectCard.astro";
 import PoroScout from "../components/external/PoroScout.astro";
@@ -13,7 +22,7 @@ export interface Props {
 
 <div class="flex flex-col gap-y-2 -mt-2">
   <ProjectCard
-    image="https://poroscout.gg/poroxmoba.webp"
+    image={poroscout}
     title="PoroScout"
     href="https://poroscout.gg"
     index={index++}
@@ -26,7 +35,7 @@ export interface Props {
     <PoroScout slot="badges" />
   </ProjectCard>
   <ProjectCard
-    image="https://derock.media/r/7K4z7w.png"
+    image={discordHtmlTranscripts}
     title="discord-html-transcripts"
     href="https://github.com/itzderock/discord-html-transcripts"
     npm="discord-html-transcripts"
@@ -39,7 +48,7 @@ export interface Props {
     and React SSR. 
   </ProjectCard>
   <ProjectCard
-    image="https://derock.media/r/KQEvQe.png"
+    image={hostforge}
     title="HostForge"
     href="https://hostforge.sh"
     github="itzderock/hostforge"
@@ -51,7 +60,7 @@ export interface Props {
     SSL certificates, manage reverse proxies, instant rollbacks, and more.
   </ProjectCard>
   <ProjectCard
-    image="https://media.derock.dev/r/1QBaTl.png"
+    image={mcstorage}
     title="MCStorage"
     href="https://web.archive.org/web/20220306183052/https://mcstorage.cloud/"
     index={index++}
@@ -65,7 +74,7 @@ export interface Props {
   {
     Astro.props.showAll ? (
       <ProjectCard
-        image="https://derock.media/r/8z57yv.png"
+        image={advancedStats}
         title="Advanced Stats"
         href="https://github.com/itzderock/AdvancedStats"
         github="itzderock/AdvancedStats"
@@ -78,7 +87,7 @@ export interface Props {
       </ProjectCard>
 
       <ProjectCard
-        image="https://derock.media/r/7K4z7w.png"
+        image={discordMarkdownParser}
         title="discord-markdown-parser"
         href="https://github.com/itzderock/discord-markdown-parser"
         npm="discord-markdown-parser"
@@ -104,7 +113,7 @@ export interface Props {
       </ProjectCard>
 
       <ProjectCard
-        image="https://nvd.nist.gov/site-media/images/cvss_logo.png"
+        image={cvss}
         title="CVSS-based Vulnerability and Risk Assessment for High Performance Computing Networks"
         href="https://ieeexplore.ieee.org/document/9773931"
         index={index++}
@@ -113,7 +122,7 @@ export interface Props {
       </ProjectCard>
 
       <ProjectCard
-        image="https://derock.media/GcgG7S.png"
+        image={genericRobot}
         title="A Network-based Distributed Data Storage System for Data Security in a Hostile Network"
         href="https://ieeexplore.ieee.org/document/9994017"
         index={index++}
@@ -122,7 +131,7 @@ export interface Props {
       </ProjectCard>
 
       <ProjectCard
-        image="https://derock.media/r/Xs8SkU.jpg"
+        image={powergrid}
         title="Encblock: Enclave and Blockchain-enabled Secure Data Sharing and Computing for Power Grids"
         href="https://cdn.derock.dev/SysCon2024Paper.pdf"
         index={index++}
