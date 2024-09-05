@@ -1,6 +1,7 @@
 ---
 import { Icon } from "astro-icon/components";
 import { Image } from "astro:assets";
+import * as env from "astro:env/client";
 import profilePicture from "../assets/profile.jpeg";
 import LastFM from "../components/external/LastFM.astro";
 import LinkArrow from "../components/ui/LinkArrow.astro";
@@ -79,6 +80,27 @@ import TwoColumn from "./TwoColumn.astro";
 
     <div class="space-y-8 p-8 -m-8 mb-24">
       <slot />
+
+      <!-- git commit -->
+      <div class="flex justify-between items-center">
+        <span class="text-text-light/60 dark:text-text-dark/60 mx-auto">
+          <a
+            href={env.VERCEL_GIT_COMMIT_SHA
+              ? `https://github.com/itzderock/derock.dev/commit/${env.VERCEL_GIT_COMMIT_SHA}`
+              : "https://github.com/itzderock/derock.dev"}
+            target="_blank"
+            class="align-middle"
+          >
+            <Icon
+              name="tabler:git-merge"
+              class="size-4 transition-all inline-block"
+            />
+            <span class="sr-only">Git commit</span>
+
+            {env.VERCEL_GIT_COMMIT_SHA?.slice(0, 7) ?? "Unknown commit"}
+          </a>
+        </span>
+      </div>
     </div>
   </TwoColumn>
 </Layout>

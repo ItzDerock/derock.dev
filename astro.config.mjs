@@ -38,6 +38,12 @@ export default defineConfig({
           context: "server",
           access: "secret",
         }),
+
+        VERCEL_GIT_COMMIT_SHA: envField.string({
+          context: "client",
+          access: "public",
+          optional: true,
+        }),
       },
     },
   },
