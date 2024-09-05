@@ -4,16 +4,15 @@ export interface Props {
 }
 
 import type { Repository } from "@saber2pr/types-github-api";
-import request from "@11ty/eleventy-fetch";
 import { Icon } from "astro-icon/components";
+import * as env from "astro:env/server";
 
-const data = await request<Repository>(
-  `https://api.github.com/repos/${Astro.props.repo}`,
-  {
-    type: "json",
-    duration: "1h",
+const data = await fetch(`https://api.github.com/repos/${Astro.props.repo}`, {
+  headers: {
+    Accept: "application/vnd.github+json",
+    Authorization: `Bearer ${env.GITHUB_PAT}`,
   },
-);
+}).then((res) => res.json() as Promise<Repository>);
 
 const formatter = new Intl.NumberFormat("en-US");
 ---

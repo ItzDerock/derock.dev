@@ -1,5 +1,4 @@
 ---
-import EleventyFetch from "@11ty/eleventy-fetch";
 import * as env from "astro:env/server";
 import type { WeatherApiResponse } from "./openweathermap";
 import { weatherCodeToAdjective } from "./utils";
@@ -18,17 +17,15 @@ queryParams.append("lon", env.OPENWEATHERMAP_LON.toFixed(0));
 queryParams.append("exclude", "minutely,hourly,daily,alerts");
 
 // Fetch the data (@11ty/eleventy-fetch caches response on the fs)
-const weather = await EleventyFetch<WeatherApiResponse>(
-  "https://api.openweathermap.org/data/3.0/onecall?" + queryParams.toString(),
-  {
-    type: "json",
-    duration: "1h",
-  }
-).catch((err) => {
-  queryParams.delete("appid");
-  console.error("Failed to fetch weather data! ", err, queryParams.entries);
-  return null;
-});
+const weather = await fetch(
+  "https://api.openweathermap.org/data/3.0/onecall?" + queryParams.toString()
+)
+  .then((res) => res.json() as Promise<WeatherApiResponse>)
+  .catch((err: Error) => {
+    queryParams.delete("appid");
+    console.error("Failed to fetch weather data! ", err, queryParams.entries);
+    return null;
+  });
 
 const adj = weather
   ? weatherCodeToAdjective(weather?.current.weather[0].id)

@@ -10,7 +10,6 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@11ty/eleventy-fetch": "^4.0.1",
     "@astrojs/check": "^0.8.2",
     "@astrojs/solid-js": "^4.4.0",
     "@astrojs/tailwind": "^5.1.0",

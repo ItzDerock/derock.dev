@@ -10,16 +10,11 @@ type NPMJSResponse = {
   package: string;
 };
 
-import request from "@11ty/eleventy-fetch";
 import { Icon } from "astro-icon/components";
 
-const data = await request<NPMJSResponse>(
-  `https://api.npmjs.org/downloads/point/last-week/${Astro.props.package}`,
-  {
-    type: "json",
-    duration: "1h",
-  },
-);
+const data = (await fetch(
+  `https://api.npmjs.org/downloads/point/last-week/${Astro.props.package}`
+).then((res) => res.json())) as NPMJSResponse;
 
 const formatter = new Intl.NumberFormat("en-US");
 ---

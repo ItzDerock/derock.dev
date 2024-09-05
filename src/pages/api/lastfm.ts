@@ -1,4 +1,3 @@
-import request from "@11ty/eleventy-fetch";
 import * as env from "astro:env/server";
 
 // Last.fm API types --------------
@@ -59,13 +58,10 @@ export async function fetchCurrentSong(user: string = env.LASTFM_USERNAME) {
   queryParams.append("api_key", env.LASTFM_API_KEY);
   queryParams.append("format", "json");
 
-  const data = await request<LastFMResponse>(
+  const fetchStart = Date.now();
+  const data = await fetch(
     `https://ws.audioscrobbler.com/2.0/?${queryParams.toString()}`,
-    {
-      type: "json",
-      duration: "15s",
-    }
-  );
+  ).then(res => res.json() as Promise<LastFMResponse>);
 
   const latestTrack = data.recenttracks.track.find(
     (t) => t["@attr"]?.nowplaying === "true"
@@ -80,6 +76,8 @@ export async function fetchCurrentSong(user: string = env.LASTFM_USERNAME) {
     `https://www.last.fm/user/${encodeURIComponent(user)}/library/music/`
   );
 
+  console.log(`[${Date.now() - fetchStart}ms] Fetched ${user}'s latest song: ${track} by ${artist}`);
+
   return { latestTrack, artist, album, track, image, url };
 }
 
@@ -91,6 +89,11 @@ export async function GET() {
   return new Response(JSON.stringify(data), {
     headers: {
       "Content-Type": "application/json",
+
+      // cache for 15 seconds
+      "Cache-Control": "public, max-age=10", // clients cache 10 seconds
+      'CDN-Cache-Control': 'max-age=15', // Downstream CDNs cache 15 seconds
+      'Vercel-CDN-Cache-Control': 'max-age=30', // Vercel CDN cache 30 seconds
     },
   });
 }

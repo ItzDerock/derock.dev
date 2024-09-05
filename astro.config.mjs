@@ -33,6 +33,11 @@ export default defineConfig({
           context: "server",
           access: "public",
         }),
+
+        GITHUB_PAT: envField.string({
+          context: "server",
+          access: "secret",
+        }),
       },
     },
   },

@@ -6,13 +6,11 @@ type APIResponse = {
   users: number;
 };
 
-import request from "@11ty/eleventy-fetch";
 import { Icon } from "astro-icon/components";
 
-const data = await request<APIResponse>(`https://graphs.poroscout.gg/stats`, {
-  type: "json",
-  duration: "1h",
-});
+const data = (await fetch(`https://graphs.poroscout.gg/stats`).then((res) =>
+  res.json()
+)) as APIResponse;
 
 const formatter = new Intl.NumberFormat("en-US");
 ---
