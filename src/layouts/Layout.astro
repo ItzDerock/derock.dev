@@ -8,7 +8,7 @@ interface Props {
 const { title } = Astro.props;
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" class="min-h-full overflow-x-hidden dark">
   <head>
     <meta charset="UTF-8" />
@@ -54,8 +54,7 @@ const { title } = Astro.props;
     <script
       defer
       data-domain="derock.dev"
-      src="https://stats.derock.dev/js/script.js"
-    ></script>
+      src="https://stats.derock.dev/js/script.js"></script>
   </head>
   <body
     class="bg-background-light text-foreground-light dark:text-foreground-dark dark:bg-background-dark min-h-full px-4 md:px-12 min-w-full"
@@ -85,6 +84,13 @@ const { title } = Astro.props;
         border-radius: 50%;
         filter: blur(90px);
         mix-blend-mode: lighten;
+      }
+
+      /* on screens bigger than 2000px, add a margin left to streaks */
+      @media (min-width: 2000px) {
+        .streak {
+          margin-left: calc(50vw - 1100px);
+        }
       }
     </style>
     <AOS />

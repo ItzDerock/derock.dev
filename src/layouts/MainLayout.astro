@@ -2,6 +2,7 @@
 import { Icon } from "astro-icon/components";
 import { Image } from "astro:assets";
 import * as env from "astro:env/client";
+import { Suspense } from "solid-js";
 import profilePicture from "../assets/profile.jpeg";
 import LastFM from "../components/external/LastFM.astro";
 import LinkArrow from "../components/ui/LinkArrow.astro";
@@ -72,8 +73,10 @@ import TwoColumn from "./TwoColumn.astro";
         </div>
 
         <!-- last.fm  -->
-        <div class="lg:flex flex-col mt-2 gap-2 opacity-60 hidden">
-          <LastFM />
+        <div class="lg:flex flex-col mt-2 gap-2 opacity-60 hidden max-w-96">
+          <Suspense>
+            <LastFM />
+          </Suspense>
         </div>
       </section>
     </div>

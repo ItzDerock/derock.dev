@@ -1,4 +1,4 @@
-import { createResource, onMount, Show } from "solid-js";
+import { createMemo, createResource, onMount, Show } from "solid-js";
 import type { LocalLastFMData } from "../../pages/api/lastfm";
 
 export function LastFMClient({
@@ -30,6 +30,21 @@ export function LastFMClient({
     return () => clearInterval(interval);
   });
 
+  const desc = createMemo(() => {
+    const track = data()?.track;
+    const album = data()?.album;
+
+    // for singles, just show the track name once
+    let raw =
+      (track?.trim() === album?.trim()
+        ? track?.trim()
+        : `${track} • ${album}`) ?? "";
+
+    // limit the description to 100 characters
+    if (raw.length > 100) raw = raw.slice(0, 100) + "...";
+    return raw;
+  });
+
   return (
     <Show when={data()?.latestTrack}>
       <div class="space-y-2">
@@ -54,9 +69,7 @@ export function LastFMClient({
 
           <span class="flex flex-col flex-grow">
             <span class="font-bold">{data()?.artist}</span>
-            <span>
-              {data()?.track} &middot; {data()?.album}
-            </span>
+            <span>{desc()}</span>
           </span>
         </a>
       </div>
