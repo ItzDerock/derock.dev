@@ -29,8 +29,12 @@ const { image, title, href } = Astro.props;
 >
   <Card>
     <div class="flex flex-col md:flex-row justify-center gap-4">
-      <div class="min-w-44">
-        <Image src={image} alt={title} class="w-96 object-cover rounded-md" />
+      <div class="min-w-48">
+        <Image
+          src={image}
+          alt={title}
+          class="md:max-w-48 object-cover rounded-md"
+        />
       </div>
       <div class="-mt-2">
         <h2 class="text-lg font-bold">{title}</h2>
