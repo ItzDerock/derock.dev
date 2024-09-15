@@ -1,5 +1,6 @@
 import { createMemo, createResource, onMount, Show } from "solid-js";
 import type { LocalLastFMData } from "../../pages/api/lastfm";
+import styles from "./lastfm.module.css";
 
 export function LastFMClient({
   initialValue,
@@ -16,7 +17,7 @@ export function LastFMClient({
         : Promise.resolve(null),
     {
       initialValue,
-    }
+    },
   );
 
   // refetch every 30 seconds
@@ -47,7 +48,7 @@ export function LastFMClient({
 
   return (
     <Show when={data()?.latestTrack}>
-      <div class="space-y-2">
+      <div class={`space-y-2 ${styles.fadeUpStatic}`}>
         <h2 class="font-semibold">Currently Listening</h2>
         <a
           class="flex flex-row items-center gap-2"

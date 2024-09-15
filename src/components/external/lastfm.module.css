@@ -1,0 +1,15 @@
+.fadeUpStatic {
+  animation: fade-up-static 0.6s cubic-bezier(0.39, 0.575, 0.565, 1) forwards;
+}
+
+@keyframes fade-up-static {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
