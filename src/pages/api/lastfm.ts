@@ -84,16 +84,20 @@ export async function fetchCurrentSong(user: string = env.LASTFM_USERNAME) {
 export type LocalLastFMData = Awaited<ReturnType<typeof fetchCurrentSong>>;
 
 export async function GET() {
-  const data = await fetchCurrentSong();
+  try {
+    const data = await fetchCurrentSong();
 
-  return new Response(JSON.stringify(data), {
-    headers: {
-      "Content-Type": "application/json",
+    return new Response(JSON.stringify(data), {
+      headers: {
+        "Content-Type": "application/json",
 
-      // cache for 15 seconds
-      "Cache-Control": "public, max-age=10", // clients cache 10 seconds
-      'CDN-Cache-Control': 'max-age=15', // Downstream CDNs cache 15 seconds
-      'Vercel-CDN-Cache-Control': 'max-age=30', // Vercel CDN cache 30 seconds
-    },
-  });
+        // Cache for 10 seconds, and instruct CDNs to revalidate BEFORE RESPONSE if the content is stale
+        "Cache-Control": "public, max-age=10, must-revalidate", // clients cache 10 seconds
+        'CDN-Cache-Control': 'max-age=10, must-revalidate', // Downstream CDNs cache 15 seconds
+        'Vercel-CDN-Cache-Control': 'max-age=10, must-revalidate', // Vercel CDN cache 10 seconds
+      },
+    });
+  } catch (err) {
+    console.log("Unexpected error occured when trying to fetch song,", err);
+  }
 }

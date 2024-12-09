@@ -1,0 +1,54 @@
+---
+import ProjectCard from "../components/card/ProjectCard.astro";
+import LinkArrow from "../components/ui/LinkArrow.astro";
+
+export interface Props {
+  showAll?: boolean;
+}
+
+// Cache for 1 hour, allow stale for 24 hours
+Astro.response.headers.set("Cache-control", "public, max-age=3600, stale-while-revalidate=86400");
+
+let posts = await fetch("https://derock.blog/posts.json")
+  .then(res => res.json()) as {
+    items: {
+      title: string;
+      description: string;
+      pubDate: string;
+      heroImage: string;
+      tags: string[];
+      link: string;
+    }[];
+  };
+
+if (!Astro.props.showAll) {
+  posts.items = posts.items.slice(0, 3);
+}
+---
+
+<div class="flex flex-col gap-y-2 -mt-2">
+  {
+    posts.items.map((item, idx) => (
+      <ProjectCard
+        image={"https://derock.blog/" + item.heroImage}
+        title={item.title}
+        href={"https://derock.blog/" + item.link}
+        index={idx}
+      >
+        {item.description}
+
+        <small slot="badges">
+          {
+            new Date(item.pubDate).toLocaleDateString()
+          }
+        </small>
+      </ProjectCard>
+    ))
+  }
+
+  <div class="w-full flex justify-end">
+    <LinkArrow href="https://derock.blog" target="_blank" class="ml-auto mr-0">
+      View More (derock.blog)
+    </LinkArrow>
+  </div>
+</div>

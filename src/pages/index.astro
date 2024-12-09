@@ -1,6 +1,7 @@
 ---
 import Section from "../components/Section.astro";
 import MainLayout from "../layouts/MainLayout.astro";
+import BlogPosts from "../partials/BlogPosts.astro";
 import JobExperience from "../partials/JobExperience.astro";
 import Projects from "../partials/Projects.astro";
 
@@ -66,5 +67,8 @@ let i = 0;
   </Section>
   <Section title="Job Experience 👷" index={i++}>
     <JobExperience />
+  </Section>
+  <Section title="Recent Blog Posts 📝" index={i++}>
+    <BlogPosts />
   </Section>
 </MainLayout>

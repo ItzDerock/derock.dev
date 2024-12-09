@@ -7,7 +7,7 @@ import Card from "./Card.astro";
 
 export interface Props {
   title: string;
-  image: ImageMetadata;
+  image: ImageMetadata | string;
 
   github?: string;
   npm?: string;
@@ -30,11 +30,21 @@ const { image, title, href } = Astro.props;
   <Card>
     <div class="flex flex-col md:flex-row justify-center gap-4">
       <div class="min-w-48">
-        <Image
-          src={image}
-          alt={title}
-          class="md:max-w-48 object-cover rounded-md"
-        />
+        {
+          typeof image === "string" ? (
+            <img
+              src={image}
+              alt={title}
+              class="md:max-w-48 object-cover rounded-md"
+            />
+          ) : (
+            <Image
+              src={image}
+              alt={title}
+              class="md:max-w-48 object-cover rounded-md"
+            />
+          )
+        }
       </div>
       <div class="-mt-2">
         <h2 class="text-lg font-bold">{title}</h2>
