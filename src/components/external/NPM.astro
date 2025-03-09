@@ -12,15 +12,20 @@ type NPMJSResponse = {
 
 import { Icon } from "astro-icon/components";
 
-const data = (await fetch(
-  `https://api.npmjs.org/downloads/point/last-week/${Astro.props.package}`
-).then((res) => res.json())) as NPMJSResponse;
+const data = await fetch(
+  `https://api.npmjs.org/downloads/point/last-week/${Astro.props.package}`,
+)
+  .then((res) => res.json() as Promise<NPMJSResponse>)
+  .catch((err) => {
+    console.log("[npm] Failed to fetch data, ", err);
+    return null;
+  });
 
 const formatter = new Intl.NumberFormat("en-US");
 ---
 
 <span class="inline-block">
   <Icon name="tabler:download" class="inline-block mb-1" />
-  {formatter.format(data.downloads)}
+  {data ? formatter.format(data.downloads) : "Unknown"}
   downloads/week
 </span>

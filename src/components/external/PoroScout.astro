@@ -7,20 +7,26 @@ type APIResponse = {
 };
 
 import { Icon } from "astro-icon/components";
+import { Show } from "solid-js";
 
-const data = (await fetch(`https://graphs.poroscout.gg/stats`).then((res) =>
-  res.json()
-)) as APIResponse;
+const data = await fetch(`https://graphs.poroscout.gg/stats`)
+  .then((res) => res.json() as Promise<APIResponse>)
+  .catch((err) => {
+    console.error("[poroscout] Failed to fetch data, ", err);
+    return null;
+  });
 
 const formatter = new Intl.NumberFormat("en-US");
 ---
 
-<span class="inline-block">
-  <Icon name="fa6-brands:discord" class="inline-block mb-1" />
-  {formatter.format(data.guilds)} Servers
-</span>
+<Show when={data !== null}>
+  <span class="inline-block">
+    <Icon name="fa6-brands:discord" class="inline-block mb-1" />
+    {formatter.format(data!.guilds)} Servers
+  </span>
 
-<span class="inline-block">
-  <Icon name="tabler:user-filled" class="inline-block mb-1" />
-  {formatter.format(data.users)} Users
-</span>
+  <span class="inline-block">
+    <Icon name="tabler:user-filled" class="inline-block mb-1" />
+    {formatter.format(data!.users)} Users
+  </span>
+</Show>

@@ -12,12 +12,25 @@ const data = await fetch(`https://api.github.com/repos/${Astro.props.repo}`, {
     Accept: "application/vnd.github+json",
     Authorization: `Bearer ${env.GITHUB_PAT}`,
   },
-}).then((res) => res.json() as Promise<Repository>);
+})
+  .then((res) => res.json())
+  .then((res) => {
+    if (res.message && res.status !== "200") {
+      console.error("[github] Failed to fetch data, ", res.message);
+      return null;
+    } else {
+      return res as Repository;
+    }
+  })
+  .catch((err) => {
+    console.error("[github] Failed to fetch data, ", err);
+    return null;
+  });
 
 const formatter = new Intl.NumberFormat("en-US");
 ---
 
 <span class="inline-block">
   <Icon name="tabler:star-filled" class="inline-block mb-1" />
-  {formatter.format(data.stargazers_count)} stars
+  {data ? formatter.format(data.stargazers_count) : "Unknown"} stars
 </span>
