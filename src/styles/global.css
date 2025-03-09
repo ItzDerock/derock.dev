@@ -1,5 +1,8 @@
 @import 'tailwindcss';
 
+/* toggle dark mode via dark class */
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --animate-spin-slow: spin 5s linear infinite;
 
@@ -28,6 +31,7 @@
   color utility to any element that depends on these defaults.
 */
 @layer base {
+
   *,
   ::after,
   ::before,
