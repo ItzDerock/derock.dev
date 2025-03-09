@@ -1,11 +1,12 @@
 import { createMemo, createResource, onMount, Show } from "solid-js";
 import type { LocalLastFMData } from "../../pages/api/lastfm";
 import styles from "./lastfm.module.css";
+import defaultDisc from "../../assets/lastfm/default-disc.webp";
 
 export function LastFMClient({
   initialValue,
 }: {
-  initialValue?: LocalLastFMData;
+  initialValue?: LocalLastFMData | null;
 }) {
   const [data, { refetch }] = createResource(
     () => true,
@@ -37,7 +38,7 @@ export function LastFMClient({
 
     // for singles, just show the track name once
     let raw =
-      (track?.trim() === album?.trim()
+      (track?.trim() === album?.trim() || !album
         ? track?.trim()
         : `${track} • ${album}`) ?? "";
 
@@ -57,10 +58,7 @@ export function LastFMClient({
         >
           <span class="relative animate-spin-slow">
             <img
-              src={
-                data()?.image ??
-                "https://pngimg.com/uploads/compact_disc/small/compact_disc_PNG102166.png"
-              }
+              src={data()?.image || defaultDisc.src}
               alt="Last.fm album cover"
               class="rounded-full"
               width={48}
