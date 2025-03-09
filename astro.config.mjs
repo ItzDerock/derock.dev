@@ -1,6 +1,6 @@
 import solidJs from "@astrojs/solid-js";
 import tailwind from "@astrojs/tailwind";
-import vercel from "@astrojs/vercel/serverless";
+import vercel from "@astrojs/vercel";
 import { defineConfig, envField } from "astro/config";
 
 import icon from "astro-icon";
@@ -8,43 +8,41 @@ import icon from "astro-icon";
 // https://astro.build/config
 export default defineConfig({
   integrations: [tailwind(), solidJs(), icon()],
-  experimental: {
-    env: {
-      schema: {
-        OPENWEATHERMAP_KEY: envField.string({
-          context: "server",
-          access: "secret",
-        }),
-        OPENWEATHERMAP_LAT: envField.number({
-          context: "server",
-          access: "secret",
-        }),
-        OPENWEATHERMAP_LON: envField.number({
-          context: "server",
-          access: "secret",
-        }),
+  env: {
+    schema: {
+      OPENWEATHERMAP_KEY: envField.string({
+        context: "server",
+        access: "secret",
+      }),
+      OPENWEATHERMAP_LAT: envField.number({
+        context: "server",
+        access: "secret",
+      }),
+      OPENWEATHERMAP_LON: envField.number({
+        context: "server",
+        access: "secret",
+      }),
 
-        LASTFM_API_KEY: envField.string({
-          context: "server",
-          access: "secret",
-        }),
+      LASTFM_API_KEY: envField.string({
+        context: "server",
+        access: "secret",
+      }),
 
-        LASTFM_USERNAME: envField.string({
-          context: "server",
-          access: "public",
-        }),
+      LASTFM_USERNAME: envField.string({
+        context: "server",
+        access: "public",
+      }),
 
-        GITHUB_PAT: envField.string({
-          context: "server",
-          access: "secret",
-        }),
+      GITHUB_PAT: envField.string({
+        context: "server",
+        access: "secret",
+      }),
 
-        VERCEL_GIT_COMMIT_SHA: envField.string({
-          context: "client",
-          access: "public",
-          optional: true,
-        }),
-      },
+      VERCEL_GIT_COMMIT_SHA: envField.string({
+        context: "client",
+        access: "public",
+        optional: true,
+      }),
     },
   },
 

@@ -74,9 +74,7 @@ import TwoColumn from "./TwoColumn.astro";
 
         <!-- last.fm  -->
         <div class="lg:flex flex-col mt-2 gap-2 opacity-60 hidden max-w-96">
-          <Suspense>
-            <LastFM />
-          </Suspense>
+          <LastFM server:defer />
         </div>
       </section>
     </div>
