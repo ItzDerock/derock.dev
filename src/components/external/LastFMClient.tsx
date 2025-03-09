@@ -66,7 +66,7 @@ export function LastFMClient({
             />
           </span>
 
-          <span class="flex flex-col flex-grow">
+          <span class="flex flex-col grow">
             <span class="font-bold">{data()?.artist}</span>
             <span>{desc()}</span>
           </span>

@@ -1,48 +1,75 @@
 <style is:global>
-  .card:hover::after {
+  /* Dark mode styles */
+  .dark .card:hover::after,
+  .dark .card:hover::before {
     opacity: 1 !important;
   }
 
-  .card:hover::before {
-    opacity: 1 !important;
-  }
-
-  .card::before,
-  .card::after {
-    @apply rounded-md h-full left-0 opacity-0 absolute top-0 transition-all duration-500 w-full;
+  .dark .card::before {
     content: "";
-  }
-
-  .card::before {
     background: radial-gradient(
       800px circle at var(--mouse-x) var(--mouse-y),
       rgba(255, 255, 255, 0.1),
       transparent 40%
     );
-
     z-index: 3;
   }
 
-  .card::after {
+  .dark .card::after {
+    content: "";
     background: radial-gradient(
       600px circle at var(--mouse-x) var(--mouse-y),
       rgba(255, 255, 255, 0.15),
       transparent 40%
     );
-
     z-index: 1;
   }
 
-  .card:hover > div {
-    @apply dark:bg-card-dark bg-card-light;
+  /* Light mode styles */
+  .card:hover::after,
+  .card:hover::before {
+    opacity: 1 !important;
+  }
+
+  .card::before {
+    content: "";
+    background: radial-gradient(
+      800px circle at var(--mouse-x) var(--mouse-y),
+      rgba(0, 0, 0, 0.05),
+      transparent 40%
+    );
+    z-index: 3;
+  }
+
+  .card::after {
+    content: "";
+    background: radial-gradient(
+      600px circle at var(--mouse-x) var(--mouse-y),
+      rgba(0, 0, 0, 0.08),
+      transparent 40%
+    );
+    z-index: 1;
   }
 </style>
 
 <article
-  class="card cursor-pointer flex flex-col relative h-full p-[1px] rounded-md hover:bg-gray-800 duration-500"
+  class="card group cursor-pointer flex flex-col relative h-full p-[1px] rounded-md duration-500
+         hover:bg-gray-100 dark:hover:bg-gray-800
+         before:rounded-md after:rounded-md
+         before:h-full after:h-full
+         before:left-0 after:left-0
+         before:opacity-0 after:opacity-0
+         before:absolute after:absolute
+         before:top-0 after:top-0
+         before:transition-all after:transition-all
+         before:duration-500 after:duration-500
+         before:w-full after:w-full"
 >
   <div
-    class="rounded-md flex flex-col grow p-6 z-[2] h-full inset-[1px] transition-all duration-500"
+    class="rounded-md flex flex-col grow p-6 z-2 h-full inset-[1px] transition-all duration-500
+           bg-white dark:bg-transparent
+           group-hover:bg-card-light dark:group-hover:bg-card-dark
+           shadow-xs dark:shadow-none"
   >
     <slot />
   </div>

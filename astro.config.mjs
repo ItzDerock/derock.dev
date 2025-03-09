@@ -1,13 +1,15 @@
 import solidJs from "@astrojs/solid-js";
-import tailwind from "@astrojs/tailwind";
 import vercel from "@astrojs/vercel";
 import { defineConfig, envField } from "astro/config";
 
 import icon from "astro-icon";
 
+import tailwindcss from "@tailwindcss/vite";
+
 // https://astro.build/config
 export default defineConfig({
-  integrations: [tailwind(), solidJs(), icon()],
+  integrations: [solidJs(), icon()],
+
   env: {
     schema: {
       OPENWEATHERMAP_KEY: envField.string({
@@ -47,9 +49,14 @@ export default defineConfig({
   },
 
   output: "server",
+
   adapter: vercel({
     isr: {
       expiration: /* 5 minutes */ 5 * 60 * 1000,
     },
   }),
+
+  vite: {
+    plugins: [tailwindcss()],
+  },
 });
