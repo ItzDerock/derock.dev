@@ -6,6 +6,8 @@ const initialData = await fetchCurrentSong().catch((err) => {
   console.log("[lastfm] Failed to fetch initial data, ", err);
   return null;
 });
+
+console.log("Initial data fetched:", initialData);
 ---
 
 <LastFMClient
