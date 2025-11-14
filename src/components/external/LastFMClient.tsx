@@ -31,7 +31,7 @@ export function LastFMClient({
   onMount(() => {
     const interval = setInterval(() => {
       refetch();
-    }, 5000);
+    }, 30000);
 
     if (globalThis.window) refetch();
 
