@@ -118,8 +118,12 @@ let iconClass = isNight ? "-ml-2 -mr-1" : "-ml-1 -mr-2";
 if (code === 800) iconClass = "-mx-3";
 ---
 
-<Image
-  src={IconToUse}
-  alt="Weather icon"
-  class={"inline-block size-12 object-contain " + iconClass}
-/>
+<span class={`relative w-12 inline-block ${iconClass}`}>
+  <Image
+    src={IconToUse}
+    alt="Weather icon"
+    width={48}
+    height={48}
+    class="absolute left-0 right-0 object-contain -bottom-3"
+  />
+</span>

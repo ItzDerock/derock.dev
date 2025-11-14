@@ -1,4 +1,11 @@
-import { createMemo, createResource, onMount, Show } from "solid-js";
+import {
+  createEffect,
+  createMemo,
+  createResource,
+  createSignal,
+  onMount,
+  Show,
+} from "solid-js";
 import type { LocalLastFMData } from "../../pages/api/lastfm";
 import styles from "./lastfm.module.css";
 import defaultDisc from "../../assets/lastfm/default-disc.webp";
@@ -9,13 +16,12 @@ export function LastFMClient({
   initialValue?: LocalLastFMData | null;
 }) {
   const [data, { refetch }] = createResource(
-    () => true,
     () =>
       // can't fetch on the server, so defer to client-side
       // Astro global not available in solid, so cant use Astro.url
       globalThis.window
         ? fetch("/api/lastfm").then((r) => r.json() as Promise<LocalLastFMData>)
-        : Promise.resolve(null),
+        : Promise.resolve(initialValue),
     {
       initialValue,
     },
@@ -33,43 +39,40 @@ export function LastFMClient({
   });
 
   const desc = createMemo(() => {
-    const track = data()?.track;
-    const album = data()?.album;
+    const track = data.latest?.track;
+    const album = data.latest?.album;
 
     // for singles, just show the track name once
-    let raw =
+    return (
       (track?.trim() === album?.trim() || !album
         ? track?.trim()
-        : `${track} • ${album}`) ?? "";
-
-    // limit the description to 100 characters
-    if (raw.length > 100) raw = raw.slice(0, 100) + "...";
-    return raw;
+        : `${track} • ${album}`) ?? ""
+    );
   });
 
   return (
-    <Show when={data()?.latestTrack}>
+    <Show when={data.latest?.latestTrack}>
       <div class={`space-y-2 ${styles.fadeUpStatic}`}>
         <h2 class="font-semibold">Currently Listening</h2>
         <a
           class="flex flex-row items-center gap-2"
-          href={data()?.url}
+          href={data.latest?.url}
           target="_blank"
         >
-          <span class="relative animate-spin-slow">
+          <div class="relative animate-spin-slow shrink-0">
             <img
-              src={data()?.image || defaultDisc.src}
+              src={data.latest?.image || defaultDisc.src}
               alt="Last.fm album cover"
               class="rounded-full"
               width={48}
               height={48}
             />
-          </span>
+          </div>
 
-          <span class="flex flex-col grow">
-            <span class="font-bold">{data()?.artist}</span>
-            <span>{desc()}</span>
-          </span>
+          <div class="flex flex-col grow">
+            <h2 class="font-bold">{data.latest?.artist}</h2>
+            <p class="max-h-12 line-clamp-2">{desc()}</p>
+          </div>
         </a>
       </div>
     </Show>
