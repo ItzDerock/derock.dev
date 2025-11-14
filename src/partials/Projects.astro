@@ -7,6 +7,7 @@ import hostforge from "../assets/projects/hostforge.png";
 import mcstorage from "../assets/projects/mcstorage.png";
 import poroscout from "../assets/projects/poroscout.webp";
 import powergrid from "../assets/projects/powergrid.png";
+import weatherStation from "../assets/projects/weather-station.webp";
 import genericRobot from "../assets/projects/robotics-generic.png";
 import robotics from "../assets/projects/robotics.png";
 import ProjectCard from "../components/card/ProjectCard.astro";
@@ -70,81 +71,108 @@ export interface Props {
     Developed with a React.js frontend and a backend comprising a Fastify server
     and ZFS storage nodes, it was sold in 2022 and is now under new management.
   </ProjectCard>
+  <ProjectCard
+    image={weatherStation}
+    title="DIY Weather Station"
+    href="https://github.com/itzderock/weather-station"
+    index={index++}
+  >
+    Low power, low cost ESP32-based weather station. Connects to an MQTT broker
+    over NB-IoT cellular network for remote environments. Utilizes the
+    ESP32-S3's Ultra low power co-processor and deep sleep states to maximize
+    battery life. Collects temperature, humidity, pressure, wind speed, wind
+    direction, rainfall, UV index, light level, and PM2.5 levels.
+  </ProjectCard>
 
   {
     Astro.props.showAll ? (
-      <ProjectCard
-        image={advancedStats}
-        title="Advanced Stats"
-        href="https://github.com/itzderock/AdvancedStats"
-        github="itzderock/AdvancedStats"
-        index={index++}
-      >
-        Advanced Stats was a Discord bot that tracked server statistics and stored
-        them in InfluxDB for later analysis. Users could view graphs and other
-        charts related to their server, including voice channel usage, message
-        counts, and more. The bot was built using Node.js and Discord.js.
-      </ProjectCard>
+      <>
+        <ProjectCard
+          image={advancedStats}
+          title="Advanced Stats"
+          href="https://github.com/itzderock/AdvancedStats"
+          github="itzderock/AdvancedStats"
+          index={index++}
+        >
+          Advanced Stats was a Discord bot that tracked server statistics and
+          stored them in InfluxDB for later analysis. Users could view graphs
+          and other charts related to their server, including voice channel
+          usage, message counts, and more. The bot was built using Node.js and
+          Discord.js.
+        </ProjectCard>
 
-      <ProjectCard
-        image={discordMarkdownParser}
-        title="discord-markdown-parser"
-        href="https://github.com/itzderock/discord-markdown-parser"
-        npm="discord-markdown-parser"
-        github="itzderock/discord-markdown-parser"
-        index={index++}
-      >
-        TypeScript implementation of a markdown parser, designed to turn
-        discord-flavored markdown into an Abstract Syntax Tree (AST), supporting
-        various markdown features such as links, quotes, code blocks, mentions, and
-        emojis
-      </ProjectCard>
+        <ProjectCard
+          image={discordMarkdownParser}
+          title="discord-markdown-parser"
+          href="https://github.com/itzderock/discord-markdown-parser"
+          npm="discord-markdown-parser"
+          github="itzderock/discord-markdown-parser"
+          index={index++}
+        >
+          TypeScript implementation of a markdown parser, designed to turn
+          discord-flavored markdown into an Abstract Syntax Tree (AST),
+          supporting various markdown features such as links, quotes, code
+          blocks, mentions, and emojis
+        </ProjectCard>
 
-      <ProjectCard
-	      image={robotics}
-        title="vex-over-under"
-        href="https://github.com/itzderock/vex-over-under"
-        github="itzderock/vex-over-under"
-        index={index++}
-      >
-        Robotics code for the 2023-2024 VEX Robotics season. PID, Pure Pursuit, and
-	      Boomerang algorithms. Custom MPEG video decoding pipeline with LVGL, runs
-	      at 40 fps. 3rd best programming score in the state.
-      </ProjectCard>
+        <ProjectCard
+          image={robotics}
+          title="vex-over-under"
+          href="https://github.com/itzderock/vex-over-under"
+          github="itzderock/vex-over-under"
+          index={index++}
+        >
+          Robotics code for the 2023-2024 VEX Robotics season. PID, Pure
+          Pursuit, and Boomerang algorithms. Custom MPEG video decoding pipeline
+          with LVGL, runs at 40 fps. 3rd best programming score in the state.
+        </ProjectCard>
 
-      <ProjectCard
-        image={cvss}
-        title="CVSS-based Vulnerability and Risk Assessment for High Performance Computing Networks"
-        href="https://ieeexplore.ieee.org/document/9773931"
-        index={index++}
-      >
-        J. K. Debnath and D. Xie, "CVSS-based Vulnerability and Risk Assessment for High Performance Computing Networks," The 16th IEEE International Systems Conference (SysCon), Montreal, QC, Canada, 2022, pp. 1-8, doi: 10.1109/SysCon53536.2022.9773931.
-      </ProjectCard>
+        <ProjectCard
+          image={cvss}
+          title="CVSS-based Vulnerability and Risk Assessment for High Performance Computing Networks"
+          href="https://ieeexplore.ieee.org/document/9773931"
+          index={index++}
+        >
+          J. K. Debnath and D. Xie, "CVSS-based Vulnerability and Risk
+          Assessment for High Performance Computing Networks," The 16th IEEE
+          International Systems Conference (SysCon), Montreal, QC, Canada, 2022,
+          pp. 1-8, doi: 10.1109/SysCon53536.2022.9773931.
+        </ProjectCard>
 
-      <ProjectCard
-        image={genericRobot}
-        title="A Network-based Distributed Data Storage System for Data Security in a Hostile Network"
-        href="https://ieeexplore.ieee.org/document/9994017"
-        index={index++}
-      >
-        J. Chu and D. Xie, "A Network-based Distributed Data Storage System for Data Security in a Hostile Network," 2022 International Conference on Smart Applications, Communications and Networking (SmartNets), Palapye, Botswana, 2022, pp. 1-8, doi: 10.1109/SmartNets55823.2022.9994017.
-      </ProjectCard>
+        <ProjectCard
+          image={genericRobot}
+          title="A Network-based Distributed Data Storage System for Data Security in a Hostile Network"
+          href="https://ieeexplore.ieee.org/document/9994017"
+          index={index++}
+        >
+          J. Chu and D. Xie, "A Network-based Distributed Data Storage System
+          for Data Security in a Hostile Network," 2022 International Conference
+          on Smart Applications, Communications and Networking (SmartNets),
+          Palapye, Botswana, 2022, pp. 1-8, doi:
+          10.1109/SmartNets55823.2022.9994017.
+        </ProjectCard>
 
-      <ProjectCard
-        image={powergrid}
-        title="Encblock: Enclave and Blockchain-enabled Secure Data Sharing and Computing for Power Grids"
-        href="https://cdn.derock.dev/SysCon2024Paper.pdf"
-        index={index++}
-      >D. Xie, A. Kumar, “Encblock: Enclave and Blockchain-enabled Secure Data Sharing and Computing for Power Grids,” Submitted to the 17th IEEE International Systems Conference (SysCon), Montreal, QC, Canada, 2023.</ProjectCard>
+        <ProjectCard
+          image={powergrid}
+          title="Encblock: Enclave and Blockchain-enabled Secure Data Sharing and Computing for Power Grids"
+          href="https://cdn.derock.dev/SysCon2024Paper.pdf"
+          index={index++}
+        >
+          D. Xie, A. Kumar, “Encblock: Enclave and Blockchain-enabled Secure
+          Data Sharing and Computing for Power Grids,” Submitted to the 17th
+          IEEE International Systems Conference (SysCon), Montreal, QC, Canada,
+          2023.
+        </ProjectCard>
 
-      <div class="w-full flex flex-col justify-end">
-        <LinkArrow href="https://github.com/itzderock" class="ml-auto mr-0">
-          View even more on GitHub
-        </LinkArrow>
-        <LinkArrow href="/" class="ml-auto mr-0">
-          Back Home
-        </LinkArrow>
-      </div>
+        <div class="w-full flex flex-col justify-end">
+          <LinkArrow href="https://github.com/itzderock" class="ml-auto mr-0">
+            View even more on GitHub
+          </LinkArrow>
+          <LinkArrow href="/" class="ml-auto mr-0">
+            Back Home
+          </LinkArrow>
+        </div>
+      </>
     ) : (
       <div class="w-full flex justify-end">
         <LinkArrow href="/projects" class="ml-auto mr-0">
