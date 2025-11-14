@@ -14,7 +14,7 @@ import TwoColumn from "./TwoColumn.astro";
   <TwoColumn>
     <div>
       <section
-        class="flex flex-col gap-2 sticky top-12 lg:top-36 items-center text-center"
+        class="flex flex-col gap-2 sticky top-12 lg:top-36 items-center text-center md:text-left md:items-baseline"
       >
         <Image
           src={profilePicture}
@@ -74,7 +74,9 @@ import TwoColumn from "./TwoColumn.astro";
         </div>
 
         <!-- last.fm  -->
-        <div class="lg:flex flex-col mt-2 gap-2 opacity-60 md:max-w-96">
+        <div
+          class="lg:flex flex-col mt-2 gap-2 opacity-60 md:max-w-96 text-left"
+        >
           <LastFM server:defer />
         </div>
       </section>
