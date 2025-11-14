@@ -21,7 +21,7 @@ export function LastFMClient({
       // Astro global not available in solid, so cant use Astro.url
       globalThis.window
         ? fetch("/api/lastfm").then((r) => r.json() as Promise<LocalLastFMData>)
-        : Promise.resolve(null),
+        : Promise.resolve(initialValue),
     {
       initialValue,
     },
