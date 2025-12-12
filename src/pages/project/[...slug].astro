@@ -1,0 +1,78 @@
+---
+import { Icon } from "astro-icon/components";
+import { Image } from "astro:assets";
+import * as env from "astro:env/client";
+import LastFM from "../../components/external/LastFM.astro";
+import LinkArrow from "../../components/ui/LinkArrow.astro";
+import Layout from "../../layouts/Layout.astro";
+import TwoColumn from "../../layouts/TwoColumn.astro";
+import { getCollection, render, type CollectionEntry } from "astro:content";
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+  const posts = await getCollection("projects");
+  console.log(posts);
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: post,
+  }));
+}
+
+type Props = CollectionEntry<"projects">;
+const entry = Astro.props;
+const { Content, remarkPluginFrontmatter } = await render(entry);
+---
+
+<Layout title="derock.dev - Fullstack Developer">
+  <TwoColumn>
+    <div>
+      <section
+        class="flex flex-col gap-2 sticky top-12 lg:top-36 text-left items-baseline"
+      >
+        <div class="px-8">
+          <h1 class="text-4xl md:text-5xl font-bold">{entry.data.title}</h1>
+
+          <Image
+            src={entry.data.heroImage}
+            alt={entry.data.title}
+            class="mx-auto w-fit max-w-lg rounded-lg mt-4"
+          />
+        </div>
+
+        <!-- links -->
+        <div class="flex flex-col mt-2 xl:mt-[calc(67vh-35rem)]">
+          <LinkArrow href="https://derock.blog" target="_blank">Blog</LinkArrow>
+          <LinkArrow href="/projects">All Projects</LinkArrow>
+          <LinkArrow href="/" data-astro-prefetch>Home</LinkArrow>
+        </div>
+      </section>
+    </div>
+
+    <div class="space-y-8 p-8 -m-8 mb-24 leading-relaxed tracking-wide">
+      <!-- <slot /> -->
+      <Content remarkPluginFrontmatter={remarkPluginFrontmatter} />
+
+      <!-- git commit -->
+      <div class="flex justify-between items-center">
+        <span class="text-text-light/60 dark:text-text-dark/60 mx-auto">
+          <a
+            href={env.VERCEL_GIT_COMMIT_SHA
+              ? `https://github.com/itzderock/derock.dev/commit/${env.VERCEL_GIT_COMMIT_SHA}`
+              : "https://github.com/itzderock/derock.dev"}
+            target="_blank"
+            class="align-middle"
+          >
+            <Icon
+              name="tabler:git-merge"
+              class="size-4 transition-all inline-block"
+            />
+            <span class="sr-only">Git commit</span>
+
+            {env.VERCEL_GIT_COMMIT_SHA?.slice(0, 7) ?? "Unknown commit"}
+          </a>
+        </span>
+      </div>
+    </div>
+  </TwoColumn>
+</Layout>

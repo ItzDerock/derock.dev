@@ -6,9 +6,11 @@ import icon from "astro-icon";
 
 import tailwindcss from "@tailwindcss/vite";
 
+import mdx from "@astrojs/mdx";
+
 // https://astro.build/config
 export default defineConfig({
-  integrations: [solidJs(), icon()],
+  integrations: [solidJs(), icon(), mdx()],
 
   env: {
     schema: {
