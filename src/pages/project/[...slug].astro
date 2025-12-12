@@ -1,11 +1,6 @@
 ---
-import { Icon } from "astro-icon/components";
 import { Image } from "astro:assets";
-import * as env from "astro:env/client";
-import LastFM from "../../components/external/LastFM.astro";
 import LinkArrow from "../../components/ui/LinkArrow.astro";
-import Layout from "../../layouts/Layout.astro";
-import TwoColumn from "../../layouts/TwoColumn.astro";
 import { getCollection, render, type CollectionEntry } from "astro:content";
 import ProfileLayout from "../../layouts/ProfileLayout.astro";
 import "../../styles/post.css";
@@ -14,7 +9,6 @@ export const prerender = true;
 
 export async function getStaticPaths() {
   const posts = await getCollection("projects");
-  console.log(posts);
   return posts.map((post) => ({
     params: { slug: post.slug },
     props: post,
@@ -33,15 +27,23 @@ const { Content, remarkPluginFrontmatter } = await render(entry);
     </p>
   </div>
 
-  <h1 class="text-4xl md:text-5xl font-bold">{entry.data.title}</h1>
+  <div class="max-w-[65ch]">
+    <h1 class="text-4xl md:text-5xl font-bold mb-6">{entry.data.title}</h1>
 
-  <div class="prose dark:prose-invert lg:prose-md">
-    <Content remarkPluginFrontmatter={remarkPluginFrontmatter} />
-  </div>
+    <div class="prose dark:prose-invert lg:prose-md">
+      <Content remarkPluginFrontmatter={remarkPluginFrontmatter} />
+    </div>
 
-  <div class="text-right">
-    <LinkArrow href="/projects" class="mb-4" data-astro-preload>
-      Back to all projects
-    </LinkArrow>
+    <Image
+      src={entry.data.heroImage}
+      alt={entry.data.title}
+      class="my-8 rounded-lg shadow-lg max-w-xl mx-auto"
+    />
+
+    <div class="text-right">
+      <LinkArrow href="/projects" class="mb-4" data-astro-preload>
+        Back to all projects
+      </LinkArrow>
+    </div>
   </div>
 </ProfileLayout>
