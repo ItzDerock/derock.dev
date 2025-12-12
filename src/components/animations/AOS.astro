@@ -1,9 +1,23 @@
 <script>
   import sal from "sal.js";
-  sal({
-    threshold: 0.1,
-    root: document.querySelector("body"),
-  });
+
+  // disable animations for users who prefer reduced motion
+  const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+  if (mediaQuery && mediaQuery.matches) {
+    document.body.classList.add("sal-disabled");
+  } else {
+    runAnimations();
+
+    // re-run animation on astro client route change
+    document.addEventListener("astro:page-load", runAnimations);
+  }
+
+  function runAnimations() {
+    sal({
+      threshold: 0.1,
+      root: document.querySelector("body"),
+    });
+  }
 </script>
 
 <style is:global>

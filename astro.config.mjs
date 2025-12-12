@@ -3,14 +3,25 @@ import vercel from "@astrojs/vercel";
 import { defineConfig, envField } from "astro/config";
 
 import icon from "astro-icon";
-
 import tailwindcss from "@tailwindcss/vite";
-
 import mdx from "@astrojs/mdx";
+import { remarkKroki } from "remark-kroki";
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [solidJs(), icon(), mdx()],
+  integrations: [
+    solidJs(),
+    icon(),
+    mdx({
+      syntaxHighlight: false,
+      remarkPlugins: [
+        [
+          remarkKroki,
+          { server: "https://kroki.io", output: "img-html-base64" },
+        ],
+      ],
+    }),
+  ],
 
   env: {
     schema: {
