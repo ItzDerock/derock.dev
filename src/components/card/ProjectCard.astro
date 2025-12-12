@@ -21,7 +21,7 @@ const { image, title, href } = Astro.props;
 
 <a
   href={href}
-  target="_blank"
+  target={href.startsWith("/") ? "_self" : "_blank"}
   data-sal="fade-up"
   style={{
     "transition-delay": `${(Astro.props.index ?? 0) * 100}ms`,

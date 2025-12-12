@@ -1,8 +1,10 @@
 ---
 import { Image } from "astro:assets";
 import LinkArrow from "../../components/ui/LinkArrow.astro";
+import LinkExternal from "../../components/ui/LinkExternal.astro";
 import { getCollection, render, type CollectionEntry } from "astro:content";
 import ProfileLayout from "../../layouts/ProfileLayout.astro";
+import { stringToHexColor } from "../../utils";
 import "../../styles/post.css";
 
 export const prerender = true;
@@ -25,10 +27,39 @@ const { Content, remarkPluginFrontmatter } = await render(entry);
     <p class="text-lg text-text-light dark:text-text-dark text-balance">
       {entry.data.description}
     </p>
+
+    <!-- tags -->
+    <div class="flex flex-row flex-wrap gap-2 mt-4">
+      {
+        entry.data.tags
+          .map((tag) => [tag, stringToHexColor(tag)])
+          .map(([tag, hex]) => (
+            <span
+              class="px-3 py-1 rounded-full text-sm font-medium border"
+              style={{
+                backgroundColor: hex + "35",
+                borderColor: hex + "a0",
+              }}
+            >
+              {tag}
+            </span>
+          ))
+      }
+    </div>
   </div>
 
-  <div class="max-w-[65ch]">
-    <h1 class="text-4xl md:text-5xl font-bold mb-6">{entry.data.title}</h1>
+  <div class="max-w-[65ch]" data-sal="fade-up">
+    <h1 class="text-4xl md:text-5xl font-bold mb-4">{entry.data.title}</h1>
+
+    <div class="flex flex-row mb-2 -ml-1.25">
+      {
+        entry.data.links.map(([label, url]) => (
+          <LinkExternal target="_blank" href={url} data-astro-preload>
+            {label}
+          </LinkExternal>
+        ))
+      }
+    </div>
 
     <div class="prose dark:prose-invert lg:prose-md">
       <Content remarkPluginFrontmatter={remarkPluginFrontmatter} />

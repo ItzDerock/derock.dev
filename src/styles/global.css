@@ -42,4 +42,8 @@
   html {
     font-display: swap;
   }
+
+  :root {
+    overscroll-behavior: none;
+  }
 }
