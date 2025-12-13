@@ -5,12 +5,23 @@ import * as env from "astro:env/client";
 import profilePicture from "../assets/profile.jpeg";
 import LastFM from "../components/external/LastFM.astro";
 import LinkArrow from "../components/ui/LinkArrow.astro";
-import Weather from "../components/weather/Weather.astro";
 import Layout from "./Layout.astro";
 import TwoColumn from "./TwoColumn.astro";
+
+export interface Props {
+  title?: string;
+  description?: string;
+  thumbnail?: string;
+}
+
+const { title, description, thumbnail } = Astro.props;
 ---
 
-<Layout title="derock.dev - Fullstack Developer">
+<Layout
+  title={title ?? "derock.dev - Fullstack Developer"}
+  description={description}
+  thumbnail={thumbnail}
+>
   <TwoColumn>
     <div>
       <section
@@ -22,60 +33,12 @@ import TwoColumn from "./TwoColumn.astro";
           class="size-36 rounded-full"
         />
         <h1 class="font-bold text-5xl">Derock Xie</h1>
-        <h2 class="text-2xl text-text-light dark:text-text-dark text-balance">
-          Developer based in
-          <Weather fallback="" />
-          North Carolina, USA.
-        </h2>
 
-        <!-- socials -->
-        <div class="flex gap-4">
-          <a
-            href="https://github.com/itzderock"
-            class="text-text-light dark:text-text-dark"
-            target="_blank"
-          >
-            <Icon name="fa6-brands:github" class="size-6 transition-all" />
-            <span class="sr-only">GitHub</span>
-          </a>
-
-          <a
-            href="https://discord.com/invite/NqqtkS7ekj"
-            class="text-text-light dark:text-text-dark"
-            target="_blank"
-          >
-            <Icon name="fa6-brands:discord" class="size-6 transition-all" />
-            <span class="sr-only">Discord</span>
-          </a>
-
-          <a
-            href="https://x.com/itzderock"
-            class="text-text-light dark:text-text-dark"
-            target="_blank"
-          >
-            <Icon name="fa6-brands:x-twitter" class="size-6 transition-all" />
-            <span class="sr-only">X (formally Twitter)</span>
-          </a>
-
-          <a
-            href="mailto:derock@derock.dev"
-            class="text-text-light dark:text-text-dark"
-            target="_blank"
-          >
-            <Icon name="tabler:mail-filled" class="size-6 transition-all" />
-            <span class="sr-only">Email</span>
-          </a>
-        </div>
+        <slot name="subtitle" />
 
         <!-- links -->
         <div class="flex flex-col mt-2 xl:mt-[calc(80vh-35rem)]">
-          {
-            Astro.url.pathname !== "/" && (
-              <LinkArrow href="/" data-astro-preload>
-                Home
-              </LinkArrow>
-            )
-          }
+          <LinkArrow href="/" data-astro-preload>Home</LinkArrow>
           <LinkArrow href="https://derock.blog" target="_blank">Blog</LinkArrow>
           <LinkArrow href="/projects" data-astro-preload>
             All Projects
@@ -86,6 +49,7 @@ import TwoColumn from "./TwoColumn.astro";
         <div
           class="lg:flex flex-col mt-2 gap-2 opacity-60 md:max-w-96 text-left"
         >
+          <!-- todo: persist state here -->
           <LastFM server:defer transition:persist />
         </div>
       </section>

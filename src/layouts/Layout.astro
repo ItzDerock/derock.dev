@@ -1,12 +1,15 @@
 ---
+import { ClientRouter } from "astro:transitions";
 import AOS from "../components/animations/AOS.astro";
 import "../styles/global.css";
 
 interface Props {
   title: string;
+  description?: string;
+  thumbnail?: string;
 }
 
-const { title } = Astro.props;
+const { title, description, thumbnail } = Astro.props;
 ---
 
 <!doctype html>
@@ -14,9 +17,9 @@ const { title } = Astro.props;
   <head>
     <meta charset="UTF-8" />
     <meta name="keywords" content="fullstack developer, derock xie" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-    <meta name="generator" content={Astro.generator} />
     <meta name="theme-color" content="#5f8785" />
 
     <!-- font -->
@@ -26,7 +29,7 @@ const { title } = Astro.props;
     <title>{title}</title>
 
     {/* thumbnail (large) */}
-    <meta property="og:image" content="/thumb.png" />
+    <meta property="og:image" content={thumbnail ?? "/thumb.png"} />
     <meta name="twitter:card" content="summary_large_image" />
 
     {/* title */}
@@ -35,7 +38,8 @@ const { title } = Astro.props;
     {/* description */}
     <meta
       name="description"
-      content="Hi, I'm Derock Xie, a fullstack developer and highschool student. Check out my projects and blogs on my website!"
+      content={description ??
+        "Hi, I'm Derock Xie, a fullstack, software, and embedded developer studying Electrical Computer Engineering & CS at Duke University."}
     />
     <!--
     Light theme not yet ready
@@ -51,6 +55,8 @@ const { title } = Astro.props;
       }
     </script> -->
 
+    <ClientRouter />
+
     <!-- analytics -->
     <script
       defer
@@ -61,13 +67,9 @@ const { title } = Astro.props;
   <body
     class="bg-background-light text-foreground-light dark:text-foreground-dark dark:bg-background-dark min-h-full px-4 md:px-12 min-w-full"
   >
-    <div class="streak left-12 w-36 h-[900px] -rotate-45 -translate-y-[50%]">
-    </div>
+    <div class="streak left-12 w-36 h-225 -rotate-45 -translate-y-[50%]"></div>
 
-    <div
-      class="streak left-[400px] w-36 h-[900px] -rotate-45 -translate-y-[70%]"
-    >
-    </div>
+    <div class="streak left-100 w-36 h-225 -rotate-45 -translate-y-[70%]"></div>
 
     <div
       class="streak right-0 bottom-0 size-44 blur-[120px] translate-x-[50%] translate-y-[50%]"

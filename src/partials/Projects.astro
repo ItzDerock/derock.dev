@@ -1,14 +1,11 @@
 ---
 import advancedStats from "../assets/projects/advanced-stats.png";
-import cvss from "../assets/projects/cvss.png";
 import discordHtmlTranscripts from "../assets/projects/discord-html-transcripts.png";
 import discordMarkdownParser from "../assets/projects/discord-markdown-parser.png";
 import hostforge from "../assets/projects/hostforge.png";
 import mcstorage from "../assets/projects/mcstorage.png";
 import poroscout from "../assets/projects/poroscout.webp";
-import powergrid from "../assets/projects/powergrid.png";
 import weatherStation from "../assets/projects/weather-station.webp";
-import genericRobot from "../assets/projects/robotics-generic.png";
 import robotics from "../assets/projects/robotics.png";
 import ProjectCard from "../components/card/ProjectCard.astro";
 import PoroScout from "../components/external/PoroScout.astro";
@@ -25,7 +22,7 @@ export interface Props {
   <ProjectCard
     image={poroscout}
     title="PoroScout"
-    href="https://poroscout.gg"
+    href="/project/poroscout"
     index={index++}
   >
     PoroScout is a League of Legends companion bot that provides real-time game
@@ -127,43 +124,6 @@ export interface Props {
           with LVGL, runs at 40 fps. 3rd best programming score in the state.
         </ProjectCard>
 
-        <ProjectCard
-          image={cvss}
-          title="CVSS-based Vulnerability and Risk Assessment for High Performance Computing Networks"
-          href="https://ieeexplore.ieee.org/document/9773931"
-          index={index++}
-        >
-          J. K. Debnath and D. Xie, "CVSS-based Vulnerability and Risk
-          Assessment for High Performance Computing Networks," The 16th IEEE
-          International Systems Conference (SysCon), Montreal, QC, Canada, 2022,
-          pp. 1-8, doi: 10.1109/SysCon53536.2022.9773931.
-        </ProjectCard>
-
-        <ProjectCard
-          image={genericRobot}
-          title="A Network-based Distributed Data Storage System for Data Security in a Hostile Network"
-          href="https://ieeexplore.ieee.org/document/9994017"
-          index={index++}
-        >
-          J. Chu and D. Xie, "A Network-based Distributed Data Storage System
-          for Data Security in a Hostile Network," 2022 International Conference
-          on Smart Applications, Communications and Networking (SmartNets),
-          Palapye, Botswana, 2022, pp. 1-8, doi:
-          10.1109/SmartNets55823.2022.9994017.
-        </ProjectCard>
-
-        <ProjectCard
-          image={powergrid}
-          title="Encblock: Enclave and Blockchain-enabled Secure Data Sharing and Computing for Power Grids"
-          href="https://cdn.derock.dev/SysCon2024Paper.pdf"
-          index={index++}
-        >
-          D. Xie, A. Kumar, “Encblock: Enclave and Blockchain-enabled Secure
-          Data Sharing and Computing for Power Grids,” Submitted to the 17th
-          IEEE International Systems Conference (SysCon), Montreal, QC, Canada,
-          2023.
-        </ProjectCard>
-
         <div class="w-full flex flex-col justify-end">
           <LinkArrow href="https://github.com/itzderock" class="ml-auto mr-0">
             View even more on GitHub
@@ -176,7 +136,7 @@ export interface Props {
     ) : (
       <div class="w-full flex justify-end">
         <LinkArrow href="/projects" class="ml-auto mr-0">
-          View More Projects and Publications
+          View More Projects
         </LinkArrow>
       </div>
     )

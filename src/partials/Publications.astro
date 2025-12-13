@@ -1,0 +1,49 @@
+---
+import cvss from "../assets/projects/cvss.png";
+import powergrid from "../assets/projects/powergrid.png";
+import genericRobot from "../assets/projects/robotics-generic.png";
+import ProjectCard from "../components/card/ProjectCard.astro";
+
+let index = 0;
+
+export interface Props {
+  showAll?: boolean;
+}
+---
+
+<div class="flex flex-col gap-y-2 -mt-2">
+  <ProjectCard
+    image={cvss}
+    title="CVSS-based Vulnerability and Risk Assessment for High Performance Computing Networks"
+    href="https://ieeexplore.ieee.org/document/9773931"
+    index={index++}
+  >
+    J. K. Debnath and D. Xie, "CVSS-based Vulnerability and Risk Assessment for
+    High Performance Computing Networks," The 16th IEEE International Systems
+    Conference (SysCon), Montreal, QC, Canada, 2022, pp. 1-8, doi:
+    10.1109/SysCon53536.2022.9773931.
+  </ProjectCard>
+
+  <ProjectCard
+    image={genericRobot}
+    title="A Network-based Distributed Data Storage System for Data Security in a Hostile Network"
+    href="https://ieeexplore.ieee.org/document/9994017"
+    index={index++}
+  >
+    J. Chu and D. Xie, "A Network-based Distributed Data Storage System for Data
+    Security in a Hostile Network," 2022 International Conference on Smart
+    Applications, Communications and Networking (SmartNets), Palapye, Botswana,
+    2022, pp. 1-8, doi: 10.1109/SmartNets55823.2022.9994017.
+  </ProjectCard>
+
+  <ProjectCard
+    image={powergrid}
+    title="Encblock: Enclave and Blockchain-enabled Secure Data Sharing and Computing for Power Grids"
+    href="https://cdn.derock.dev/SysCon2024Paper.pdf"
+    index={index++}
+  >
+    D. Xie, A. Kumar, “Encblock: Enclave and Blockchain-enabled Secure Data
+    Sharing and Computing for Power Grids,” Submitted to the 17th IEEE
+    International Systems Conference (SysCon), Montreal, QC, Canada, 2023.
+  </ProjectCard>
+</div>

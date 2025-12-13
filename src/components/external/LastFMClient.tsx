@@ -1,11 +1,4 @@
-import {
-  createEffect,
-  createMemo,
-  createResource,
-  createSignal,
-  onMount,
-  Show,
-} from "solid-js";
+import { createMemo, createResource, onMount, Show } from "solid-js";
 import type { LocalLastFMData } from "../../pages/api/lastfm";
 import styles from "./lastfm.module.css";
 import defaultDisc from "../../assets/lastfm/default-disc.webp";

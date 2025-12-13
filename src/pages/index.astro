@@ -4,6 +4,8 @@ import MainLayout from "../layouts/MainLayout.astro";
 import BlogPosts from "../partials/BlogPosts.astro";
 import JobExperience from "../partials/JobExperience.astro";
 import Projects from "../partials/Projects.astro";
+import Publications from "../partials/Publications.astro";
+import GitHubGraph from "../components/external/GitHubGraph.astro";
 
 let i = 0;
 ---
@@ -63,8 +65,11 @@ let i = 0;
       </div>
     </div>
   </Section>
-  <Section title="Projects 📚" index={i++}>
+  <Section title="Projects 🏗️" index={i++}>
     <Projects />
+  </Section>
+  <Section title="Publications 📚" index={i++}>
+    <Publications />
   </Section>
   <Section title="Job Experience 👷" index={i++}>
     <JobExperience />
@@ -72,4 +77,5 @@ let i = 0;
   <Section title="Recent Blog Posts 📝" index={i++}>
     <BlogPosts />
   </Section>
+  <GitHubGraph username="ItzDerock" />
 </MainLayout>

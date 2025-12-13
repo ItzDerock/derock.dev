@@ -1,9 +1,24 @@
 <script>
   import sal from "sal.js";
-  sal({
-    threshold: 0.1,
-    root: document.querySelector("body"),
-  });
+
+  runAnimations();
+
+  // re-run animation on astro client route change
+  document.addEventListener("astro:page-load", runAnimations);
+
+  function runAnimations() {
+    // disable animations for users who prefer reduced motion
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (mediaQuery && mediaQuery.matches) {
+      console.log("Reduced motion preference detected, disabling animations.");
+      document.body.classList.add("sal-disabled");
+    } else {
+      sal({
+        threshold: 0.1,
+        root: document.querySelector("body"),
+      });
+    }
+  }
 </script>
 
 <style is:global>
@@ -46,6 +61,12 @@
   body.sal-disabled [data-sal="fade-up"] {
     opacity: 1;
     transform: translateY(0);
+  }
+
+  body.sal-disabled [data-sal] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
   }
 </style>
 

@@ -1,0 +1,221 @@
+---
+title: "PoroScout"
+blurb: Building a League of Legends companion app that serves thousands of communities.
+description:
+  "PoroScout is a League of Legends companion bot that provides real-time game
+  data, including live match stats, player profiles, champion statistics, and
+  more. It is comprised of multiple microservices bundled into one monorepo,
+  deployed using the Docker Swarm orchestrator."
+
+publishedAt: "December 12, 2025"
+heroImage: "./assets/poroscout/thumb.webp"
+tags: ["TypeScript", "Docker", "CI/CD Pipeline"]
+links: [["Website", "https://poroscout.gg/"]]
+weight: 500
+---
+
+import { Image } from "astro:assets";
+import email from "./assets/poroscout/email.webp";
+import chatlog from "./assets/poroscout/chatlog.webp";
+import grafana from "./assets/poroscout/grafana.webp";
+import zabbix from "./assets/poroscout/zabbix.webp";
+import pipeline from "./assets/poroscout/ci-pipeline.webp";
+
+During my Freshman year of High School, I got really hooked on the game League
+of Legends. It's a 5v5 team-based game with deep lore and difficult mechanics.
+In my highschool's Esports team, we used a platform called [Discord](https://discord.com)
+to communicate and strategize. Part of strategizing was scouting our upcoming
+enemies and learning about their playstyle: including the champions they play,
+what role they take on, etc.
+
+There exist tools to help with this, such as [OP.gg](https://op.gg) and
+[Mobalytics](https://mobalytics.gg/). But, I wanted to bring this data into the
+chat platform, instead of having to constantly take and send screenshots and
+links:
+
+<Image
+  src={chatlog}
+  alt="Example conversation using screenshots"
+  class="mx-auto"
+/>
+
+In Discord, users can build "Bots" that perform actions when invoked, and there
+existed a bot for League of Legends. Upon testing it though, the data was
+heavily outdated and the overall state of the bot seemed unmaintained.
+
+So, I decided to build my own.
+
+League of Legends has a public API which lets you fetch data on a per-match
+basis. This is great for getting basic information about players, but
+aggregate statistics like overall champion winrate and the current popular
+playstyles are not a single API query away.
+
+I initially prototyped an approach similar to many **web crawlers** approach.
+The architecture looked something like this:
+
+```kroki type=graphviz classnames="mx-auto" alt="Block crawling diagram"
+digraph LoLCrawler_Horizontal {
+  bgcolor="#0d1117";
+  rankdir=LR;
+  nodesep=0.5;
+  ranksep=0.5;
+
+  node [shape=box, style="filled,rounded", fillcolor="#2d2d2d", fontcolor="white", fontname="Arial", color="#555", height=0.6];
+  edge [color="#888", fontname="Arial", fontsize=10, fontcolor="#888"];
+
+  Queue [shape=cylinder, label="Match Queue", fillcolor="#8957e5", color="#8957e5", fontcolor="white", width=1.2];
+
+  subgraph cluster_init {
+    style=invis;
+    Init [label="Init Crawler"];
+    Spawn [label="Spawn Threads"];
+    Seed [label="Fetch Seed\nPlayers"];
+
+    Init -> Spawn;
+    Spawn -> Seed;
+  }
+
+  subgraph cluster_worker {
+    style=filled;
+    color="#1c2128";
+    label="Worker Process";
+    fontcolor="#666";
+
+    Fetch [label="Fetch Match"];
+    Crawl [label="Crawl &\nStore Stats"];
+    Process [label="Extract Players"];
+    Check [label="Check Player\nHistory"];
+    IsNew [shape=diamond, label="Uncrawled?", height=0.8];
+
+    Fetch -> Crawl;
+    Crawl -> Process;
+    Process -> Check [label="Each Player"];
+    Check -> IsNew;
+  }
+
+  Seed -> Queue [label="Push Batch", color="#8957e5", fontcolor="#a371f7"];
+  Queue -> Fetch [label="Pop Job", tailport=s];
+  IsNew -> Queue [label="Found New Game\n(Add to Queue)", color="#8957e5", fontcolor="#a371f7", tailport=e, headport=w];
+  IsNew -> Process [label="Next Player", tailport=n, headport=n];
+}
+```
+
+But, since the game has over 170 different playable characters with hundreds of
+different items and runes, getting a comprehensive dataset would be quite hard
+to do independently. Instead, I decided to reach out to [Mobalytics](https://mobalytics.gg)
+and ask if I could piggyback on their data.
+
+So, on a random Friday in 2021, I sent them a cold email:
+
+<Image src={email} alt="Email chain with a Mobalytics exec" />
+
+To my surprise, they replied within two hours! We set up a meeting and
+coordinated with their engineers. They gave me access to a private GraphQL
+endpoint to pull data from. Then began the work to create the bot.
+
+The initial MVP was written in JavaScript, but a year later, I would rewrite
+everything in TypeScript. On launch, Mobalytics helped to advertise the bot,
+and within a month, the bot was being used in hundreds of communities.
+
+Now, I have to tackle the problem of scalability.
+
+# Observability
+
+Tracking usage statistics, health amongst the different shards, and slow
+endpoints was the first thing I tackled. PoroScout starts with a "master"
+process, which spawns a bunch of child node processes, each assigned to handle
+a set of communities that PoroScout is in.
+
+In the master process, I added a Prometheus service discovery endpoint, and each
+child process ran a lightweight webserver that prometheus could scrape. Using
+Grafana as the frontend, I built a custom dashboard to aggregate all this data:
+
+<Image src={grafana} alt="Grafana Dashboard" />
+
+Zabbix was installed on the host machine to track overall system usage and alert
+me whenever something was going wrong:
+
+<Image
+  src={zabbix}
+  alt="Zabbix alert showing high server load"
+  width="500"
+  class="max-w-fit mx-auto"
+/>
+
+# Caching
+
+Once again, I refactored the code to decouple the business logic from the
+Discord gateway handling code. I used **Redis** as a centralized cache, and
+created a utility to memoize existing functions.
+
+```ts
+this.getPlayerData = this.api.cache.memoize(this.getPlayerData.bind(this), {
+  key: (puuid, region) => `challenges:player:${region}:${puuid}`,
+  ttl: /* 5 minutes */ 1000 * 60 * 5,
+  staleTTL: /* 1 minute */ 1000 * 60,
+});
+```
+
+This cache manager uses **Stale-while-revalidate** logic. The cache will serve
+stale data, revalidate the result in the background, and update the cache as
+needed.
+
+# Code Structure
+
+PoroScout consists of multiple microservices and webservices. A private API for
+external partnerships, microservice to index new champions and items into the
+search provider, microservice to track player statistics, etc.
+
+To prevent code duplication, I broke the project down into a monorepo using
+Turbo, where packages can be reused between services.
+
+```
+poroscout/
+  |- apps/
+    |- poroscout/
+    |- api/
+    |- meilisearch-updater/
+    |- docker/
+    `- scheduled-tasks/
+  `- packages/
+    |- api/
+    |- cache/
+    |- database/
+    |- log/
+    |- metrics/
+    |- riot-api (submodule)
+    |- riot-rate-limiter (submodule)
+    `- utils/
+```
+
+Prior to this, different microservices had their own git repos, and submodules
+were used to bring in common files. But maintaining and keeping the submodules
+up to date turned out to be a real pain, which is why I switched to this
+monorepo format.
+
+# CI/CD Pipeline
+
+PoroScout is containerized, with each app getting its own Docker container.
+Upon pushing the code to GitHub, a CI pipeline is spawned that builds all the
+targets. The tag of the image is based off the branch that it was pushed to.
+
+<Image src={pipeline} alt="GitHub actions pipeline" />
+
+If a pull request is made targeting the main branch, then the pipeline will also
+deploy a staging version of the bot for testing. When a release tag is created,
+the pipeline builds the image off the main branch, and sends a webhook request
+to Portainer, which pulls the latest image from GitHub and starts rolling the
+release out to the public.
+
+# Conclusion
+
+Running a production-grade Discord bot forced me to wear every hat: Product
+Manager, Backend Engineer, and DevOps Specialist. I started this project with
+just an idea, sent out a cold email, and somehow landed myself a partnership
+with a large VC-backed company. This project has gotten me many additional
+connections and I've formed partnerships with additional companies.
+
+When I began, I had very limited experience programming large-scale
+applications, and learnt all the skills required along the journey.
+
+Check out the website at https://poroscout.gg.
