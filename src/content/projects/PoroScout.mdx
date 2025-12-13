@@ -27,7 +27,7 @@ to communicate and strategize. Part of strategizing was scouting our upcoming
 enemies and learning about their playstyle: including the champions they play,
 what role they take on, etc.
 
-There exists tools to help with this, such as [OP.gg](https://op.gg) and
+There exist tools to help with this, such as [OP.gg](https://op.gg) and
 [Mobalytics](https://mobalytics.gg/). But, I wanted to bring this data into the
 chat platform, instead of having to constantly take and send screenshots and
 links:
@@ -49,10 +49,8 @@ basis. This is great for getting basic information about players, but
 aggregate statistics like overall champion winrate and the current popular
 playstyles are not a single API query away.
 
-To get that data, I started with an approach similar to many **web crawlers**.
-I took an initial list of players, fetched every one of their matches,
-and then fetched the matches from all the other players in the match, and
-repeated; therby "crawling" a long list of matches.
+I initially prototyped an approach similar to many **web crawlers** approach.
+The architecture looked something like this:
 
 ```kroki type=graphviz classnames="mx-auto" alt="Block crawling diagram"
 digraph LoLCrawler_Horizontal {
@@ -110,11 +108,11 @@ So, on a random Friday in 2021, I sent them a cold email:
 
 <Image src={email} alt="Email chain with a Mobalytics exec" />
 
-To my suprise, they replied within two hours! We set up a meeting and
+To my surprise, they replied within two hours! We set up a meeting and
 coordinated with their engineers. They gave me access to a private GraphQL
-endpoint to pull data from. Then the began the work to create the bot.
+endpoint to pull data from. Then began the work to create the bot.
 
-The intial MVP was written in JavaScript, but a year later, I would rewrite
+The initial MVP was written in JavaScript, but a year later, I would rewrite
 everything in TypeScript. On launch, Mobalytics helped to advertise the bot,
 and within a month, the bot was being used in hundreds of communities.
 
@@ -145,7 +143,7 @@ me whenever something was going wrong:
 
 # Caching
 
-Once again, I refactored the code to decouple the buisness logic from the
+Once again, I refactored the code to decouple the business logic from the
 Discord gateway handling code. I used **Redis** as a centralized cache, and
 created a utility to memoize existing functions.
 
@@ -167,8 +165,8 @@ PoroScout consists of multiple microservices and webservices. A private API for
 external partnerships, microservice to index new champions and items into the
 search provider, microservice to track player statistics, etc.
 
-To prevent code duplication, I broke the project down into a monorepo, where
-packages can be reused between services.
+To prevent code duplication, I broke the project down into a monorepo using
+Turbo, where packages can be reused between services.
 
 ```
 poroscout/
@@ -196,7 +194,7 @@ monorepo format.
 
 # CI/CD Pipeline
 
-PoroScout is containerized, with each app getting it's own Docker container.
+PoroScout is containerized, with each app getting its own Docker container.
 Upon pushing the code to GitHub, a CI pipeline is spawned that builds all the
 targets. The tag of the image is based off the branch that it was pushed to.
 
@@ -210,12 +208,11 @@ release out to the public.
 
 # Conclusion
 
-Who knew running a Discord bot could be so much work. This project has taught me
-so much when it comes to system administration, monitoring, and programming in
-general. I started this project with just an idea, sent out a cold email, and
-somehow landed myself a partnership with a large VC-backed company. This project
-has gotten me many additional connections and I've formed partnerships with
-additional companies.
+Running a production-grade Discord bot forced me to wear every hat: Product
+Manager, Backend Engineer, and DevOps Specialist. I started this project with
+just an idea, sent out a cold email, and somehow landed myself a partnership
+with a large VC-backed company. This project has gotten me many additional
+connections and I've formed partnerships with additional companies.
 
 When I began, I had very limited experience programming large-scale
 applications, and learnt all the skills required along the journey.

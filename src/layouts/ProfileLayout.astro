@@ -7,9 +7,15 @@ import LastFM from "../components/external/LastFM.astro";
 import LinkArrow from "../components/ui/LinkArrow.astro";
 import Layout from "./Layout.astro";
 import TwoColumn from "./TwoColumn.astro";
+
+export interface Props {
+  title?: string;
+}
+
+const { title } = Astro.props;
 ---
 
-<Layout title="derock.dev - Fullstack Developer">
+<Layout title={title ?? "derock.dev - Fullstack Developer"}>
   <TwoColumn>
     <div>
       <section
@@ -28,14 +34,17 @@ import TwoColumn from "./TwoColumn.astro";
         <div class="flex flex-col mt-2 xl:mt-[calc(80vh-35rem)]">
           <LinkArrow href="/" data-astro-preload>Home</LinkArrow>
           <LinkArrow href="https://derock.blog" target="_blank">Blog</LinkArrow>
-          <LinkArrow href="/projects">All Projects</LinkArrow>
+          <LinkArrow href="/projects" data-astro-preload>
+            All Projects
+          </LinkArrow>
         </div>
 
         <!-- last.fm  -->
         <div
           class="lg:flex flex-col mt-2 gap-2 opacity-60 md:max-w-96 text-left"
         >
-          <LastFM server:defer />
+          <!-- todo: persist state here -->
+          <LastFM server:defer transition:persist />
         </div>
       </section>
     </div>

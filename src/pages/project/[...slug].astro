@@ -22,7 +22,7 @@ const entry = Astro.props;
 const { Content, remarkPluginFrontmatter } = await render(entry);
 ---
 
-<ProfileLayout>
+<ProfileLayout title={`Project - ${entry.data.title}`}>
   <div slot="subtitle">
     <p class="text-lg text-text-light dark:text-text-dark text-balance">
       {entry.data.description}
@@ -48,8 +48,10 @@ const { Content, remarkPluginFrontmatter } = await render(entry);
     </div>
   </div>
 
-  <div class="max-w-[65ch]" data-sal="fade-up">
-    <h1 class="text-4xl md:text-5xl font-bold mb-4">{entry.data.title}</h1>
+  <div class="max-w-[min(90vw,65ch)]" data-sal="fade-up">
+    <h1 class="text-4xl md:text-5xl font-bold mb-4 wrap-break-word">
+      {entry.data.title}
+    </h1>
 
     <div class="flex flex-row mb-2 -ml-1.25">
       {
@@ -61,15 +63,17 @@ const { Content, remarkPluginFrontmatter } = await render(entry);
       }
     </div>
 
-    <div class="prose dark:prose-invert lg:prose-md">
+    <div class="prose dark:prose-invert lg:prose-md max-w-none">
       <Content remarkPluginFrontmatter={remarkPluginFrontmatter} />
     </div>
 
-    <Image
-      src={entry.data.heroImage}
-      alt={entry.data.title}
-      class="my-8 rounded-lg shadow-lg max-w-xl mx-auto"
-    />
+    <div class="px-4 md:px-12">
+      <Image
+        src={entry.data.heroImage}
+        alt={entry.data.title}
+        class="my-8 rounded-lg shadow-lg mx-auto"
+      />
+    </div>
 
     <div class="text-right">
       <LinkArrow href="/projects" class="mb-4" data-astro-preload>

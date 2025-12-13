@@ -7,11 +7,18 @@ import tailwindcss from "@tailwindcss/vite";
 import mdx from "@astrojs/mdx";
 import { remarkKroki } from "remark-kroki";
 
+import expressiveCode from "astro-expressive-code";
+
+import sitemap from "@astrojs/sitemap";
+
 // https://astro.build/config
 export default defineConfig({
+  site: "https://derock.dev",
+
   integrations: [
     solidJs(),
     icon(),
+    expressiveCode(),
     mdx({
       syntaxHighlight: false,
       remarkPlugins: [
@@ -21,6 +28,7 @@ export default defineConfig({
         ],
       ],
     }),
+    sitemap(),
   ],
 
   env: {

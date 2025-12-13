@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://derock.dev/sitemap-index.xml
