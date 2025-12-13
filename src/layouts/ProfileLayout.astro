@@ -10,12 +10,18 @@ import TwoColumn from "./TwoColumn.astro";
 
 export interface Props {
   title?: string;
+  description?: string;
+  thumbnail?: string;
 }
 
-const { title } = Astro.props;
+const { title, description, thumbnail } = Astro.props;
 ---
 
-<Layout title={title ?? "derock.dev - Fullstack Developer"}>
+<Layout
+  title={title ?? "derock.dev - Fullstack Developer"}
+  description={description}
+  thumbnail={thumbnail}
+>
   <TwoColumn>
     <div>
       <section

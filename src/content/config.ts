@@ -10,6 +10,8 @@ const projectCollection = defineCollection({
       publishedAt: z.coerce.date(),
       tags: z.array(z.string()),
       links: z.array(z.tuple([z.string(), z.string().url()])),
+      // short description that starts with a verb
+      blurb: z.string(),
       // image: z.string(),
       // github: z.string().optional(),
       // npm: z.string().optional(),

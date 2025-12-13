@@ -5,9 +5,11 @@ import "../styles/global.css";
 
 interface Props {
   title: string;
+  description?: string;
+  thumbnail?: string;
 }
 
-const { title } = Astro.props;
+const { title, description, thumbnail } = Astro.props;
 ---
 
 <!doctype html>
@@ -27,7 +29,7 @@ const { title } = Astro.props;
     <title>{title}</title>
 
     {/* thumbnail (large) */}
-    <meta property="og:image" content="/thumb.png" />
+    <meta property="og:image" content={thumbnail ?? "/thumb.png"} />
     <meta name="twitter:card" content="summary_large_image" />
 
     {/* title */}
@@ -36,7 +38,8 @@ const { title } = Astro.props;
     {/* description */}
     <meta
       name="description"
-      content="Hi, I'm Derock Xie, a fullstack, software, and embedded developer studying Electrical Computer Engineering & CS at Duke University."
+      content={description ??
+        "Hi, I'm Derock Xie, a fullstack, software, and embedded developer studying Electrical Computer Engineering & CS at Duke University."}
     />
     <!--
     Light theme not yet ready

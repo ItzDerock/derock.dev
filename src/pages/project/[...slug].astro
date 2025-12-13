@@ -22,10 +22,14 @@ const entry = Astro.props;
 const { Content, remarkPluginFrontmatter } = await render(entry);
 ---
 
-<ProfileLayout title={`Project - ${entry.data.title}`}>
+<ProfileLayout
+  title={`Project - ${entry.data.title}`}
+  description={entry.data.description}
+  thumbnail={entry.data.heroImage.src}
+>
   <div slot="subtitle">
     <p class="text-lg text-text-light dark:text-text-dark text-balance">
-      {entry.data.description}
+      {entry.data.blurb}
     </p>
 
     <!-- tags -->
