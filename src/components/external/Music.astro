@@ -1,8 +1,8 @@
 ---
-import { fetchCurrentSong } from "../../pages/api/lastfm";
-import { LastFMClient } from "./LastFMClient";
+import { fetchCurrentTrack } from "~/pages/api/music";
+import { LastFMClient } from "./MusicClient";
 
-const initialData = await fetchCurrentSong().catch((err) => {
+const initialData = await fetchCurrentTrack().catch((err) => {
   console.log("[lastfm] Failed to fetch initial data, ", err);
   return null;
 });

@@ -3,7 +3,7 @@ import { Icon } from "astro-icon/components";
 import { Image } from "astro:assets";
 import * as env from "astro:env/client";
 import profilePicture from "../assets/profile.jpeg";
-import LastFM from "../components/external/LastFM.astro";
+import Music from "~/components/external/Music.astro";
 import LinkArrow from "../components/ui/LinkArrow.astro";
 import Weather from "../components/weather/Weather.astro";
 import Layout from "./Layout.astro";
@@ -86,7 +86,7 @@ import TwoColumn from "./TwoColumn.astro";
         <div
           class="lg:flex flex-col mt-2 gap-2 opacity-60 md:max-w-96 text-left"
         >
-          <LastFM server:defer transition:persist />
+          <Music server:defer transition:persist />
         </div>
       </section>
     </div>
