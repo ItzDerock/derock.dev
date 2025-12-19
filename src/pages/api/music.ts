@@ -51,6 +51,6 @@ export async function GET() {
     });
   } catch (err) {
     console.log("Unexpected error occured when trying to fetch song,", err);
-    return new Response("{}", { status: 500 });
+    return new Response("", { status: 500 });
   }
 }
