@@ -1,7 +1,7 @@
 import { createMemo, createResource, onMount, Show } from "solid-js";
-import type { LocalLastFMData } from "../../pages/api/lastfm";
-import styles from "./lastfm.module.css";
+import styles from "./music.module.css";
 import defaultDisc from "../../assets/lastfm/default-disc.webp";
+import type { LocalLastFMData } from "~/external/scrobblers/LastFM";
 
 export function LastFMClient({
   initialValue,
@@ -13,7 +13,7 @@ export function LastFMClient({
       // can't fetch on the server, so defer to client-side
       // Astro global not available in solid, so cant use Astro.url
       globalThis.window
-        ? fetch("/api/lastfm").then((r) => r.json() as Promise<LocalLastFMData>)
+        ? fetch("/api/music").then((r) => r.json() as Promise<LocalLastFMData>)
         : Promise.resolve(initialValue),
     {
       initialValue,
@@ -44,7 +44,7 @@ export function LastFMClient({
   });
 
   return (
-    <Show when={data.latest?.latestTrack}>
+    <Show when={data.latest}>
       <div class={`space-y-2 ${styles.fadeUpStatic}`}>
         <h2 class="font-semibold">Currently Listening</h2>
         <a

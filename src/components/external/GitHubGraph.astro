@@ -7,6 +7,32 @@ interface Props {
 
 const { username } = Astro.props;
 
+type GithubResponseSuccess = {
+  data: {
+    user: {
+      contributionsCollection: {
+        contributionCalendar: {
+          totalContributions: number;
+          weeks: {
+            contributionDays: {
+              contributionLevel: number;
+              contributionCount: number;
+              date: string;
+              weekday: string;
+            }[];
+          }[];
+        };
+      };
+    };
+  };
+};
+
+type GithubResponseFailure = {
+  message: string;
+  documentation_url: string;
+  status: string;
+};
+
 async function getContributions(user: string) {
   const query = `
     query($user: String!) {
@@ -37,12 +63,20 @@ async function getContributions(user: string) {
     body: JSON.stringify({ query, variables: { user } }),
   });
 
-  const json = await response.json();
-  return json.data.user.contributionsCollection.contributionCalendar;
+  const json = (await response.json()) as
+    | GithubResponseSuccess
+    | GithubResponseFailure;
+
+  if ("data" in json)
+    return json.data.user.contributionsCollection.contributionCalendar;
+
+  console.error("[warn] Failed to fetch GitHub statistics");
+  console.error(json);
+  return null;
 }
 
 const data = await getContributions(username);
-const weeks = data.weeks;
+const weeks = data?.weeks;
 
 function getColor(level: string) {
   switch (level) {
@@ -61,37 +95,39 @@ function getColor(level: string) {
 }
 ---
 
-<div class="flex flex-col items-center w-full max-w-full">
-  <div class="w-full flex justify-center pb-2 overflow-x-auto">
-    <svg
-      viewBox={`0 0 ${weeks.length * 14} 100`}
-      class="h-auto w-full max-w-187.5"
-    >
-      {
-        weeks.map((week: any, weekIndex: number) => (
-          <g transform={`translate(${weekIndex * 14}, 0)`}>
-            {week.contributionDays.map((day: any) => (
-              <rect
-                width="10"
-                height="10"
-                x="0"
-                y={day.weekday * 12}
-                class={getColor(day.contributionLevel)}
-                rx="2"
-                ry="2"
-              >
-                <title>
-                  {day.contributionCount} contributions on {day.date}
-                </title>
-              </rect>
-            ))}
-          </g>
-        ))
-      }
-    </svg>
-  </div>
+{
+  weeks && data && (
+    <div class="flex flex-col items-center w-full max-w-full">
+      <div class="w-full flex justify-center pb-2 overflow-x-auto">
+        <svg
+          viewBox={`0 0 ${weeks.length * 14} 100`}
+          class="h-auto w-full max-w-187.5"
+        >
+          {weeks.map((week: any, weekIndex: number) => (
+            <g transform={`translate(${weekIndex * 14}, 0)`}>
+              {week.contributionDays.map((day: any) => (
+                <rect
+                  width="10"
+                  height="10"
+                  x="0"
+                  y={day.weekday * 12}
+                  class={getColor(day.contributionLevel)}
+                  rx="2"
+                  ry="2"
+                >
+                  <title>
+                    {day.contributionCount} contributions on {day.date}
+                  </title>
+                </rect>
+              ))}
+            </g>
+          ))}
+        </svg>
+      </div>
 
-  <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-2">
-    {data.totalContributions} contributions in the last year
-  </p>
-</div>
+      <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-2">
+        {data.totalContributions} contributions in the last year
+      </p>
+    </div>
+  )
+}
