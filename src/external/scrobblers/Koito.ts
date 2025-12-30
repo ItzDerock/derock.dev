@@ -9,11 +9,11 @@ export type KoitoScrobble = {
     artists: {
       id: number;
       name: string;
-    }[];
+    }[] | null;
     musicbrainz_id: string | null;
     listen_count: number;
     duration: number; // in seconds
-    image?: string; // image id
+    image?: string | null; // image id
     album_id: number;
     time_listened: number; // in seconds
     first_listen: number; // unix timestamp

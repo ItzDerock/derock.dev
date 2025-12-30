@@ -1,8 +1,8 @@
 import * as env from "astro:env/server";
-import { KoitoScrobblerClient } from "~/external/scrobblers/Koito";
 import type { KoitoScrobble } from "~/external/scrobblers/Koito";
-import { LastFMScrobblerClient } from "~/external/scrobblers/LastFM";
+import { KoitoScrobblerClient } from "~/external/scrobblers/Koito";
 import type { LocalLastFMData } from "~/external/scrobblers/LastFM";
+import { LastFMScrobblerClient } from "~/external/scrobblers/LastFM";
 
 const koito = new KoitoScrobblerClient("https://music.derock.dev");
 const lastfm = new LastFMScrobblerClient(
@@ -13,7 +13,7 @@ const lastfm = new LastFMScrobblerClient(
 function formatKoitoTrack(track: KoitoScrobble): LocalLastFMData {
   return {
     latestTrack: undefined, // not compatible with lastfm
-    artist: track.track.artists.map((a) => a.name).join(", "),
+    artist: track.track.artists?.map((a) => a.name).join(", "),
     album: undefined, // koito doesn't provide album name
     track: track.track.title,
     image: track.track.image
@@ -31,6 +31,9 @@ export async function fetchCurrentTrack() {
   let data: LocalLastFMData | null = null;
 
   if (koitoTrack) {
+    if (!koitoTrack.currently_playing)
+      return null;
+
     data = formatKoitoTrack(koitoTrack);
   } else {
     data = await lastfm.fetchCurrentTrack();
