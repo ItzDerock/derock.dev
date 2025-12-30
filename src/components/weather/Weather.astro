@@ -32,25 +32,33 @@ const adj = weather
   : null;
 
 const feels = weather ? Math.round(weather.current.feels_like) : null;
+
+if (!weather || !adj || !feels) {
+  console.error("Incomplete weather data!", { weather, adj, feels });
+}
 ---
 
-{
-  weather && adj && feels && (
-    <span class="whitespace-pre" data-generated={new Date().toISOString()}>
-      <span class="font-bold inline-block bg-linear-to-b from-text-light dark:from-text-dark to-text-light/60 dark:to-text-dark/60 via-text-light dark:via-text-dark text-transparent bg-clip-text">
-        {adj}
-      </span>{" "}
-      <WeatherIcon
-        code={weather.current.weather[0].id}
-        isNight={
-          !!(
-            weather.current.sunrise &&
-            weather.current.sunset &&
-            (weather.current.dt > weather.current.sunset ||
-              weather.current.dt < weather.current.sunrise)
-          )
-        }
-      />
-    </span>
-  )
-}
+<span class="whitespace-pre" data-generated={new Date().toISOString()}>
+  {
+    weather && adj && feels ? (
+      <>
+        <span class="font-bold inline-block bg-linear-to-b from-text-light dark:from-text-dark to-text-light/60 dark:to-text-dark/60 via-text-light dark:via-text-dark text-transparent bg-clip-text">
+          {adj}
+        </span>{" "}
+        <WeatherIcon
+          code={weather.current.weather[0].id}
+          isNight={
+            !!(
+              weather.current.sunrise &&
+              weather.current.sunset &&
+              (weather.current.dt > weather.current.sunset ||
+                weather.current.dt < weather.current.sunrise)
+            )
+          }
+        />
+      </>
+    ) : (
+      ""
+    )
+  }
+</span>
