@@ -44,7 +44,7 @@ export async function fetchCurrentTrack() {
 
 export async function GET() {
   try {
-    return new Response(JSON.stringify(await fetchCurrentTrack() ), {
+    return new Response(JSON.stringify(await fetchCurrentTrack()), {
       headers: {
         "Content-Type": "application/json",
         "Cache-Control": "public, max-age=10, must-revalidate",
