@@ -64,7 +64,10 @@ const config = {
     height: 100%;
     overflow: hidden;
     position: relative;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
   }
+
   :global(#dither-canvas-container canvas) {
     display: block;
     outline: none;
@@ -333,6 +336,17 @@ const config = {
       this.ditherPass.uniforms.colorNum.value = this.options.colorNum;
       this.ditherPass.uniforms.pixelSize.value = this.options.pixelSize;
       this.composer.addPass(this.ditherPass);
+
+      try {
+        this.container.style.opacity = "100%";
+        document.querySelectorAll(".streak").forEach((el) => {
+          if (el instanceof HTMLDivElement) {
+            el.style.opacity = "0%";
+          }
+        });
+      } catch (err) {
+        console.warn(err);
+      }
     }
 
     onMouseMove(e: MouseEvent) {

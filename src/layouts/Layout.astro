@@ -68,22 +68,22 @@ const { title, description, thumbnail } = Astro.props;
   <body
     class="bg-background-light text-foreground-light dark:text-foreground-dark dark:bg-background-dark min-h-full px-4 md:px-12 min-w-full"
   >
-    <!-- <div class="streak left-12 w-36 h-225 -rotate-45 -translate-y-[50%]"></div>
+    <div class="streak left-12 w-36 h-225 -rotate-45 -translate-y-[50%]"></div>
 
     <div class="streak left-100 w-36 h-225 -rotate-45 -translate-y-[70%]"></div>
 
     <div
       class="streak right-0 bottom-0 size-44 blur-[120px] translate-x-[50%] translate-y-[50%]"
     >
-    </div> -->
+    </div>
 
     <div class="-z-10 inset-0 fixed">
       <Background
         pixelSize={2.0}
         waveColor={[20 / 255, 55 / 255, 72 / 255]}
         enableMouseInteraction={false}
-        backgroundColor={[0, 8 / 255, 20 / 255]}
-        backgroundAlpha={0.5}
+        backgroundColor={[0 / 255, 8 / 255, 20 / 255]}
+        backgroundAlpha={1}
         waveAmplitude={0.367}
         waveSpeed={0.035}
       />
@@ -102,6 +102,8 @@ const { title, description, thumbnail } = Astro.props;
         border-radius: 50%;
         filter: blur(90px);
         mix-blend-mode: lighten;
+        opacity: 1;
+        transition: opacity 0.5s ease-in-out;
       }
 
       /* on screens bigger than 2000px, add a margin left to streaks */
