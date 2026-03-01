@@ -2,6 +2,7 @@
 import { ClientRouter } from "astro:transitions";
 import AOS from "../components/animations/AOS.astro";
 import "../styles/global.css";
+import Background from "../components/animations/Background.astro";
 
 interface Props {
   title: string;
@@ -76,6 +77,18 @@ const { title, description, thumbnail } = Astro.props;
     >
     </div>
 
+    <div class="-z-10 inset-0 fixed">
+      <Background
+        pixelSize={2.0}
+        waveColor={[20 / 255, 55 / 255, 72 / 255]}
+        enableMouseInteraction={false}
+        backgroundColor={[0 / 255, 8 / 255, 20 / 255]}
+        backgroundAlpha={1}
+        waveAmplitude={0.367}
+        waveSpeed={0.035}
+      />
+    </div>
+
     <slot />
     <style is:global>
       html {
@@ -89,6 +102,8 @@ const { title, description, thumbnail } = Astro.props;
         border-radius: 50%;
         filter: blur(90px);
         mix-blend-mode: lighten;
+        opacity: 1;
+        transition: opacity 0.5s ease-in-out;
       }
 
       /* on screens bigger than 2000px, add a margin left to streaks */
