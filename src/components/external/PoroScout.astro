@@ -2,14 +2,23 @@
 export interface Props {}
 
 type APIResponse = {
-  guilds: number;
-  users: number;
+  guildCount: {
+    current: number;
+    history: number[];
+  };
+
+  interactionCount: {
+    current: number;
+    history: number[];
+  };
+
+  userInstalls: number;
 };
 
 import { Icon } from "astro-icon/components";
 import { Show } from "solid-js";
 
-const data = await fetch(`https://graphs.poroscout.gg/stats`)
+const data = await fetch(`https://api.poroscout.gg/bot/stats`)
   .then((res) => res.json() as Promise<APIResponse>)
   .catch((err) => {
     console.error("[poroscout] Failed to fetch data, ", err);
@@ -22,11 +31,12 @@ const formatter = new Intl.NumberFormat("en-US");
 <Show when={data !== null}>
   <span class="inline-block">
     <Icon name="fa6-brands:discord" class="inline-block mb-1" />
-    {formatter.format(data!.guilds)} Servers
+    {formatter.format(data?.guildCount.current ?? 4977)} Servers
   </span>
 
   <span class="inline-block">
     <Icon name="tabler:user-filled" class="inline-block mb-1" />
-    {formatter.format(data!.users)} Users
+    <!-- from grafana march 1st. TODO: make api endpoint return live. -->
+    {formatter.format(939526)} Users
   </span>
 </Show>
