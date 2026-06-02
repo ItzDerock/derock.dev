@@ -17,7 +17,7 @@ function formatKoitoTrack(track: KoitoScrobble): LocalLastFMData {
     album: undefined, // koito doesn't provide album name
     track: track.track.title,
     image: track.track.image
-      ? `https://music.derock.dev/images/medium/${track.track.image}`
+      ? `https://music.derock.dev${track.track.image.small}`
       : undefined,
     url: `https://music.derock.dev/track/${track.track.id}`,
   };
@@ -31,8 +31,7 @@ export async function fetchCurrentTrack() {
   let data: LocalLastFMData | null = null;
 
   if (koitoTrack) {
-    if (!koitoTrack.currently_playing)
-      return null;
+    if (!koitoTrack.currently_playing) return null;
 
     data = formatKoitoTrack(koitoTrack);
   } else {

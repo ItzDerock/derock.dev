@@ -22,7 +22,7 @@ export function LastFMClient({
 
   // refetch every 30 seconds
   onMount(() => {
-    const interval = setInterval(() => {
+    const interval = window.setInterval(() => {
       refetch();
     }, 30000);
 
