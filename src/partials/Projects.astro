@@ -1,5 +1,6 @@
 ---
 import advancedStats from "../assets/projects/advanced-stats.png";
+import aero from "../content/projects/assets/aero/thumb.webp";
 import discordHtmlTranscripts from "../assets/projects/discord-html-transcripts.png";
 import discordMarkdownParser from "../assets/projects/discord-markdown-parser.png";
 import hostforge from "../assets/projects/hostforge.png";
@@ -19,6 +20,16 @@ export interface Props {
 ---
 
 <div class="flex flex-col gap-y-2 -mt-2">
+  <ProjectCard
+    image={aero}
+    title="Duke Aero"
+    href="/project/duke-aero"
+    index={index++}
+  >
+    Engineering and programming flight computers, developing custom RF video
+    streaming solution, redesigning the website, and more for Duke Aero: Duke's
+    premier aerospace society. Sending rockets to 30,000ft and higher yearly.
+  </ProjectCard>
   <ProjectCard
     image={poroscout}
     title="PoroScout"
@@ -45,29 +56,7 @@ export interface Props {
     conversations with a visually appealing format. It is built using StencilJS
     and React SSR.
   </ProjectCard>
-  <ProjectCard
-    image={hostforge}
-    title="HostForge"
-    href="https://github.com/ItzDerock/hostforge"
-    github="itzderock/hostforge"
-    index={index++}
-  >
-    A work-in-progress dashboard for managing fleets of servers, designed to
-    provide a simple and intuitive interface for deploying and managing Docker
-    swarm clusters. It can automatically build and bundle your code, automate
-    SSL certificates, manage reverse proxies, instant rollbacks, and more.
-  </ProjectCard>
-  <ProjectCard
-    image={mcstorage}
-    title="MCStorage"
-    href="https://web.archive.org/web/20220306183052/https://mcstorage.cloud/"
-    index={index++}
-  >
-    MCStorage was a BaaS (Backup as a Service) designed for seamless integration
-    with Minecraft and other game servers to facilitate easy data backups.
-    Developed with a React.js frontend and a backend comprising a Fastify server
-    and ZFS storage nodes, it was sold in 2022 and is now under new management.
-  </ProjectCard>
+
   <ProjectCard
     image={weatherStation}
     title="DIY Weather Station"
@@ -84,6 +73,31 @@ export interface Props {
   {
     Astro.props.showAll ? (
       <>
+        <ProjectCard
+          image={hostforge}
+          title="HostForge"
+          href="https://github.com/ItzDerock/hostforge"
+          github="itzderock/hostforge"
+          index={index++}
+        >
+          A work-in-progress dashboard for managing fleets of servers, designed
+          to provide a simple and intuitive interface for deploying and managing
+          Docker swarm clusters. It can automatically build and bundle your
+          code, automate SSL certificates, manage reverse proxies, instant
+          rollbacks, and more.
+        </ProjectCard>
+        <ProjectCard
+          image={mcstorage}
+          title="MCStorage"
+          href="https://web.archive.org/web/20220306183052/https://mcstorage.cloud/"
+          index={index++}
+        >
+          MCStorage was a BaaS (Backup as a Service) designed for seamless
+          integration with Minecraft and other game servers to facilitate easy
+          data backups. Developed with a React.js frontend and a backend
+          comprising a Fastify server and ZFS storage nodes, it was sold in 2022
+          and is now under new management.
+        </ProjectCard>
         <ProjectCard
           image={advancedStats}
           title="Advanced Stats"

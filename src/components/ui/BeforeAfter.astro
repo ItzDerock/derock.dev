@@ -1,0 +1,433 @@
+---
+import { Image } from "astro:assets";
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  /** left / "before" image */
+  before: ImageMetadata | string;
+  /** right / "after" image */
+  after: ImageMetadata | string;
+
+  beforeAlt?: string;
+  afterAlt?: string;
+
+  /** corner pills, pass `false` to hide */
+  beforeLabel?: string | false;
+  afterLabel?: string | false;
+
+  /** initial handle position, 0-100 */
+  start?: number;
+
+  /**
+   * css `aspect-ratio` for the frame. inferred from the images when they are
+   * imported assets, required when both srcs are plain strings.
+   */
+  aspectRatio?: string;
+
+  caption?: string;
+  class?: string;
+}
+
+const {
+  before,
+  after,
+  beforeAlt = "Before",
+  afterAlt = "After",
+  beforeLabel = "Before",
+  afterLabel = "After",
+  start = 50,
+  aspectRatio,
+  caption,
+  class: className,
+} = Astro.props;
+
+// prefer the "after" image for sizing, fall back to "before", then 16/9
+const meta =
+  typeof after !== "string" ? after : typeof before !== "string" ? before : null;
+const ratio = aspectRatio ?? (meta ? `${meta.width} / ${meta.height}` : "16 / 9");
+const pos = Math.min(100, Math.max(0, start));
+---
+
+<figure class:list={["not-prose my-8", className]}>
+  <before-after style={`--ar: ${ratio}; --pos: ${pos}%;`}>
+    <div class="frame" data-frame>
+      <!-- after (right side) -->
+      <div class="layer layer-after">
+        {
+          typeof after === "string" ? (
+            <img src={after} alt={afterAlt} draggable={false} />
+          ) : (
+            <Image src={after} alt={afterAlt} draggable={false} />
+          )
+        }
+        {afterLabel && <span class="pill pill-right">{afterLabel}</span>}
+      </div>
+
+      <!-- before (left side) -->
+      <div class="layer layer-before">
+        {
+          typeof before === "string" ? (
+            <img src={before} alt={beforeAlt} draggable={false} />
+          ) : (
+            <Image src={before} alt={beforeAlt} draggable={false} />
+          )
+        }
+        {beforeLabel && <span class="pill pill-left">{beforeLabel}</span>}
+      </div>
+
+      <!-- divider + knob -->
+      <div
+        class="handle"
+        data-handle
+        role="slider"
+        tabindex="0"
+        aria-label="Reveal before or after image"
+        aria-valuemin="0"
+        aria-valuemax="100"
+        aria-valuenow={Math.round(pos)}
+        aria-orientation="horizontal"
+      >
+        <span class="knob" aria-hidden="true">
+          <Icon name="tabler:chevron-left" class="size-4" />
+          <Icon name="tabler:chevron-right" class="size-4" />
+        </span>
+      </div>
+
+      <button
+        type="button"
+        class="fs-btn"
+        data-no-drag
+        data-fullscreen
+        aria-label="Enter fullscreen"
+      >
+        <Icon name="tabler:maximize" class="size-5" data-icon-expand />
+        <Icon name="tabler:minimize" class="size-5" data-icon-collapse />
+      </button>
+    </div>
+  </before-after>
+
+  {
+    caption && (
+      <figcaption class="mt-2 text-center text-sm text-muted-light dark:text-muted-dark">
+        {caption}
+      </figcaption>
+    )
+  }
+</figure>
+
+<style>
+  before-after {
+    display: block;
+  }
+
+  .frame {
+    position: relative;
+    width: 100%;
+    aspect-ratio: var(--ar);
+    overflow: hidden;
+    border-radius: 0.5rem;
+    background: #0b0f17;
+    cursor: ew-resize;
+    user-select: none;
+    -webkit-user-select: none;
+    /* let vertical scrolling through, we own horizontal drags */
+    touch-action: pan-y;
+  }
+
+  .layer {
+    position: absolute;
+    inset: 0;
+  }
+
+  .layer :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    -webkit-user-drag: none;
+  }
+
+  /* clip each side against the handle so the labels clip with the image */
+  .layer-before {
+    clip-path: inset(0 calc(100% - var(--pos)) 0 0);
+  }
+
+  .layer-after {
+    clip-path: inset(0 0 0 var(--pos));
+  }
+
+  .pill {
+    position: absolute;
+    bottom: 0.75rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(4px);
+    pointer-events: none;
+    white-space: nowrap;
+  }
+
+  .pill-left {
+    left: 0.75rem;
+  }
+
+  .pill-right {
+    right: 0.75rem;
+  }
+
+  .handle {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: var(--pos);
+    width: 2px;
+    margin-left: -1px;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.25);
+    cursor: ew-resize;
+    touch-action: none;
+  }
+
+  .handle:focus-visible {
+    outline: none;
+  }
+
+  .handle:focus-visible .knob {
+    outline: 2px solid #fff;
+    outline-offset: 3px;
+  }
+
+  .knob {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 9999px;
+    color: #111;
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+    transition: scale 150ms ease;
+  }
+
+  .frame:hover .knob,
+  .handle:focus-visible .knob {
+    scale: 1.08;
+  }
+
+  .fs-btn {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.4rem;
+    border-radius: 0.375rem;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(4px);
+    cursor: pointer;
+    opacity: 0;
+    transition:
+      opacity 150ms ease,
+      background 150ms ease;
+  }
+
+  .frame:hover .fs-btn,
+  .fs-btn:focus-visible {
+    opacity: 1;
+  }
+
+  .fs-btn:hover {
+    background: rgba(0, 0, 0, 0.75);
+  }
+
+  /* touch devices never hover, so always show the control there */
+  @media (hover: none) {
+    .fs-btn {
+      opacity: 1;
+    }
+  }
+
+  [data-icon-collapse] {
+    display: none;
+  }
+
+  /* ---- fullscreen (native + fallback for browsers without element fs) ---- */
+
+  before-after:fullscreen,
+  before-after.is-pseudo-fullscreen {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #000;
+  }
+
+  before-after.is-pseudo-fullscreen {
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+  }
+
+  /*
+    override `aspect-ratio` directly rather than redefining `--ar`, since `--ar`
+    lives in the inline style attribute and would win against any selector here
+  */
+  before-after:fullscreen .frame,
+  before-after.is-pseudo-fullscreen .frame {
+    aspect-ratio: auto;
+    height: 100%;
+    border-radius: 0;
+  }
+
+  before-after:fullscreen [data-icon-expand],
+  before-after.is-pseudo-fullscreen [data-icon-expand] {
+    display: none;
+  }
+
+  before-after:fullscreen [data-icon-collapse],
+  before-after.is-pseudo-fullscreen [data-icon-collapse] {
+    display: block;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .knob,
+    .fs-btn {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  class BeforeAfter extends HTMLElement {
+    connectedCallback() {
+      const frame = this.querySelector<HTMLElement>("[data-frame]");
+      const handle = this.querySelector<HTMLElement>("[data-handle]");
+      const fsBtn = this.querySelector<HTMLButtonElement>("[data-fullscreen]");
+      if (!frame || !handle || !fsBtn) return;
+
+      let dragging = false;
+
+      const setPos = (pct: number) => {
+        const clamped = Math.min(100, Math.max(0, pct));
+        this.style.setProperty("--pos", `${clamped.toFixed(2)}%`);
+        handle.setAttribute("aria-valuenow", String(Math.round(clamped)));
+      };
+
+      const posFromEvent = (e: PointerEvent) => {
+        const rect = frame.getBoundingClientRect();
+        return ((e.clientX - rect.left) / rect.width) * 100;
+      };
+
+      frame.addEventListener("pointerdown", (e) => {
+        // don't hijack clicks on the overlay controls
+        if ((e.target as Element).closest("[data-no-drag]")) return;
+
+        dragging = true;
+        frame.setPointerCapture(e.pointerId);
+        setPos(posFromEvent(e));
+      });
+
+      frame.addEventListener("pointermove", (e) => {
+        if (!dragging) return;
+        e.preventDefault();
+        setPos(posFromEvent(e));
+      });
+
+      const stopDrag = (e: PointerEvent) => {
+        if (!dragging) return;
+        dragging = false;
+        if (frame.hasPointerCapture(e.pointerId))
+          frame.releasePointerCapture(e.pointerId);
+      };
+
+      frame.addEventListener("pointerup", stopDrag);
+      frame.addEventListener("pointercancel", stopDrag);
+
+      handle.addEventListener("keydown", (e) => {
+        const step = e.shiftKey ? 10 : 1;
+        const current = Number(handle.getAttribute("aria-valuenow") ?? 50);
+
+        let next: number | null = null;
+        if (e.key === "ArrowLeft") next = current - step;
+        else if (e.key === "ArrowRight") next = current + step;
+        else if (e.key === "Home") next = 0;
+        else if (e.key === "End") next = 100;
+        if (next === null) return;
+
+        e.preventDefault();
+        setPos(next);
+      });
+
+      // ---- fullscreen ----
+
+      const isPseudo = () => this.classList.contains("is-pseudo-fullscreen");
+      const isFullscreen = () =>
+        document.fullscreenElement === this || isPseudo();
+
+      const syncButton = () => {
+        fsBtn.setAttribute(
+          "aria-label",
+          isFullscreen() ? "Exit fullscreen" : "Enter fullscreen",
+        );
+      };
+
+      const enterPseudo = () => {
+        this.classList.add("is-pseudo-fullscreen");
+        document.documentElement.style.overflow = "hidden";
+        handle.focus({ preventScroll: true });
+        syncButton();
+      };
+
+      const exitPseudo = () => {
+        this.classList.remove("is-pseudo-fullscreen");
+        document.documentElement.style.overflow = "";
+        syncButton();
+      };
+
+      const toggleFullscreen = async () => {
+        if (isPseudo()) return exitPseudo();
+
+        if (document.fullscreenElement === this) {
+          await document.exitFullscreen();
+          return;
+        }
+
+        // iOS Safari has no element-level fullscreen, fall back to a fixed overlay
+        if (typeof this.requestFullscreen === "function") {
+          try {
+            await this.requestFullscreen();
+            return;
+          } catch {
+            /* fall through */
+          }
+        }
+
+        enterPseudo();
+      };
+
+      fsBtn.addEventListener("click", toggleFullscreen);
+      this.addEventListener("fullscreenchange", syncButton);
+      document.addEventListener("fullscreenchange", syncButton);
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && isPseudo()) exitPseudo();
+      });
+
+      syncButton();
+    }
+  }
+
+  if (!customElements.get("before-after")) {
+    customElements.define("before-after", BeforeAfter);
+  }
+</script>
